@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_design_pattern_lock_configuration"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/images_accueil_background"
+    tools:context="mbpl.graphical.passwords.adminConfiguration.PatternLockConfiguration">
+
+    <Spinner
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:id="@+id/spinnerConfigPatternLockNbPoints"
+        android:background="@color/white"
+        android:elevation="5dp"
+        android:layout_below="@+id/textViewConfigPatternLock"
+        android:layout_alignLeft="@+id/spinnerConfigAndroidPatternLockPointsMin"
+        android:layout_alignStart="@+id/spinnerConfigAndroidPatternLockPointsMin"
+        android:layout_marginTop="99dp" />
+
+    <Spinner
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:elevation="5dp"
+        android:id="@+id/spinnerConfigAndroidPatternLockPointsMin"
+        android:background="@color/white"
+        android:layout_marginRight="17dp"
+        android:layout_marginEnd="17dp"
+        android:layout_alignTop="@+id/textViewPointsMinimum"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Points minimum"
+        android:layout_width="170dp"
+        android:id="@+id/textViewPointsMinimum"
+        android:gravity="center"
+        android:layout_height="40dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_centerVertical="true"
+        android:background="@drawable/style_textview"
+        android:textSize="18sp"
+        android:layout_alignLeft="@+id/textViewNbPointsPatternLock"
+        android:layout_alignStart="@+id/textViewNbPointsPatternLock" />
+
+    <TextView
+        android:text="Configuration Pattern Lock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:id="@+id/textViewConfigPatternLock"
+        android:gravity="center"
+        android:background="#00000000"
+        android:textSize="25sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Nombre de points"
+        android:id="@+id/textViewNbPointsPatternLock"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:background="@drawable/style_textview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/spinnerConfigPatternLockNbPoints"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="170dp" />
+
+    <Button
+        android:text="Terminer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:id="@+id/buttonConfigPattrnLock"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/border_button_accueil"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Initialiser le mot de passe"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonInitPatternLock"
+        android:layout_marginBottom="65dp"
+        android:background="@drawable/border_button_accueil"
+        android:layout_width="220dp"
+        android:layout_above="@+id/buttonConfigPattrnLock"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- Header aligned to top -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#AFA7EF"
+        android:gravity="center" >
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="2"
+            android:columnCount="15"
+            android:id="@+id/gridToolbar">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Del"
+                android:id="@+id/btnDel"
+                android:layout_column="0"
+                android:layout_row="0" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Valider"
+                android:id="@+id/btnValider"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_above="@+id/scrollview"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+
+        </GridLayout>
+
+    </RelativeLayout>
+
+    <!-- Scrollable Content below header and above footer -->
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="false"
+        android:id="@+id/scrollview"
+        android:layout_alignRight="@+id/customProgressUsability"
+        android:layout_alignEnd="@+id/customProgressUsability"
+        android:layout_below="@+id/customProgressUsability">
+
+        <!-- Content will go here -->
+
+    </ScrollView>
+
+    <mbpl.graphical.passwords.utils.CustomProgress
+        android:id="@+id/customProgressSecure"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/custom_progress_height"
+        android:layout_below="@+id/header"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <mbpl.graphical.passwords.utils.CustomProgress
+        android:id="@+id/customProgressUsability"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/custom_progress_height"
+        android:layout_below="@+id/customProgressSecure"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>
+
+
+<!--
+    Header / footer trouvé ici :
+    http://www.byteslounge.com/tutorials/android-fixed-header-and-footer-with-scrollable-content-layout-example
+-->

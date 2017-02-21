@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_validation_creation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="mbpl.graphical.passwords.passfaces.ValidationCreation"
+    android:background="@drawable/images_accueil_background">
+
+    <Button
+        android:text="Image suivante"
+        android:layout_height="40dp"
+        android:layout_marginBottom="37dp"
+        android:id="@+id/buttonNextValidationCreation"
+        android:layout_marginRight="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_above="@+id/buttonTerminerValidationCreationPassFace"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/border_button_accueil"
+        android:layout_alignParentEnd="true"
+        android:layout_width="140dp" />
+
+
+    <Button
+        android:text="terminer"
+        android:layout_height="40dp"
+        android:id="@+id/buttonTerminerValidationCreationPassFace"
+        android:layout_marginBottom="14dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/border_button_accueil"
+        android:layout_centerHorizontal="true"
+        android:layout_width="100dp" />
+
+    <TextView
+        android:text="Cliquez sur l'image pour l'agrandir"
+        android:layout_width="wrap_content"
+        android:id="@+id/textViewZoom"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"
+        android:layout_above="@+id/imageViewValidation"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:id="@+id/imageViewValidation"
+        android:scaleType="centerCrop"
+        android:cropToPadding="true"
+        android:background="@drawable/border_image"
+        android:padding="5dp"
+        android:clickable="true"
+        android:layout_above="@+id/textViewExplicationValidationCreation"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="Regardez attentivement l'image."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/textViewExplicationValidationCreation"
+        android:background="#00000000"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_marginBottom="41dp"
+        android:layout_above="@+id/buttonNextValidationCreation"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Phase de mémorisation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/textViewAccueilValidationCreation"
+        android:background="#00000000"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_marginTop="17dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/textViewZoom"
+        android:layout_alignStart="@+id/textViewZoom" />
+
+    <Button
+        android:text="Image précédente"
+        android:layout_height="40dp"
+        android:id="@+id/buttonPreviousValidationCreation"
+        android:background="@drawable/border_button_accueil"
+        android:layout_below="@+id/textViewExplicationValidationCreation"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="155dp" />
+
+</RelativeLayout>

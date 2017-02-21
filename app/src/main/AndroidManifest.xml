@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="mbpl.graphical.passwords">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- Menu -->
+        <activity
+            android:name=".accueil.AccueilAdminUser"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".accueil.AccueilUser"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".accueil.AccueilAdmin"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- Passfaces -->
+        <activity
+            android:name=".passfaces.Authentification"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".passfaces.Creation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".androidPatternLock.Creation"
+            android:label="@string/title_activity_change"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".androidPatternLock.Authentification"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme" />
+
+        <!-- Welcome's activities -->
+        <activity android:name=".androidPatternLock.Bienvenue" />
+        <activity android:name=".passfaces.Bienvenue" />
+        <activity
+            android:name=".adminConfiguration.PatternLockConfiguration"
+            android:label="@string/title_activity_design_pattern_lock_configuration" />
+        <activity
+            android:name=".adminConfiguration.PassFacesConfiguration"
+            android:label="@string/title_activity_pass_faces_configuration" />
+
+        <activity
+            android:name=".passfaces.ValidationCreation"
+            android:label="@string/title_activity_validation_creation"/>
+    </application>
+
+</manifest>

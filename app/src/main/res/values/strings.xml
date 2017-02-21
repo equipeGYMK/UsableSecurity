@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Android Password</string>
+    <string name="action_settings">A propos</string>
+    <string name="security">Niveau de sécurité</string>
+    <string name="usability">Niveau d\'utilisabilité</string>
+    <string name="icon_number">Nombre d\'icônes pendant une phase :</string>
+    <string name="doublons">Interdire les doublons</string>
+    <string name="configurations">Configurations</string>
+    <string name="appliquer">Appliquer</string>
+    <string name="reset">Reset</string>
+    <string name="title_activity_change">ChangeActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+
+    <string name="action_create_new_pattern">Create New Pattern</string>
+    <string name="action_check">Check Pattern</string>
+    <string name="action_contact">Contact</string>
+    <string name="draw_pattern_msg">Draw new pattern</string>
+    <string name="redraw_confirm_pattern_msg">Redraw pattern to confirm</string>
+    <string name="title_activity_welcome">Welcome Activity</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_design_pattern_lock_configuration">DesignPatternLockConfiguration
+    </string>
+    <string name="title_activity_pass_faces_configuration">PassFacesConfiguration</string>
+    <string name="title_activity_validation_creation">ValidationCreation</string>
+
+
+</resources>

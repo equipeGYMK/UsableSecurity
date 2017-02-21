@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff222233" >
+
+
+    <TextView
+        android:id="@+id/tvMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#ff006699" />
+
+    <FrameLayout
+        android:id="@+id/confirmPattern"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvMsg"
+        android:visibility="gone" >
+
+        <mbpl.graphical.passwords.androidPatternLock.Lock9View
+            android:id="@+id/lock_viewConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:lineColor="#ff006699"
+            app:lineWidth="8dp"
+            app:nodeOnSrc="@drawable/lock_9_view_node_highlighted"
+            app:nodeSrc="@drawable/lock_9_view_node_normal"
+            android:layout_below="@+id/tvMsg"
+            android:layout_toRightOf="@+id/tvMsg"
+            android:layout_toEndOf="@+id/tvMsg"
+            android:layout_marginTop="39dp"
+            android:layout_marginBottom="74dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </FrameLayout>
+
+    <Button
+        android:text="Recommencer"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:id="@+id/buttonPatternLockCreationRecommencer"
+        android:layout_marginBottom="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <FrameLayout
+        android:id="@+id/enterPattern"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <mbpl.graphical.passwords.androidPatternLock.Lock9View
+            android:id="@+id/lock_viewFirstTry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:lineColor="#ff006699"
+            app:lineWidth="8dp"
+            app:nodeOnSrc="@drawable/lock_9_view_node_highlighted"
+            app:nodeSrc="@drawable/lock_9_view_node_normal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="74dp" />
+    </FrameLayout>
+
+</RelativeLayout>
