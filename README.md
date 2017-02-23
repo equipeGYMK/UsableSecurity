@@ -18,9 +18,9 @@ Utilisateurs lambda voulant découvrir/tester/comparer des techniques d'authenti
 Application développée dans le cadre de l'UE TER/PROJET : "Usable Security", pour le M1 informatique de l'Université Paul Sabatier de Toulouse.
 
 Auteurs :
-* Chellah Yaakoub
-* Fisli Karim
-* Perreu Marie
-* Truong Guillaume
+* Guillaume Truong
+* Yaakoub Chellah
+* Marie Perreu
+* Karim Fisli
 
 Remerciements à M. PALANQUE Philippe  et M. WINCKLER pour leur encadrement.
