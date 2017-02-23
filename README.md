@@ -1,25 +1,26 @@
 # Application
-MBPL's application to show some graphical passwords.
+GYMK's application to show some graphical passwords.
 
 ## Quoi ?
-Application permettant de découvrir, tester et comparer différents systèmes d’authentifications
-L’application propose différents systèmes d’authentification, explique leur fonctionnement ainsi que les threat auxquels ils sont résistant et un indice de sécurité et d’utilisabilité en fonction du tableau du TER.
-Lors de la création du mot de passe, l’application renseigne l’utilisateur du niveau de sécurité.
-Un log de retour sur le test venant d’être effectué (temps moyen nécessaire a la saisie, nombre d’échecs, nombre de réussites)
-L’application permet aussi de comparer les résultats de l’utilisateur sur différents systèmes d’authentification.
-
+Application permettant de découvrir, tester et comparer différentes techniques d’authentifications.
+L’application comprend 3 activités principales : 
+- Gestion des statistiques (utitlisabilité & sécurité)
+  * récupération des log (résultats) des utilisateurs et interprétation (comparaison).
+- Gestion de la politique d'authentification    ---> Administrateur
+  * applique des contraintes sur les différents paramètres des techniques d'authentification.
+- Utilisation des techniques d'authentification ---> Utilisateur
+  * explique leur fonctionnement et permet de "jouer" (créer un mot de passe et s'authentifier) autant de fois que souhaité.
 
 ## Pour qui ?
-Utilisateurs lambda voulant découvrir/tester/comparer d’autres types de systèmes d’authentifications.
-
+Utilisateurs lambda voulant découvrir/tester/comparer des techniques d'authentification.
 
 ## A Propos
-Application développée dans le cadre de l'UE TER/PROJET : "Usable Security - Secure Usability", pour le M1 informatique de l'Université Paul Sabatier de Toulouse.
+Application développée dans le cadre de l'UE TER/PROJET : "Usable Security", pour le M1 informatique de l'Université Paul Sabatier de Toulouse.
 
 Auteurs :
-* LACHERAY Benjamin
-* JEANMOUGIN Pierre
-* LE QUERE Lilian
-* MOUGEOT Matteo
+* Guillaume Truong
+* Yaakoub Chellah
+* Marie Perreu
+* Karim Fisli
 
-Remerciements à M. PALANQUE Philippe pour son encadrement.
+Remerciements à M. PALANQUE Philippe  et M. WINCKLER pour leur encadrement.
