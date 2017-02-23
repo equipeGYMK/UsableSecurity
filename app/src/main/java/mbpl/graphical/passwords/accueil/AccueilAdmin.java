@@ -19,7 +19,7 @@ import mbpl.graphical.passwords.sqlite.MethodeManager;
 import mbpl.graphical.passwords.utils.CustomList;
 
 import static mbpl.graphical.passwords.sqlite.ImplementedMethods.implementedMethods;
-//classeAccueilAdmind
+//classeAccueilAdmind  yak test =)))
 public class AccueilAdmin extends Activity {
 
     ListView lv;
