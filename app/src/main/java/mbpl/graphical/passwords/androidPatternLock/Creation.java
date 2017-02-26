@@ -135,6 +135,28 @@ public class Creation extends ActionBarActivity {
         });
     }
 
+
+
+    //Afin de remplir le test d'acception suivant: quand un user appuie sur annuler alors il revient sur l'écran de création d'un pattern
+    @Override
+    public void onBackPressed() {
+
+        Intent authentification;
+        //On peut seulement se rediriger vers la page de création d'un nouveau mdp si l'utilisateur a au moins entré une fois son pattern. Cela n'a aucune utilité sinon
+        //Si le bouton recommencer est visible alors on sait qu'on se trouve dans la seconde partie de création lorsque l'utilisateur doit valider son pattern en le remettant.
+        if (btnRecommencer.isShown()) {
+            authentification = new Intent(Creation.this, Creation.class);
+            startActivity(authentification);
+        }
+        //Sinon on revient à l'écran d'accueil
+        else
+        {
+            authentification = new Intent(Creation.this, AccueilUser.class);
+            startActivity(authentification);
+        }
+    }
+
+
     /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
