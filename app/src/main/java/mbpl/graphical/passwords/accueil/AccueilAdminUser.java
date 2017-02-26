@@ -9,7 +9,6 @@ import android.widget.Button;
 import mbpl.graphical.passwords.R;
 
 public class AccueilAdminUser extends AppCompatActivity {
-/** test github**/
 
     Button btnAdmin, btnUser;
 

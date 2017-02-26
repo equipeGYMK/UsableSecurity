@@ -41,23 +41,29 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".adminConfiguration.PassFacesConfiguration"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_pass_faces_configuration" />
+
+        <!-- PatternLock -->
+        <activity
             android:name=".androidPatternLock.Creation"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_change"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".androidPatternLock.Authentification"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".adminConfiguration.PatternLockConfiguration"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_design_pattern_lock_configuration" />
 
         <!-- Welcome's activities -->
         <activity android:name=".androidPatternLock.Bienvenue" />
         <activity android:name=".passfaces.Bienvenue" />
-        <activity
-            android:name=".adminConfiguration.PatternLockConfiguration"
-            android:label="@string/title_activity_design_pattern_lock_configuration" />
-        <activity
-            android:name=".adminConfiguration.PassFacesConfiguration"
-            android:label="@string/title_activity_pass_faces_configuration" />
 
         <activity
             android:name=".passfaces.ValidationCreation"
