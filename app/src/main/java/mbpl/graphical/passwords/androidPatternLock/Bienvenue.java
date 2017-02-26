@@ -15,9 +15,10 @@ import mbpl.graphical.passwords.sqlite.PatternLock;
 public class Bienvenue extends AppCompatActivity {
 
 
-    Button btnRetour, btnReinit;
+    Button btnRetour, enregistrerNewMdp;
     //BDD
     private MethodeManager methodeManager;
+    private Class creationClass;
     protected Methode methode = new PatternLock();
 
 
@@ -32,23 +33,23 @@ public class Bienvenue extends AppCompatActivity {
 
         //création des boutons
         btnRetour = (Button) findViewById(R.id.buttonRetourPatternLock);
-        btnReinit = (Button) findViewById(R.id.buttonReinit);
+        enregistrerNewMdp = (Button) findViewById(R.id.buttonReinit);
 
 
         //Evévenement des boutons
-        btnReinit.setOnClickListener(new View.OnClickListener() {
+        enregistrerNewMdp.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
                     //On réinitialise le mot de passe à " "
                     methodeManager.open();
                     methode = methodeManager.getMethode(methode);
-                    methodeManager.setPassword(methode, "");
+                    //Récupération de la classe création pour la redirection lors du clic sur le bouton enregistrer nouveau mdp
+                    creationClass =  methode.getCreation();
                     methodeManager.close();
 
-                    //On retourne à l'activité accueil
-                    Intent authentification = new Intent(Bienvenue.this, AccueilUser.class);
+                    //On retourne à l'activité de création de la technique d'authentification en question en fonction du contenu de l'attribut creationClass
+                    Intent authentification = new Intent(Bienvenue.this, creationClass);
                     startActivity(authentification);
                     finish();
             }

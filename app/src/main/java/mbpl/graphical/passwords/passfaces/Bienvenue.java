@@ -18,6 +18,7 @@ public class Bienvenue extends AppCompatActivity {
     Button btnRetour, btnReinit;
     //BDD
     private MethodeManager methodeManager;
+    private Class creationClass;
     protected Methode methode = new Passfaces();
 
 
@@ -44,11 +45,12 @@ public class Bienvenue extends AppCompatActivity {
                     //On réinitialise le mot de passe à " "
                     methodeManager.open();
                     methode = methodeManager.getMethode(methode);
-                    methodeManager.setPassword(methode, "");
+                //Récupération de la classe création pour la redirection lors du clic sur le bouton enregistrer nouveau mdp
+                    creationClass = methode.getCreation();
                     methodeManager.close();
 
                     //On retourne à l'activité accueil
-                    Intent authentification = new Intent(Bienvenue.this, AccueilUser.class);
+                    Intent authentification = new Intent(Bienvenue.this, creationClass);
                     startActivity(authentification);
                     finish();
             }
