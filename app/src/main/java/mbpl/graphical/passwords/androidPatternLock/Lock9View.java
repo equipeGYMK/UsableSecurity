@@ -51,6 +51,7 @@ public class Lock9View extends ViewGroup {
     private int nbPoints;
     private int nbPointsMinimum;
     private int compteurPoints = 0;
+    private boolean verifPointsValide = false;
 
 
     public Lock9View(Context context) {
@@ -205,16 +206,26 @@ public class Lock9View extends ViewGroup {
                     else if (nodeAt == null || nodeAt.isHighLighted()) {
                         canvas.drawLine(currentNode.getCenterX(), currentNode.getCenterY(), event.getX(), event.getY(), paint);
                     } else {
-                        canvas.drawLine(currentNode.getCenterX(), currentNode.getCenterY(), nodeAt.getCenterX(), nodeAt.getCenterY(), paint);
-                        nodeAt.setHighLighted(true);
-                        Pair<NodeView, NodeView> pair = new Pair<NodeView, NodeView>(currentNode, nodeAt);
-                        lineList.add(pair);
+                        //Cas où l'on a deux points
+                        //ajout de l'algorithme pour s'assurer que l'on a visité tous les points entre le point de départ et d'arrivé.
+                        verifPointsValide = verificationPoints(currentNode, nodeAt);
 
-                        //changement de noeud
-                        currentNode = nodeAt;
-                        //Ajout du noeud au mot de passe
-                        pwdSb.append(currentNode.getNum());
-                        compteurPoints++;
+                        //si le point est valide
+                        if (verifPointsValide) {
+                            canvas.drawLine(currentNode.getCenterX(), currentNode.getCenterY(), nodeAt.getCenterX(), nodeAt.getCenterY(), paint);
+                            nodeAt.setHighLighted(true);
+                            Pair<NodeView, NodeView> pair = new Pair<NodeView, NodeView>(currentNode, nodeAt);
+                            lineList.add(pair);
+
+                            //changement de noeud
+                            currentNode = nodeAt;
+                            //Ajout du noeud au mot de passe
+                            pwdSb.append(currentNode.getNum());
+                            compteurPoints++;
+                        }
+                        //sinon on dessine seulement le trait actuel
+                        else
+                            canvas.drawLine(currentNode.getCenterX(), currentNode.getCenterY(), event.getX(), event.getY(), paint);
                     }
 
                     invalidate();
@@ -303,6 +314,38 @@ public class Lock9View extends ViewGroup {
         return result;
     }
 
+
+    public boolean verificationPoints(NodeView currentNode, NodeView nodeAt){
+
+        //récupérer le bon modulo selon la taille du pattern
+        int moduloNbPoints = getPointsUtils(nbPoints);
+
+        //Récupérer le modulo du point de départ et d'arrivée
+        int pointDep = currentNode.getNum() % moduloNbPoints;
+        int pointArrive = nodeAt.getNum() % moduloNbPoints;
+        //position points
+        int curPos = currentNode.getNum();
+        int aTPos = nodeAt.getNum();
+
+
+        if (curPos > aTPos)
+        {
+            if ((curPos == aTPos + 1) || (curPos == aTPos + moduloNbPoints) || (curPos == aTPos + moduloNbPoints + 1) || (curPos == aTPos + moduloNbPoints - 1))
+                return true;
+            else
+                return false;
+        }
+        else if (curPos < aTPos)
+        {
+            if ((aTPos == curPos + 1) || (aTPos == curPos + moduloNbPoints) || (aTPos == curPos + moduloNbPoints + 1) || (aTPos == curPos + moduloNbPoints - 1))
+                return true;
+            else
+                return false;
+        }
+
+        System.out.println("point dep: " + pointDep + " et point arrivée: " + pointArrive);
+        return false;
+    }
 
 
     public class NodeView extends View {
