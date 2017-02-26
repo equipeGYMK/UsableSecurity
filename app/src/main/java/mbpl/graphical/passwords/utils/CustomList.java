@@ -82,32 +82,21 @@ public class CustomList extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
 
-        View rowView =  convertView;
+        View rowView;
         final Holder holder;
 
-        if (rowView == null) {
+        rowView = inflater.inflate(R.layout.technics_list, null);
+        holder = new Holder();
 
-            rowView = inflater.inflate(R.layout.technics_list, null);
-            holder = new Holder();
+        holder.tv = (TextView) rowView.findViewById(R.id.textView1);
+        holder.descriptionTechnic = (TextView) rowView.findViewById(R.id.textView3);
+        holder.img = (ImageView) rowView.findViewById(R.id.imageView1);
+        holder.buttonDescrption = (Button) rowView.findViewById(R.id.buttonList);
+        holder.descriptionTechnic.setVisibility(View.GONE);
 
-            holder.tv = (TextView) rowView.findViewById(R.id.textView1);
-            holder.descriptionTechnic = (TextView) rowView.findViewById(R.id.textView3);
-            holder.img = (ImageView) rowView.findViewById(R.id.imageView1);
-            holder.buttonDescrption = (Button) rowView.findViewById(R.id.buttonList);
-
-
-
-            holder.descriptionTechnic.setVisibility(View.GONE);
-
-
-            holder.descriptionTechnic.setText(description[position]);
-            holder.tv.setText(result[position]);
-            holder.img.setImageResource(imageId[position]);
-        }
-        else
-        {
-            holder = (Holder) rowView.getTag();
-        }
+        holder.descriptionTechnic.setText(description[position]);
+        holder.tv.setText(result[position]);
+        holder.img.setImageResource(imageId[position]);
 
         rowView.setOnClickListener(new OnClickListener() {
             @Override
