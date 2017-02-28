@@ -49,9 +49,10 @@ public class Lock9View extends ViewGroup {
     private MethodeManager methodeManager;
 
     private int nbPoints;
-    private int nbPointsMinimum;
     private int compteurPoints = 0;
     private boolean verifPointsValide = false;
+    private int compteur, nbPointSelec, valuePoints;
+    private String diagType;
 
 
     public Lock9View(Context context) {
@@ -86,7 +87,6 @@ public class Lock9View extends ViewGroup {
         methodeManager.open();
         methode = methodeManager.getMethode(methode);
         nbPoints = methode.getParam1();
-        nbPointsMinimum = methode.getParam2();
         methodeManager.close();
 
 
@@ -212,16 +212,9 @@ public class Lock9View extends ViewGroup {
 
                         //si le point est valide
                         if (verifPointsValide) {
-                            canvas.drawLine(currentNode.getCenterX(), currentNode.getCenterY(), nodeAt.getCenterX(), nodeAt.getCenterY(), paint);
-                            nodeAt.setHighLighted(true);
-                            Pair<NodeView, NodeView> pair = new Pair<NodeView, NodeView>(currentNode, nodeAt);
-                            lineList.add(pair);
-
                             //changement de noeud
                             currentNode = nodeAt;
-                            //Ajout du noeud au mot de passe
-                            pwdSb.append(currentNode.getNum());
-                            compteurPoints++;
+                            compteurPoints += nbPointSelec;
                         }
                         //sinon on dessine seulement le trait actuel
                         else
@@ -284,6 +277,12 @@ public class Lock9View extends ViewGroup {
         return null;
     }
 
+    private NodeView getNodeWithPosition(int position) {
+
+        NodeView node = (NodeView) getChildAt(position - 1);
+        return node;
+    }
+
     public void setCallBack(CallBack callBack) {
         this.callBack = callBack;
     }
@@ -317,35 +316,319 @@ public class Lock9View extends ViewGroup {
 
     public boolean verificationPoints(NodeView currentNode, NodeView nodeAt){
 
-        //récupérer le bon modulo selon la taille du pattern
+        String result;
+        int i;
+        Pair<NodeView, NodeView> pair;
+        //récupérer le bon modulo selon la taille du sss
         int moduloNbPoints = getPointsUtils(nbPoints);
 
-        //Récupérer le modulo du point de départ et d'arrivée
-        int pointDep = currentNode.getNum() % moduloNbPoints;
-        int pointArrive = nodeAt.getNum() % moduloNbPoints;
+        //Récupérer la colonne de départ et d'arrivée
+        int pointDepCol = currentNode.getNum() % moduloNbPoints;
+        int pointArriveCol = nodeAt.getNum() % moduloNbPoints;
+        //Récupérer la ligne de départ et d'arrivée
+        int pointDepLig = (currentNode.getNum() - 1) / moduloNbPoints;
+        int pointArriveLig = (nodeAt.getNum() - 1) / moduloNbPoints;
+
         //position points
         int curPos = currentNode.getNum();
         int aTPos = nodeAt.getNum();
+        //Noeud intermédiaires
+        NodeView noeudActuel, prochainNoeud;
+        nbPointSelec = 0;
 
 
         if (curPos > aTPos)
         {
-            if ((curPos == aTPos + 1) || (curPos == aTPos + moduloNbPoints) || (curPos == aTPos + moduloNbPoints + 1) || (curPos == aTPos + moduloNbPoints - 1))
-                return true;
-            else
-                return false;
+            result =  getValueTraitementSup(curPos, aTPos, moduloNbPoints, pointDepCol, pointDepLig, pointArriveCol, pointArriveLig);
+            System.out.println("result: " + result + " et le diagType: " + diagType + " et le compteur: " +compteur);
+            switch  (result){
+                case "horizontal":{
+                    //fonction de traitement
+                    ajoutPointsLigneSup(compteur, curPos);
+                    break;
+                }
+                case "vertical":{
+                    //fonction de traitement
+                    ajoutPointsLigneSup(compteur, curPos);
+                    break;
+                }
+                case "diagonal":{
+                    if (diagType.equals("plus"))
+                        valuePoints = moduloNbPoints + 1;
+                    else
+                        valuePoints = moduloNbPoints - 1;
+
+                    //fonction de traitement
+                    ajoutPointsLigneSup(compteur, curPos);
+                    break;
+                }
+                default:{
+                    //dessiner le point et rendre le point highlited
+                    canvas.drawLine(currentNode.getCenterX(), currentNode.getCenterY(), nodeAt.getCenterX(), nodeAt.getCenterY(), paint);
+                    currentNode.setHighLighted(true);
+                    nodeAt.setHighLighted(true);
+                    //Ajouter les bonnes valeurs au tableau
+                    pair = new Pair<NodeView, NodeView>(currentNode, nodeAt);
+                    lineList.add(pair);
+                    //incrémenter le nombre de points
+                    nbPointSelec++;
+                    //Ajout du noeud au mot de passe
+                    pwdSb.append(currentNode.getNum());
+                }
+            }
+
+            return true;
+
         }
         else if (curPos < aTPos)
         {
-            if ((aTPos == curPos + 1) || (aTPos == curPos + moduloNbPoints) || (aTPos == curPos + moduloNbPoints + 1) || (aTPos == curPos + moduloNbPoints - 1))
-                return true;
-            else
-                return false;
-        }
+            result =  getValueTraitementInf(curPos, aTPos, moduloNbPoints, pointDepCol, pointDepLig, pointArriveCol, pointArriveLig);
+            switch  (result){
+                case "horizontal":{
+                    //A cet instant on sait qu'aucun point n'a déjà été ajouté donc on peut ajouter tout le chemin et on va écrire le chemin pour chaque point
+                    ajoutPointsLigneInf(compteur, curPos);
+                    break;
+                }
+                case "vertical":{
+                    //A cet instant on sait qu'aucun point n'a déjà été ajouté donc on peut ajouter tout le chemin et on va écrire le chemin pour chaque point
+                    ajoutPointsLigneInf(compteur, curPos);
+                    break;
+                }
+                case "diagonal":{
+                    if (diagType.equals("plus"))
+                        valuePoints = moduloNbPoints + 1;
+                    else
+                        valuePoints = moduloNbPoints - 1;
 
-        System.out.println("point dep: " + pointDep + " et point arrivée: " + pointArrive);
+                    //A cet instant on sait qu'aucun point n'a déjà été ajouté donc on peut ajouter tout le chemin et on va écrire le chemin pour chaque point
+                    ajoutPointsLigneInf(compteur, curPos);
+                    break;
+                }
+                default:{
+                    //dessiner le point et rendre le point highlited
+                    canvas.drawLine(currentNode.getCenterX(), currentNode.getCenterY(), nodeAt.getCenterX(), nodeAt.getCenterY(), paint);
+                    currentNode.setHighLighted(true);
+                    nodeAt.setHighLighted(true);
+                    //Ajouter les bonnes valeurs au tableau
+                    pair = new Pair<NodeView, NodeView>(currentNode, nodeAt);
+                    lineList.add(pair);
+                    //incrémenter le nombre de points
+                    nbPointSelec++;
+                    //Ajout du noeud au mot de passe
+                    pwdSb.append(currentNode.getNum());
+                }
+            }
+            return true;
+        }
         return false;
     }
+
+
+    /**
+     * Fonction lorsque le point de départ est supérieur au point d'arrivée
+     * @param depPoint
+     * @param finPoint
+     * @param intervalle:  représente le nombre de points. Pour une grille 9x9, on aura un intervalle de 3. Une grille 16x16 aura un intervalle de 4. etc..
+     * @return
+     */
+    public String getValueTraitementSup(int depPoint, int finPoint, int intervalle,  int colDep, int ligDep, int colArr, int ligArr)
+    {
+        int depPointTemp = depPoint;
+        int finPointTemp = finPoint;
+
+        //cas horizontal
+        //On s'arrête lorsque les deux points sont égaux ou bien si notre compteur est égal à l'intervalle pour ne pas aller trop loin
+        compteur = 1;
+        if (ligDep == ligArr) {
+            while (compteur < intervalle) {
+                depPointTemp = depPointTemp - 1;
+                if (depPointTemp == finPointTemp) {
+                    valuePoints = 1;
+                    return "horizontal";
+                }
+                compteur++;
+            }
+        }
+
+        //cas vertical
+        //Récupérer les bonnes valeurs. Etant donnée que l'on travaille verticalement, on incrémentera notre compteur de 3, 4 ou 5 selon la taille de notre grille.
+        compteur = intervalle;
+        depPointTemp = depPoint;
+        if (colArr == colDep) {
+            while (depPointTemp > finPointTemp) {
+                depPointTemp -= intervalle;
+                if (depPointTemp == finPointTemp){
+                    valuePoints = intervalle;
+                    return "vertical";
+                }
+                compteur += intervalle;
+            }
+        }
+
+        //Cas diagonale
+        //Récupérer les bonnes valeurs. Etant donnée que l'on travaille diagonalement, on incrémentera notre compteur de 3, 4 ou 5  + 1 selon la taille de notre grille.
+        compteur = intervalle + 1;
+        depPointTemp = depPoint;
+        while (depPointTemp > finPointTemp)
+        {
+            depPointTemp -= intervalle + 1;
+            if (depPointTemp == finPointTemp){
+                diagType = "plus";
+                return "diagonal";
+            }
+            compteur += intervalle + 1;
+        }
+
+        //Second cas diagonale
+        //Cas diagonale
+        //Récupérer les bonnes valeurs. Etant donnée que l'on travaille diagonalement, on incrémentera notre compteur de 3, 4 ou 5  + 1 selon la taille de notre grille.
+        compteur = intervalle - 1;
+        depPointTemp = depPoint;
+        while (depPointTemp > finPointTemp)
+        {
+            depPointTemp -= intervalle - 1;
+            if (depPointTemp == finPointTemp) {
+                diagType = "moins";
+                return "diagonal";
+            }
+            compteur += intervalle - 1;
+        }
+        //sinon on retourne rien
+        return "rien";
+    }
+
+
+
+
+    /**
+     * Fonction lorsque le point de départ est supérieur au point d'arrivée
+     * @param depPoint
+     * @param finPoint
+     * @param intervalle:  représente le nombre de points. Pour une grille 9x9, on aura un intervalle de 3. Une grille 16x16 aura un intervalle de 4. etc..
+     * @return
+     */
+    public String getValueTraitementInf(int depPoint, int finPoint, int intervalle, int colDep, int ligDep, int colArr, int ligArr)
+    {
+        int depPointTemp = depPoint;
+        int finPointTemp = finPoint;
+
+        //cas horizontal
+        //On s'arrête lorsque les deux points sont égaux ou bien si notre compteur est égal à l'intervalle pour ne pas aller trop loin
+        compteur = 1;
+        if (ligDep == ligArr) {
+            while (compteur < intervalle) {
+                depPointTemp = depPointTemp + 1;
+                if (finPointTemp == depPointTemp){
+                    valuePoints = 1;
+                    return "horizontal";
+                }
+                compteur++;
+            }
+        }
+
+        //cas vertical
+        //Récupérer les bonnes valeurs. Etant donnée que l'on travaille verticalement, on incrémentera notre compteur de 3, 4 ou 5 selon la taille de notre grille.
+        compteur = intervalle;
+        depPointTemp = depPoint;
+        if (colArr == colDep) {
+            while (depPointTemp < finPointTemp) {
+                depPointTemp += intervalle;
+                if (finPointTemp == depPointTemp){
+                    valuePoints = intervalle;
+                    return "vertical";
+                }
+                compteur = compteur + intervalle;
+            }
+        }
+
+        //Cas diagonale
+        //Récupérer les bonnes valeurs. Etant donnée que l'on travaille diagonalement, on incrémentera notre compteur de 3, 4 ou 5  + 1 selon la taille de notre grille.
+        compteur = intervalle + 1;
+        depPointTemp = depPoint;
+        while (depPointTemp < finPointTemp)
+        {
+            depPointTemp += intervalle + 1;
+            if (finPointTemp  == depPointTemp){
+                diagType = "plus";
+                return "diagonal";
+            }
+            compteur = compteur  + intervalle + 1;
+        }
+
+        //Cas diagonale
+        //Récupérer les bonnes valeurs. Etant donnée que l'on travaille diagonalement, on incrémentera notre compteur de 3, 4 ou 5  + 1 selon la taille de notre grille.
+        compteur = intervalle - 1;
+        depPointTemp = depPoint;
+        while (depPointTemp < finPointTemp)
+        {
+            depPointTemp += intervalle - 1;
+            if (finPointTemp  == depPointTemp){
+                diagType = "moins";
+                return "diagonal";
+            }
+            compteur = compteur  + intervalle - 1;
+        }
+        //sinon on retourne rien
+        return "rien";
+    }
+
+
+
+    public void ajoutPointsLigneSup(int compteur, int curPos)
+    {
+        Pair<NodeView, NodeView> pair;
+        //Noeud intermédiaires
+        NodeView noeudActuel, prochainNoeud;
+        nbPointSelec = 0;
+
+        for (int j = 0; j < compteur; j += valuePoints) {
+            //Récupérer les points
+            noeudActuel =  getNodeWithPosition(curPos - j);
+            prochainNoeud =  getNodeWithPosition(curPos - j - valuePoints);
+
+            //dessiner le point et rendre le point highlited
+            canvas.drawLine(noeudActuel.getCenterX(), noeudActuel.getCenterY(), prochainNoeud.getCenterX(), prochainNoeud.getCenterY(), paint);
+            noeudActuel.setHighLighted(true);
+            prochainNoeud.setHighLighted(true);
+
+            //Ajouter les bonnes valeurs au tableau
+            pair = new Pair<NodeView, NodeView>(noeudActuel, prochainNoeud);
+            lineList.add(pair);
+            //incrémenter le nombre de points
+            nbPointSelec++;
+            //Ajout du noeud au mot de passe
+            pwdSb.append(noeudActuel.getNum());
+        }
+    }
+
+
+    public void ajoutPointsLigneInf(int compteur, int curPos)
+    {
+        Pair<NodeView, NodeView> pair;
+        //Noeud intermédiaires
+        NodeView noeudActuel, prochainNoeud;
+        nbPointSelec = 0;
+
+        for (int j = 0; j < compteur; j +=  valuePoints) {
+            //Récupérer les points
+            noeudActuel =  getNodeWithPosition(curPos + j);
+            prochainNoeud =  getNodeWithPosition(curPos + j + valuePoints);
+
+            //dessiner le point et rendre le point highlited
+            canvas.drawLine(noeudActuel.getCenterX(), noeudActuel.getCenterY(), prochainNoeud.getCenterX(), prochainNoeud.getCenterY(), paint);
+            noeudActuel.setHighLighted(true);
+            prochainNoeud.setHighLighted(true);
+
+            //Ajouter les bonnes valeurs au tableau
+            pair = new Pair<NodeView, NodeView>(noeudActuel, prochainNoeud);
+            lineList.add(pair);
+            //incrémenter le nombre de points
+            nbPointSelec++;
+            //Ajout du noeud au mot de passe
+            pwdSb.append(noeudActuel.getNum());
+        }
+    }
+
 
 
     public class NodeView extends View {
