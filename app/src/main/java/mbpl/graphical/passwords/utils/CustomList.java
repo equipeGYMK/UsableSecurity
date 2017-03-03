@@ -1,6 +1,7 @@
 package mbpl.graphical.passwords.utils;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -94,9 +95,23 @@ public class CustomList extends BaseAdapter{
         holder.buttonDescrption = (Button) rowView.findViewById(R.id.buttonList);
         holder.descriptionTechnic.setVisibility(View.GONE);
 
+        holder.mdpCreated = (TextView) rowView.findViewById(R.id.mdp_existant);
+
         holder.descriptionTechnic.setText(description[position]);
         holder.tv.setText(result[position]);
         holder.img.setImageResource(imageId[position]);
+
+        Methode m;
+        MethodeManager mm = new MethodeManager(context);
+        mm.open();
+        m = mm.getMethode(implementedMethods.get(position));
+        if(!mm.defaultPassword(m)) {
+            holder.mdpCreated.setTextColor(Color.RED);
+            holder.mdpCreated.setText("MDP Créé");
+        } else {
+            //holder.mdpCreated.setTextColor(Color.RED);
+            holder.mdpCreated.setText("");
+        }
 
         rowView.setOnClickListener(new OnClickListener() {
             @Override
@@ -161,7 +176,7 @@ public class CustomList extends BaseAdapter{
 
     public class Holder
     {
-        TextView tv, descriptionTechnic;
+        TextView tv, descriptionTechnic, mdpCreated;
         ImageView img;
         Button buttonDescrption;
 
