@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -41,6 +42,10 @@ public class Creation extends ActionBarActivity {
         setContentView(R.layout.activity_creation_pattern_lock);
         //evenement Bouton
         evenementButton();
+
+        // action bar
+        setTitle("Pattern Lock");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //récupérer le contexte de la bdd
         methodeManager = new MethodeManager(getApplicationContext());
@@ -156,6 +161,16 @@ public class Creation extends ActionBarActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     /*
     @Override
@@ -164,6 +179,8 @@ public class Creation extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_change, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

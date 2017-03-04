@@ -101,16 +101,21 @@ public class CustomList extends BaseAdapter{
         holder.tv.setText(result[position]);
         holder.img.setImageResource(imageId[position]);
 
-        Methode m;
-        MethodeManager mm = new MethodeManager(context);
-        mm.open();
-        m = mm.getMethode(implementedMethods.get(position));
-        if(!mm.defaultPassword(m)) {
-            holder.mdpCreated.setTextColor(Color.RED);
-            holder.mdpCreated.setText("MDP Créé");
-        } else {
-            //holder.mdpCreated.setTextColor(Color.RED);
-            holder.mdpCreated.setText("");
+        // indicateur mot de passe cree
+        if (interfaceNom.equals("User")) {
+
+            Methode m;
+            MethodeManager mm = new MethodeManager(context);
+            mm.open();
+            m = mm.getMethode(implementedMethods.get(position));
+            if (!mm.defaultPassword(m)) {
+                holder.mdpCreated.setTextColor(Color.RED);
+                holder.mdpCreated.setText("MDP Créé");
+            } else {
+                //holder.mdpCreated.setTextColor(Color.RED);
+                holder.mdpCreated.setText("");
+            }
+
         }
 
         rowView.setOnClickListener(new OnClickListener() {
@@ -142,7 +147,6 @@ public class CustomList extends BaseAdapter{
                     //On va effectuer les différents cas en comparant le nom des techniques
                     appel = new Intent(context, implementedMethods.get(position).getConfiguration());
                     context.startActivity(appel);
-                    ((AccueilAdmin) context).finish();
 
                 }
             }

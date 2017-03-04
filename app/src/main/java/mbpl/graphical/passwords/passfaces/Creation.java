@@ -1,6 +1,7 @@
 package mbpl.graphical.passwords.passfaces;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import mbpl.graphical.passwords.accueil.AccueilUser;
 import mbpl.graphical.passwords.genericDejaVu.GenericCreation;
@@ -21,11 +22,26 @@ public class Creation extends GenericCreation {
         this.methode = new Passfaces();
         this.nbColonne = 5;
         super.onCreate(savedInstanceState);
+
+        // action bar
+        setTitle("PassFaces");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     protected int getDrawableN(int n) {
         return getResources().getIdentifier("visage_" + n, "drawable", getPackageName());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

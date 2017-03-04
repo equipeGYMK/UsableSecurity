@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.Toast;
 
-public class Authentification extends ActionBarActivity {
+public class Authentification extends AppCompatActivity {
 
         private Lock9View lock9View;
 
@@ -24,6 +26,10 @@ public class Authentification extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentification_pattern_lock);
+
+        // action bar
+        setTitle("Pattern Lock");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         lock9View = (Lock9View) findViewById(R.id.lock_9_view);
@@ -55,6 +61,16 @@ public class Authentification extends ActionBarActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 
 }

@@ -256,7 +256,7 @@ public class Lock9View extends ViewGroup {
 
 
     private void clearScreenAndDrawList() {
-        canvas.drawColor(Color.RED, PorterDuff.Mode.CLEAR);
+        canvas.drawColor(Color.BLACK, PorterDuff.Mode.CLEAR);
         for (Pair<NodeView, NodeView> pair : lineList) {
             canvas.drawLine(pair.first.getCenterX(), pair.first.getCenterY(), pair.second.getCenterX(), pair.second.getCenterY(), paint);
         }

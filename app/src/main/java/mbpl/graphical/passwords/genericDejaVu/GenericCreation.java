@@ -28,10 +28,10 @@ import mbpl.graphical.passwords.sqlite.MethodeManager;
 /**
  * Created by benja135 on 05/03/16.
  * Activité de création des méthodes de type "Déjà Vu".
- * - affiche tout les images de maniére ordonné dans une grille
+ * - affiche tout les image_passfaces de maniére ordonné dans une grille
  * - possibilité de scroller
- * - un clique sur une image l'ajoute à la liste des images choisies
- * - suppression des images de la liste possible
+ * - un clique sur une image l'ajoute à la liste des image_passfaces choisies
+ * - suppression des image_passfaces de la liste possible
  * - passSize entre 1 et 12
  * - chargement avec un progress circle !
  */
@@ -91,7 +91,7 @@ public abstract class GenericCreation extends AppCompatActivity {
          * Le coeur du chargement : filledGridWithListeners():
          *
          * @param params rien
-         * @return gridLayout "chargé", càd avec les images et les listeners.
+         * @return gridLayout "chargé", càd avec les image_passfaces et les listeners.
          */
         @Override
         protected GridLayout doInBackground(Void... params) {
@@ -154,7 +154,7 @@ public abstract class GenericCreation extends AppCompatActivity {
 
 
     /**
-     * Retourne un gridLayout rempli d'images avec les listeners.
+     * Retourne un gridLayout rempli d'image_passfaces avec les listeners.
      */
     private GridLayout filledGridWithListeners() {
 
@@ -177,7 +177,7 @@ public abstract class GenericCreation extends AppCompatActivity {
             // Crée un bitmap de l'image i
             Bitmap bmp;
             bmp = BitmapFactory.decodeResource(getResources(), getDrawableN(i + 1));
-            bmp = Bitmap.createScaledBitmap(bmp, tailleImage, tailleImage, true); // les images prennent moins de place en mémoire après cette méthode
+            bmp = Bitmap.createScaledBitmap(bmp, tailleImage, tailleImage, true); // les image_passfaces prennent moins de place en mémoire après cette méthode
 
             // On ajoute l'image à l'ImageView
             iv.setImageBitmap(bmp);
@@ -211,7 +211,7 @@ public abstract class GenericCreation extends AppCompatActivity {
 
     /**
      * Affiche la toolbar contenant les deux boutons de controle et
-     * les images choisi pour le mot de passe.
+     * les image_passfaces choisi pour le mot de passe.
      */
     private void drawGridToolbar() {
 

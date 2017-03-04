@@ -27,6 +27,9 @@ public class Bienvenue extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bienvenue_authentification);
 
+        // action bar
+        setTitle("PassFaces");
+
         //récupérer le contexte
         //récupérer le contexte de la bdd
         methodeManager = new MethodeManager(getApplicationContext());
@@ -45,7 +48,7 @@ public class Bienvenue extends AppCompatActivity {
                     //On réinitialise le mot de passe à " "
                     methodeManager.open();
                     methode = methodeManager.getMethode(methode);
-                //Récupération de la classe création pour la redirection lors du clic sur le bouton enregistrer nouveau mdp
+                    //Récupération de la classe création pour la redirection lors du clic sur le bouton enregistrer nouveau mdp
                     creationClass = methode.getCreation();
                     methodeManager.close();
 

@@ -83,7 +83,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
     }
 
     /**
-     * Affiche des images aléatoirement et ajoute un listener sur chacun d'entre eux.
+     * Affiche des image_passfaces aléatoirement et ajoute un listener sur chacun d'entre eux.
      * imageToBeDisplayed sera forcément affiché (à une position aléatoire).
      *
      * @param imageToBeDisplayed image à afficher (pour nous le caractére du mdp courant)

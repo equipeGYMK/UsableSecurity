@@ -28,7 +28,7 @@ public class AccueilAdmin extends Activity {
     TextView titre;
 
     //Paramètre des différents éléments à afficher
-    public static int [] prgmImages={R.drawable.images,R.drawable.images2};
+    public static int [] prgmImages={R.drawable.image_passfaces,R.drawable.image_patternlock};
     public static String [] prgmNameList={"PassFaces","Pattern Lock"};
     public static String [] descriptionList = new String[implementedMethods.size()];;
 

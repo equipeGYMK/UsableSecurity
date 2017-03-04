@@ -27,6 +27,9 @@ public class Bienvenue extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bienvenue_authentification);
 
+        // action bar
+        setTitle("Pattern Lock");
+
         //récupérer le contexte
         //récupérer le contexte de la bdd
         methodeManager = new MethodeManager(getApplicationContext());
