@@ -67,6 +67,7 @@ public class Accueil extends Activity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        lv.setAdapter(new CustomList(lv, this, prgmNameList,prgmImages, descriptionList,  "User"));
     }
 
     @Override
@@ -101,11 +102,6 @@ public class Accueil extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        // problème activité qui reste ouverte en fond à régler
     }
 
     @Override
