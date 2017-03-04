@@ -1,13 +1,14 @@
 package mbpl.graphical.passwords.accueil;
 
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
 import android.view.Menu;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +20,8 @@ import mbpl.graphical.passwords.sqlite.MethodeManager;
 import mbpl.graphical.passwords.utils.CustomList;
 
 import static mbpl.graphical.passwords.sqlite.ImplementedMethods.implementedMethods;
-//classeAccueilAdmind  yak test =)))
-public class AccueilAdmin extends Activity {
+
+public class Accueil extends Activity {
 
     ListView lv;
     Context context;
@@ -30,7 +31,7 @@ public class AccueilAdmin extends Activity {
     //Paramètre des différents éléments à afficher
     public static int [] prgmImages={R.drawable.image_passfaces,R.drawable.image_patternlock};
     public static String [] prgmNameList={"PassFaces","Pattern Lock"};
-    public static String [] descriptionList = new String[implementedMethods.size()];;
+    public static String [] descriptionList = new String[implementedMethods.size()];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +39,6 @@ public class AccueilAdmin extends Activity {
         setContentView(R.layout.menu_tab_technics);
 
         //récupérer la vue et générer le titre
-        titre = (TextView)findViewById(R.id.textViewTitre);
-        titre.setText("Interface Admin");
-
         context = this;
 
         //créer la bd
@@ -57,28 +55,11 @@ public class AccueilAdmin extends Activity {
 
         //Remplir mon tableau de description
         for (int i = 0; i < implementedMethods.size(); i++)
-        descriptionList[i] = implementedMethods.get(i).getDescription();
+            descriptionList[i] = implementedMethods.get(i).getDescription();
 
-
-        //Générer la liste avec la classe CustomList
+        //Générer la liste
         lv=(ListView) findViewById(R.id.mdpListView);
-        lv.setAdapter(new CustomList(lv, this, prgmNameList,prgmImages, descriptionList, "Admin"));
-
-        //Evenement bouton
-        btnRetour = (Button) findViewById(R.id.buttonRetourList);
-        btnRetour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent authentification = new Intent(AccueilAdmin.this, AccueilAdminUser.class);
-                startActivity(authentification);
-                finish();
-            }
-        });
-
-    }
-
-
-    public void remplirDescription(){
+        lv.setAdapter(new CustomList(lv, this, prgmNameList,prgmImages, descriptionList,  "User"));
 
     }
 
@@ -122,15 +103,14 @@ public class AccueilAdmin extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        // problème activité qui reste ouverte en fond à régler
+    }
 
     @Override
     protected void onStart(){
         super.onStart();
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent authentification = new Intent(AccueilAdmin.this, AccueilAdminUser.class);
-        startActivity(authentification);
-    }
 }

@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import mbpl.graphical.passwords.accueil.AccueilUser;
+import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
 import mbpl.graphical.passwords.utils.Tools;
@@ -28,7 +28,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
 
     // Variables protected à redéfinir dans chaque classe fille /!\
     protected GenericAuthentification here = GenericAuthentification.this;
-    protected Class nextClass = AccueilUser.class;
+    protected Class nextClass = Accueil.class;
     protected int nbImage;
     protected Methode methode;
     protected int tailleImage = 256; // optionnel

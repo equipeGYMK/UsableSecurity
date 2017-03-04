@@ -2,7 +2,6 @@ package mbpl.graphical.passwords.adminConfiguration;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import mbpl.graphical.passwords.R;
-import mbpl.graphical.passwords.accueil.AccueilAdmin;
+import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
 import mbpl.graphical.passwords.sqlite.PatternLock;
@@ -118,7 +117,7 @@ public class PatternLockConfiguration extends AppCompatActivity {
                 methodeManager.close();
 
                 //Changement d'activité
-                Intent authentification = new Intent(PatternLockConfiguration.this, AccueilAdmin.class);
+                Intent authentification = new Intent(PatternLockConfiguration.this, Accueil.class);
                 startActivity(authentification);
                 finish();
             }
@@ -145,6 +144,7 @@ public class PatternLockConfiguration extends AppCompatActivity {
         super.onStart();
     }
 
+    /*
     @Override
     public void onBackPressed() {
         //Retour à la page d'accueil lorsque l'on clique sur retour
@@ -152,6 +152,7 @@ public class PatternLockConfiguration extends AppCompatActivity {
         startActivity(authentification);
         finish();
     }
+    */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

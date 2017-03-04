@@ -13,8 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import mbpl.graphical.passwords.accueil.AccueilAdmin;
-import mbpl.graphical.passwords.accueil.AccueilUser;
+import mbpl.graphical.passwords.accueil.AdminUser;
+import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.R;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
@@ -34,24 +34,10 @@ public class CustomList extends BaseAdapter{
 
 
     //Constructeur user
-    public CustomList(ListView lv, AccueilUser mainActivity, String[] prgmNameList, int[] prgmImages, String[] description, String user) {
+    public CustomList(ListView lv, Accueil mainActivity, String[] prgmNameList, int[] prgmImages, String[] description, String user) {
         // TODO Auto-generated constructor stub
         this.description = description;
         this.interfaceNom = user;
-        mListView = lv;
-        result = prgmNameList;
-        context = mainActivity;
-        imageId = prgmImages;
-        inflater = ( LayoutInflater )context.
-                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
-
-
-    //constructeur admin
-    public CustomList(ListView lv, AccueilAdmin mainActivity, String[] prgmNameList, int[] prgmImages, String[] description,String admin) {
-        // TODO Auto-generated constructor stub
-        this.description = description;
-        this.interfaceNom = admin;
         mListView = lv;
         result = prgmNameList;
         context = mainActivity;
@@ -122,33 +108,11 @@ public class CustomList extends BaseAdapter{
             @Override
             public void onClick(View v) {
 
-                //On va avoir le cas où l'on se trouve dans la partie user
-                if (interfaceNom.equals("User")) {
+            Intent appel;
+            appel = new Intent(context, AdminUser.class);
+            appel.putExtra("methode", position);
+            context.startActivity(appel);
 
-                    //Si l'attribut mdp est différent de nul alors on s'est déjà authentifié
-                    Intent appel;
-                    Methode m;
-                    MethodeManager mm = new MethodeManager(context);
-                    mm.open();
-                    m = mm.getMethode(implementedMethods.get(position));
-                    if (!mm.defaultPassword(m)) {
-                        appel = new Intent(context, implementedMethods.get(position).getAuthentification());
-                    } else {
-                        appel = new Intent(context, implementedMethods.get(position).getCreation());
-                    }
-
-                    mm.close();
-                    context.startActivity(appel);
-                }
-                //Cas où l'on se trouve dans l'interfac admin
-                else if (interfaceNom.equals("Admin")){
-
-                    Intent appel;
-                    //On va effectuer les différents cas en comparant le nom des techniques
-                    appel = new Intent(context, implementedMethods.get(position).getConfiguration());
-                    context.startActivity(appel);
-
-                }
             }
         });
 

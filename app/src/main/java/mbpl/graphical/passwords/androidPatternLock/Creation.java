@@ -1,8 +1,6 @@
 package mbpl.graphical.passwords.androidPatternLock;
 
-import mbpl.graphical.passwords.accueil.AccueilAdmin;
-import mbpl.graphical.passwords.accueil.AccueilAdminUser;
-import mbpl.graphical.passwords.accueil.AccueilUser;
+import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.R;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
@@ -113,7 +111,7 @@ public class Creation extends ActionBarActivity {
                     editor.commit();
 
                     //On se redirige vers la page d'accueil de l'utilisateur
-                    Intent intent = new Intent(Creation.this, AccueilUser.class);
+                    Intent intent = new Intent(Creation.this, Accueil.class);
                     startActivity(intent);
                     finish();
                 }else{
@@ -156,7 +154,7 @@ public class Creation extends ActionBarActivity {
         //Sinon on revient à l'écran d'accueil
         else
         {
-            authentification = new Intent(Creation.this, AccueilUser.class);
+            authentification = new Intent(Creation.this, Accueil.class);
             startActivity(authentification);
         }
     }

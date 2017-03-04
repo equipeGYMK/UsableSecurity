@@ -143,6 +143,7 @@ public abstract class GenericCreation extends AppCompatActivity {
 
                         Intent authentification = new Intent(here, nextClass);
                         startActivity(authentification);
+                        finish();
                     }
                 }
             });

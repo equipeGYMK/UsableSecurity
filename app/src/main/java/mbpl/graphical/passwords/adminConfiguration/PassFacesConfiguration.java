@@ -2,7 +2,6 @@ package mbpl.graphical.passwords.adminConfiguration;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,13 +9,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import mbpl.graphical.passwords.R;
-import mbpl.graphical.passwords.accueil.AccueilAdmin;
-import mbpl.graphical.passwords.accueil.AccueilAdminUser;
-import mbpl.graphical.passwords.accueil.AccueilUser;
+import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
 import mbpl.graphical.passwords.sqlite.Passfaces;
-import mbpl.graphical.passwords.sqlite.PatternLock;
 
 public class PassFacesConfiguration extends AppCompatActivity {
 
@@ -53,7 +49,7 @@ public class PassFacesConfiguration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Changement d'activité
-                Intent authentification = new Intent(PassFacesConfiguration.this, AccueilAdmin.class);
+                Intent authentification = new Intent(PassFacesConfiguration.this, Accueil.class);
                 startActivity(authentification);
                 finish();
             }

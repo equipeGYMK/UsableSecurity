@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import mbpl.graphical.passwords.accueil.AccueilUser;
+import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.R;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
@@ -65,7 +65,7 @@ public class Bienvenue extends AppCompatActivity {
             public void onClick(View v) {
 
                 //On retourne à l'activité accueil sans rien faire
-                Intent authentification = new Intent(Bienvenue.this, AccueilUser.class);
+                Intent authentification = new Intent(Bienvenue.this, Accueil.class);
                 startActivity(authentification);
                 finish();
             }
