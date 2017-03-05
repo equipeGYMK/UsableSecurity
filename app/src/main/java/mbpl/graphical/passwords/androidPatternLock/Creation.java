@@ -155,30 +155,4 @@ public class Creation extends ActionBarActivity {
             startActivity(authentification);
         }
     }
-
-
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Étend le menu ; ceci ajoute des items à la barre d'actions si elle est présente.
-        getMenuInflater().inflate(R.menu.menu_change, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.contact:
-                new AlertDialog.Builder(this)
-                        .setTitle("Android Pattern Lock")
-                        .setMessage("Prototype version 1")
-                        .setPositiveButton("OK", null).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    */
 }
