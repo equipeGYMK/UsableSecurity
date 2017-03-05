@@ -2,21 +2,19 @@ package mbpl.graphical.passwords.adminConfiguration;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import mbpl.graphical.passwords.R;
-import mbpl.graphical.passwords.accueil.AccueilAdmin;
-import mbpl.graphical.passwords.accueil.AccueilAdminUser;
-import mbpl.graphical.passwords.accueil.AccueilUser;
+import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
 import mbpl.graphical.passwords.sqlite.Passfaces;
-import mbpl.graphical.passwords.sqlite.PatternLock;
 
-public class PassFacesConfiguration extends Activity {
+public class PassFacesConfiguration extends AppCompatActivity {
 
 
     private Button btnSubmit, btnInit;
@@ -28,6 +26,10 @@ public class PassFacesConfiguration extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pass_faces_configuration);
+
+        // action bar
+        setTitle("PassFaces Configuration");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //mise en place de la bd
         methodeManager = new MethodeManager(getApplicationContext());
@@ -47,7 +49,7 @@ public class PassFacesConfiguration extends Activity {
             @Override
             public void onClick(View v) {
                 //Changement d'activité
-                Intent authentification = new Intent(PassFacesConfiguration.this, AccueilAdmin.class);
+                Intent authentification = new Intent(PassFacesConfiguration.this, Accueil.class);
                 startActivity(authentification);
                 finish();
             }
@@ -74,12 +76,24 @@ public class PassFacesConfiguration extends Activity {
         super.onStart();
     }
 
+    /*
     @Override
     public void onBackPressed() {
         //Retour à la page d'accueil lorsque l'on clique sur retour
         Intent authentification = new Intent(PassFacesConfiguration.this, AccueilAdmin.class);
         startActivity(authentification);
         finish();
+    }*/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

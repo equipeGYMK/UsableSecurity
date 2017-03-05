@@ -7,23 +7,16 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import mbpl.graphical.passwords.R;
-import mbpl.graphical.passwords.accueil.AccueilAdmin;
-import mbpl.graphical.passwords.accueil.AccueilAdminUser;
-import mbpl.graphical.passwords.accueil.AccueilUser;
-import mbpl.graphical.passwords.adminConfiguration.PatternLockConfiguration;
-import mbpl.graphical.passwords.genericDejaVu.GenericAuthentification;
+import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
 import mbpl.graphical.passwords.sqlite.Passfaces;
-import mbpl.graphical.passwords.sqlite.PatternLock;
 import mbpl.graphical.passwords.utils.Tools;
 
 public class ValidationCreation extends Activity {
@@ -156,9 +149,10 @@ public class ValidationCreation extends Activity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent authentification = new Intent(ValidationCreation.this, AccueilUser.class);
-                startActivity(authentification);
+                Intent intent = new Intent(ValidationCreation.this, Accueil.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finish();
+                startActivity(intent);
             }
         });
 

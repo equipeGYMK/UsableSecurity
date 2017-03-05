@@ -21,7 +21,7 @@ import mbpl.graphical.passwords.utils.CustomList;
 
 import static mbpl.graphical.passwords.sqlite.ImplementedMethods.implementedMethods;
 
-public class AccueilUser extends Activity {
+public class Accueil extends Activity {
 
     ListView lv;
     Context context;
@@ -29,7 +29,7 @@ public class AccueilUser extends Activity {
     TextView titre;
 
     //Paramètre des différents éléments à afficher
-    public static int [] prgmImages={R.drawable.images,R.drawable.images2};
+    public static int [] prgmImages={R.drawable.image_passfaces,R.drawable.image_patternlock};
     public static String [] prgmNameList={"PassFaces","Pattern Lock"};
     public static String [] descriptionList = new String[implementedMethods.size()];
 
@@ -39,8 +39,6 @@ public class AccueilUser extends Activity {
         setContentView(R.layout.menu_tab_technics);
 
         //récupérer la vue et générer le titre
-        titre = (TextView)findViewById(R.id.textViewTitre);
-        titre.setText("Interface Utilisateur");
         context = this;
 
         //créer la bd
@@ -63,24 +61,13 @@ public class AccueilUser extends Activity {
         lv=(ListView) findViewById(R.id.mdpListView);
         lv.setAdapter(new CustomList(lv, this, prgmNameList,prgmImages, descriptionList,  "User"));
 
-
-        //Evenement bouton
-        btnRetour = (Button) findViewById(R.id.buttonRetourList);
-        btnRetour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent authentification = new Intent(AccueilUser.this, AccueilAdminUser.class);
-                startActivity(authentification);
-                finish();
-            }
-        });
-
     }
 
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        lv.setAdapter(new CustomList(lv, this, prgmNameList,prgmImages, descriptionList,  "User"));
     }
 
     @Override
@@ -117,15 +104,9 @@ public class AccueilUser extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     protected void onStart(){
         super.onStart();
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent authentification = new Intent(AccueilUser.this, AccueilAdminUser.class);
-        startActivity(authentification);
-    }
 }

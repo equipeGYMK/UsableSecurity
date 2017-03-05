@@ -1,6 +1,7 @@
 package mbpl.graphical.passwords.passfaces;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import mbpl.graphical.passwords.genericDejaVu.GenericAuthentification;
 import mbpl.graphical.passwords.sqlite.Passfaces;
@@ -19,11 +20,27 @@ public class Authentification extends GenericAuthentification {
         this.nbImage = 20;
         this.methode = new Passfaces();
         super.onCreate(savedInstanceState);
+
+        // action bar
+        setTitle("PassFaces");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     @Override
     protected int getDrawableN(int n) {
         return getResources().getIdentifier("visage_" + n, "drawable", getPackageName());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
