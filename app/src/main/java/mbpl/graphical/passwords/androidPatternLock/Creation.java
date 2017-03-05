@@ -1,8 +1,6 @@
 package mbpl.graphical.passwords.androidPatternLock;
 
-import mbpl.graphical.passwords.accueil.AccueilAdmin;
-import mbpl.graphical.passwords.accueil.AccueilAdminUser;
-import mbpl.graphical.passwords.accueil.AccueilUser;
+import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.R;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
@@ -13,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -41,6 +40,10 @@ public class Creation extends ActionBarActivity {
         setContentView(R.layout.activity_creation_pattern_lock);
         //evenement Bouton
         evenementButton();
+
+        // action bar
+        setTitle("Pattern Lock");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //récupérer le contexte de la bdd
         methodeManager = new MethodeManager(getApplicationContext());
@@ -108,7 +111,7 @@ public class Creation extends ActionBarActivity {
                     editor.commit();
 
                     //On se redirige vers la page d'accueil de l'utilisateur
-                    Intent intent = new Intent(Creation.this, AccueilUser.class);
+                    Intent intent = new Intent(Creation.this, Accueil.class);
                     startActivity(intent);
                     finish();
                 }else{
@@ -151,11 +154,21 @@ public class Creation extends ActionBarActivity {
         //Sinon on revient à l'écran d'accueil
         else
         {
-            authentification = new Intent(Creation.this, AccueilUser.class);
+            authentification = new Intent(Creation.this, Accueil.class);
             startActivity(authentification);
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     /*
     @Override
@@ -164,6 +177,8 @@ public class Creation extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_change, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

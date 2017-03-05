@@ -467,17 +467,12 @@ public class Lock9View extends ViewGroup {
             }
         }
 
-
-
         //récuprer les colonnes
         if (colDep == 0)
             colDep = intervalle;
 
         if (colArr == 0)
             colArr = intervalle;
-
-        System.out.println("La colonne de début est: " + colDep);
-        System.out.println("La colonne de fin est: " + colArr);
 
         //On s'assure que la colonne du point d'arrivée est supérieure à la colonne du point de départ
         if (colArr > colDep) {
@@ -486,8 +481,6 @@ public class Lock9View extends ViewGroup {
             compteur = intervalle - 1;
             depPointTemp = depPoint;
             while (depPointTemp > finPointTemp) {
-                System.out.println("On est arrivéSupDiag");
-                System.out.println("test: " + depPointTemp);
                 depPointTemp -= intervalle - 1;
                 if (depPointTemp == finPointTemp) {
                     diagType = "plus";
@@ -503,8 +496,6 @@ public class Lock9View extends ViewGroup {
             depPointTemp = depPoint;
             while (depPointTemp > finPointTemp)
             {
-                System.out.println("On est arrivéDiagInf");
-                System.out.println("test: " + depPointTemp);
                 depPointTemp -= intervalle + 1;
                 if (depPointTemp == finPointTemp) {
                     diagType = "moins";
@@ -513,11 +504,9 @@ public class Lock9View extends ViewGroup {
                 compteur += intervalle + 1;
             }
         }
-
         //sinon on retourne rien
         return "rien";
     }
-
 
 
 
@@ -532,7 +521,6 @@ public class Lock9View extends ViewGroup {
     {
         int depPointTemp = depPoint;
         int finPointTemp = finPoint;
-
 
         //cas horizontal
         //On s'arrête lorsque les deux points sont égaux ou bien si notre compteur est égal à l'intervalle pour ne pas aller trop loin
@@ -571,11 +559,6 @@ public class Lock9View extends ViewGroup {
             colDep = intervalle;
 
 
-        System.out.println("La colonne de début est: " + colDep);
-        System.out.println("La colonne de fin est: " + colArr);
-        System.out.println("salut sup");
-
-
         if (colArr > colDep) {
             //Cas diagonale
             //Récupérer les bonnes valeurs. Etant donnée que l'on travaille diagonalement, on incrémentera notre compteur de 3, 4 ou 5  + 1 selon la taille de notre grille.
@@ -597,7 +580,6 @@ public class Lock9View extends ViewGroup {
             compteur = intervalle - 1;
             depPointTemp = depPoint;
             while (depPointTemp < finPointTemp) {
-                System.out.println("DEBUTMOINS: " + depPointTemp);
                 depPointTemp += intervalle - 1;
                 if (finPointTemp == depPointTemp) {
                     diagType = "moins";
@@ -619,8 +601,6 @@ public class Lock9View extends ViewGroup {
         //Noeud intermédiaires
         NodeView noeudActuel, prochainNoeud;
         nbPointSelec = 0;
-
-        System.out.println("ValuePoint vaut: " + valuePoints + " et compteur: " + compteur);
 
         for (int j = 0; j < compteur; j += valuePoints) {
             //Récupérer les points
