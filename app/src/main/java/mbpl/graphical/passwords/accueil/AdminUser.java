@@ -55,7 +55,7 @@ public class AdminUser extends AppCompatActivity {
                     //si il y a un mdp defini
                     authentification = new Intent(AdminUser.this, implementedMethods.get(position).getAuthentification());
                 } else {
-                    //si il n'y a pas de mdp defini
+                    //si il n'y a pas de mdp defini on fait :
                     authentification = new Intent(AdminUser.this, implementedMethods.get(position).getInformation());
                 }
 
