@@ -96,7 +96,7 @@
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
-        android:text="Initialiser le mot de passe"
+        android:text="Reinitialiser le mot de passe"
         android:layout_height="wrap_content"
         android:id="@+id/buttonInitPatternLock"
         android:background="@drawable/border_button_accueil"

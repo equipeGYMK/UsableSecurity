@@ -52,9 +52,11 @@ public class AdminUser extends AppCompatActivity {
                 mm.open();
                 m = mm.getMethode(implementedMethods.get(position));
                 if (!mm.defaultPassword(m)) {
+                    //si il y a un mdp defini
                     authentification = new Intent(AdminUser.this, implementedMethods.get(position).getAuthentification());
                 } else {
-                    authentification = new Intent(AdminUser.this, implementedMethods.get(position).getCreation());
+                    //si il n'y a pas de mdp defini
+                    authentification = new Intent(AdminUser.this, implementedMethods.get(position).getInformation());
                 }
 
                 mm.close();

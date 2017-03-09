@@ -10,7 +10,7 @@ public abstract class Methode {
     protected String nom, categorie, mdp, description;
     protected Float indiceSecurite, indiceUtilisabilite, temps_auth_moyen;
     protected int param1, param2;
-    protected Class creation, authentification, configuration;
+    protected Class creation, authentification, configuration, information;
 
 
     public int getId() {
@@ -139,6 +139,10 @@ public abstract class Methode {
 
     public Class getConfiguration(){
         return configuration;
+    }
+
+    public Class getInformation() {
+        return information;
     }
 
 

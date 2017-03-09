@@ -3,6 +3,7 @@ package mbpl.graphical.passwords.sqlite;
 import mbpl.graphical.passwords.adminConfiguration.PatternLockConfiguration;
 import mbpl.graphical.passwords.androidPatternLock.Creation;
 import mbpl.graphical.passwords.androidPatternLock.Authentification;
+import mbpl.graphical.passwords.androidPatternLock.Information;
 
 /**
  * Created by Admin on 30/01/2017.
@@ -15,6 +16,7 @@ public class PatternLock extends Methode {
         this.creation = Creation.class;
         this.authentification = Authentification.class;
         this.configuration = PatternLockConfiguration.class;
+        this.information = Information.class;
 
         this.description = "L'utilisateur dispose d’une grille de taille 3x3 et le mot de passe de l’utilisateur est un dessin sur cette grille par une séquence" +
                 " de lignes reliant les points. Lors du choix du mot de passe, l’utilisateur choisit sa séquence et pour s’authentifier il doit le redessiner sur l’écran." +

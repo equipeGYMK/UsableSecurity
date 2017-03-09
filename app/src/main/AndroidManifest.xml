@@ -12,69 +12,61 @@
         <!-- Menu -->
         <activity
             android:name=".accueil.Accueil"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTask">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".accueil.AdminUser"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-
         <!-- Passfaces -->
         <activity
             android:name=".passfaces.Authentification"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
-
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".passfaces.Creation"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
-
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".adminConfiguration.PassFacesConfiguration"
+            android:label="@string/title_activity_pass_faces_configuration"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_pass_faces_configuration"/>
-
+            android:theme="@style/AppTheme" />
 
         <!-- PatternLock -->
         <activity
             android:name=".androidPatternLock.Creation"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_change"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".androidPatternLock.Authentification"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".adminConfiguration.PatternLockConfiguration"
+            android:label="@string/title_activity_design_pattern_lock_configuration"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_design_pattern_lock_configuration" />
-
+            android:theme="@style/AppTheme" />
 
         <!-- Welcome's activities -->
         <activity android:name=".androidPatternLock.Bienvenue" />
         <activity android:name=".passfaces.Bienvenue" />
-
         <activity
             android:name=".passfaces.ValidationCreation"
-            android:label="@string/title_activity_validation_creation"/>
+            android:label="@string/title_activity_validation_creation" />
+        <activity android:name=".passfaces.Information" />
+        <activity android:name=".androidPatternLock.Information"></activity>
     </application>
 
 </manifest>
