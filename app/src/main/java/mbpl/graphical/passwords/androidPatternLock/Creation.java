@@ -139,9 +139,8 @@ public class Creation extends ActionBarActivity {
     }
 
 
-
     //Afin de remplir le test d'acception suivant: quand un user appuie sur annuler alors il revient sur l'écran de création d'un pattern
-    @Override
+    /*@Override
     public void onBackPressed() {
 
         Intent authentification;
@@ -157,7 +156,7 @@ public class Creation extends ActionBarActivity {
             authentification = new Intent(Creation.this, Accueil.class);
             startActivity(authentification);
         }
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -41,6 +41,9 @@
             android:label="@string/title_activity_pass_faces_configuration"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".passfaces.Information"
+            android:screenOrientation="portrait" />
 
         <!-- PatternLock -->
         <activity
@@ -58,6 +61,9 @@
             android:label="@string/title_activity_design_pattern_lock_configuration"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".androidPatternLock.Information"
+            android:screenOrientation="portrait"/>
 
         <!-- Welcome's activities -->
         <activity android:name=".androidPatternLock.Bienvenue" />
@@ -65,8 +71,6 @@
         <activity
             android:name=".passfaces.ValidationCreation"
             android:label="@string/title_activity_validation_creation" />
-        <activity android:name=".passfaces.Information" />
-        <activity android:name=".androidPatternLock.Information"></activity>
     </application>
 
 </manifest>
