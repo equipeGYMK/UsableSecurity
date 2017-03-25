@@ -58,6 +58,8 @@ public class MethodeManager {
     protected static final int NUM_COL_PARAM1 = 20;
     protected static final String COL_PARAM2 = "param2";
     protected static final int NUM_COL_PARAM2 = 21;
+    protected static final String COL_TENTATIVE = "nb_tentative";
+    protected static final int NUM_COL_TENTATIVE = 22;
 
     protected SQLiteDatabase db;
     protected MySQLiteDatabase maBaseSQLite;
@@ -205,15 +207,14 @@ public class MethodeManager {
      * @param auth_moyen
      * @return le nombre de lignes updated
      */
-    public int addTentativeReussie(Methode methode, float auth_moyen) {
+    public int addTentativeReussie(Methode methode) {
         int id = methode.getId();
         int newTentativeReussi = methode.getNb_tentative_reussie() + 1;
-        float newAuthenMoyen = (methode.getTemps_auth_moyen() * (float) methode.getNb_tentative_reussie()
-                + auth_moyen) / (float) newTentativeReussi;
-
+       /* float newAuthenMoyen = (methode.getTemps_auth_moyen() * (float) methode.getNb_tentative_reussie()
+                + auth_moyen) / (float) newTentativeReussi;*/
         ContentValues values = new ContentValues();
         values.put(COL_TENTATIVEREUSSIE, newTentativeReussi);
-        values.put(COL_TEMPSMOYEN, newAuthenMoyen);
+       /* values.put(COL_TEMPSMOYEN, newAuthenMoyen);*/
         return db.update(TABLE_NAME, values, COL_ID + " = " + id, null);
     }
 
@@ -226,7 +227,6 @@ public class MethodeManager {
     public int addTentativeEchouee(Methode methode) {
         int id = methode.getId();
         int newTentativeEchouee = methode.getNb_tentative_echouee() + 1;
-
         ContentValues values = new ContentValues();
         values.put(COL_TENTATIVEECHOUEE, newTentativeEchouee);
         return db.update(TABLE_NAME, values, COL_ID + " = " + id, null);

@@ -177,7 +177,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
                 mToast.setText("Authentification OK !");
                 mToast.show();
                 Intent accueil = new Intent(here, nextClass);
-                methodeManager.addTentativeReussie(methode, (float) time / 1000);
+                methodeManager.addTentativeReussie(methode);
                 methodeManager.close();
                 startActivity(accueil);
             } else {
