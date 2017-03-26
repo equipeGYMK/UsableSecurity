@@ -138,9 +138,7 @@ public class Creation extends ActionBarActivity {
         });
     }
 
-
-    //Afin de remplir le test d'acception suivant: quand un user appuie sur annuler alors il revient sur l'écran de création d'un pattern
-    /*@Override
+    @Override
     public void onBackPressed() {
 
         Intent authentification;
@@ -149,20 +147,20 @@ public class Creation extends ActionBarActivity {
         if (btnRecommencer.isShown()) {
             authentification = new Intent(Creation.this, Creation.class);
             startActivity(authentification);
+            finish();
         }
-        //Sinon on revient à l'écran d'accueil
+        //Sinon on revient à l'écran de description
         else
         {
-            authentification = new Intent(Creation.this, Accueil.class);
-            startActivity(authentification);
+            finish();
         }
-    }*/
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
