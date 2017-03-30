@@ -66,10 +66,15 @@
             android:screenOrientation="portrait"/>
 
         <!-- Welcome's activities -->
-        <activity android:name=".androidPatternLock.Bienvenue" />
-        <activity android:name=".passfaces.Bienvenue" />
+        <activity
+            android:name=".androidPatternLock.Bienvenue"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".passfaces.Bienvenue"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".passfaces.ValidationCreation"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_validation_creation" />
     </application>
 
