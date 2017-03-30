@@ -15,8 +15,8 @@
     <string name="action_create_new_pattern">Create New Pattern</string>
     <string name="action_check">Check Pattern</string>
     <string name="action_contact">Contact</string>
-    <string name="draw_pattern_msg">Draw new pattern</string>
-    <string name="redraw_confirm_pattern_msg">Redraw pattern to confirm</string>
+    <string name="draw_pattern_msg">Dessinez un modèle</string>
+    <string name="redraw_confirm_pattern_msg">Redessinez votre modèle pour confirmer</string>
     <string name="title_activity_welcome">Welcome Activity</string>
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_design_pattern_lock_configuration">DesignPatternLockConfiguration

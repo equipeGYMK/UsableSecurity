@@ -26,6 +26,7 @@ public class PatternLockConfiguration extends AppCompatActivity {
     private Button btnSubmit, btnInit;
     private int nbPointsActuel, pointsMinimum;
 
+
     //BD
     protected Methode methode =  new PatternLock();
     private MethodeManager methodeManager;
@@ -110,11 +111,17 @@ public class PatternLockConfiguration extends AppCompatActivity {
         btnSubmit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Modification des paramètres
-                methodeManager.open();
-                methode = methodeManager.getMethode(methode);
-                methodeManager.setParam(methode, Integer.parseInt(String.valueOf(spinnerNbPoints.getSelectedItem())), Integer.parseInt(String.valueOf(spinnerPointsMin.getSelectedItem())));
-                methodeManager.close();
+
+                if (nbPointsActuel != Integer.parseInt(String.valueOf(spinnerNbPoints.getSelectedItem()))
+                        || pointsMinimum != Integer.parseInt(String.valueOf(spinnerPointsMin.getSelectedItem()))) {
+                    //Modification des paramètres
+                    methodeManager.open();
+                    methode = methodeManager.getMethode(methode);
+                    methodeManager.setParam(methode, Integer.parseInt(String.valueOf(spinnerNbPoints.getSelectedItem())), Integer.parseInt(String.valueOf(spinnerPointsMin.getSelectedItem())));
+                    methodeManager.close();
+
+                    initMotDePasse();
+                }
 
                 //Changement d'activité
                 Intent authentification = new Intent(PatternLockConfiguration.this, Accueil.class);
@@ -126,15 +133,18 @@ public class PatternLockConfiguration extends AppCompatActivity {
         btnInit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Initialisation du mot de passe
-                methodeManager.open();
-                methode = methodeManager.getMethode(methode);
-                methodeManager.setPassword(methode, "");
-                methodeManager.close();
-
-                Toast.makeText(PatternLockConfiguration.this, "Votre mot de passe a été initialisé", Toast.LENGTH_SHORT).show();
+                initMotDePasse();
             }
         });
+    }
+
+    private void initMotDePasse() {
+        //Initialisation du mot de passe
+        methodeManager.open();
+        methode = methodeManager.getMethode(methode);
+        methodeManager.setPassword(methode, "");
+        methodeManager.close();
+        Toast.makeText(PatternLockConfiguration.this, "Votre mot de passe a été initialisé", Toast.LENGTH_SHORT).show();
     }
 
 

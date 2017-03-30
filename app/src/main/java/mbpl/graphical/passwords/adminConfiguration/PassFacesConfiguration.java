@@ -59,17 +59,20 @@ public class PassFacesConfiguration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Initialisation du mot de passe
-                methodeManager.open();
-                methode = methodeManager.getMethode(methode);
-                methodeManager.setPassword(methode, "");
-                methodeManager.close();
-
-                Toast.makeText(PassFacesConfiguration.this, "Votre mot de passe a été initialisé", Toast.LENGTH_SHORT).show();
+                initMotDePasse();
             }
         });
+
     }
 
+    private void initMotDePasse() {
+        methodeManager.open();
+        methode = methodeManager.getMethode(methode);
+        methodeManager.setPassword(methode, "");
+        methodeManager.close();
 
+        Toast.makeText(PassFacesConfiguration.this, "Votre mot de passe a été initialisé", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onStart(){
