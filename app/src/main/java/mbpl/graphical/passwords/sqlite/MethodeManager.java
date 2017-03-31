@@ -204,7 +204,6 @@ public class MethodeManager {
      * et met à jour le temps moyen.
      *
      * @param methode
-     * @param auth_moyen
      * @return le nombre de lignes updated
      */
     public int addTentativeReussie(Methode methode) {
@@ -269,9 +268,7 @@ public class MethodeManager {
      * @return boolean
      */
     public boolean defaultPassword(Methode methode) {
-        if (methode.getMdp().compareTo("") != 0) {
-            return false;
-        } else return true;
+        return methode.getMdp().compareTo("") == 0;
     }
 
 

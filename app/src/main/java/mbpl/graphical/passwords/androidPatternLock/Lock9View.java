@@ -233,6 +233,8 @@ public class Lock9View extends ViewGroup {
                 }
 
                 if (callBack != null) {
+                    //ne pas oublier d'ajouter le dernier point
+                    pwdSb.append(currentNode.getNum());
                     callBack.onFinish(pwdSb.toString(), compteurPoints, pwdSb);
                     pwdSb.setLength(0);
                     compteurPoints = 0;
@@ -713,7 +715,7 @@ public class Lock9View extends ViewGroup {
 
     public interface CallBack {
 
-        public void onFinish(String password, int nombre,  StringBuilder ok);
+        void onFinish(String password, int nombre, StringBuilder ok);
 
     }
 

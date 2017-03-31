@@ -79,7 +79,8 @@ public class Creation extends ActionBarActivity {
             @Override
             public void onFinish(String password, int nombre, StringBuilder ok) {
 
-                StringBuilder str = ok;
+                System.out.println("chemin" + password);
+
                 if (nombre >= pointsMinimum) {
                     PATTERN_KEY = password;
                     enterPatternContainer.setVisibility(View.GONE);
@@ -88,7 +89,10 @@ public class Creation extends ActionBarActivity {
                     btnRecommencer.setVisibility(View.VISIBLE);
                 }
                 else
+                {
                     Toast.makeText(getApplicationContext(), "Votre mot de passe doit contenir au minimum " + pointsMinimum +" points. Veuillez recommencer s'il vous plaît", Toast.LENGTH_SHORT).show();
+                }
+
             }
 
         });
