@@ -108,6 +108,8 @@ public class Creation extends ActionBarActivity {
                     //Suite traitement
                     Toast.makeText(getApplicationContext(), "Le mot de passe a été créé avec succès.", Toast.LENGTH_SHORT).show();
                     editor.putString("Pattern", password);
+                    // initialisation du nombre de tentative
+                    editor.putInt("nbTentative", 3);
                     editor.commit();
 
                     //On se redirige vers la page d'accueil de l'utilisateur

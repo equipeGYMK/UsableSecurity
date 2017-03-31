@@ -1,11 +1,13 @@
 package mbpl.graphical.passwords.accueil;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import mbpl.graphical.passwords.R;
 import mbpl.graphical.passwords.sqlite.Methode;
@@ -15,7 +17,11 @@ import static mbpl.graphical.passwords.sqlite.ImplementedMethods.implementedMeth
 
 public class AdminUser extends AppCompatActivity {
 
-    Button btnAdmin, btnUser;
+    private Button btnAdmin, btnUser;
+
+    private SharedPreferences prefs;
+
+    private int nombreEssai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,9 @@ public class AdminUser extends AppCompatActivity {
 
         Intent intent = getIntent();
         final int position = intent.getIntExtra("methode",-1);
+
+        prefs = getSharedPreferences("PatternLock", MODE_PRIVATE);
+        nombreEssai = prefs.getInt("nbTentative", 0);
 
         // action bar
         setTitle(implementedMethods.get(position).getNom());
@@ -45,22 +54,29 @@ public class AdminUser extends AppCompatActivity {
         btnUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent authentification;
 
-                Methode m;
-                MethodeManager mm = new MethodeManager(AdminUser.this);
-                mm.open();
-                m = mm.getMethode(implementedMethods.get(position));
-                if (!mm.defaultPassword(m)) {
-                    //si il y a un mdp defini
-                    authentification = new Intent(AdminUser.this, implementedMethods.get(position).getAuthentification());
+                if (nombreEssai > 0 ) {
+
+                    Intent authentification;
+
+                    Methode m;
+                    MethodeManager mm = new MethodeManager(AdminUser.this);
+                    mm.open();
+                    m = mm.getMethode(implementedMethods.get(position));
+                    if (!mm.defaultPassword(m)) {
+                        //si il y a un mdp defini
+                        authentification = new Intent(AdminUser.this, implementedMethods.get(position).getAuthentification());
+                    } else {
+                        //si il n'y a pas de mdp defini on fait :
+                        authentification = new Intent(AdminUser.this, implementedMethods.get(position).getInformation());
+                    }
+
+                    mm.close();
+                    startActivity(authentification);
+
                 } else {
-                    //si il n'y a pas de mdp defini on fait :
-                    authentification = new Intent(AdminUser.this, implementedMethods.get(position).getInformation());
+                    Toast.makeText(AdminUser.this, "Vous n'avez plus d'essai restant !\nLa technique est bloquée", Toast.LENGTH_SHORT).show();
                 }
-
-                mm.close();
-                startActivity(authentification);
             }
         });
 

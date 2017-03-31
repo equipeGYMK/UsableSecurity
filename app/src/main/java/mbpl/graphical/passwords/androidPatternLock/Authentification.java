@@ -28,6 +28,7 @@ public class Authentification extends AppCompatActivity {
     private static String PATTERN_KEY;
 
     SharedPreferences prefs;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +40,12 @@ public class Authentification extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
         lock9View = (Lock9View) findViewById(R.id.lock_9_view);
 
         //récupérer le contexte de la bdd
         methodeManager = new MethodeManager(getApplicationContext());
-        nombreEssai = 3;
 
         lock9View.setCallBack(new Lock9View.CallBack() {
 
@@ -61,6 +63,9 @@ public class Authentification extends AppCompatActivity {
                 }else{
                     methodeManager.open();
                     methode = methodeManager.getMethode(methode);
+
+                    nombreEssai = prefs.getInt("nbTentative", 0);
+
                     if(password.equals(PATTERN_KEY)){
                         //Ecriture dans la BDD
                         methodeManager.addTentativeReussie(methode);
@@ -69,7 +74,6 @@ public class Authentification extends AppCompatActivity {
                         float nombreT = 0;
                         nombreT = methodeManager.getMethode(methode).getNb_tentative_reussie() + methodeManager.getMethode(methode).getNb_tentative_echouee() ;
                         methodeManager.close();
-                        Toast.makeText(Authentification.this, "Login success! \n nombre tentative echoué : " + nombreTE + "\n nombre tentative : " + nombreT + "\n nombre essaie restant : " + nombreEssai, Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(Authentification.this, Bienvenue.class);
                         startActivity(intent);
@@ -78,36 +82,47 @@ public class Authentification extends AppCompatActivity {
                         if ( nombre > 3) {
                             if (nombreEssai > 1 ) {
                                 nombreEssai-- ;
+                                editor.putInt("nbTentative", nombreEssai);
+                                editor.commit();
                                 //Ecriture dans la BDD
+                                /*
                                 methodeManager.addTentativeEchouee(methode);
                                 float nombreTE = 0;
                                 nombreTE = methodeManager.getMethode(methode).getNb_tentative_echouee();
                                 float nombreT = 0;
                                 nombreT = methodeManager.getMethode(methode).getNb_tentative_reussie() + methodeManager.getMethode(methode).getNb_tentative_echouee() ;
                                 methodeManager.close();
-                                Toast.makeText(Authentification.this, "Pattern incorrect ! \n nombre tentative echoué : " + nombreTE + "\n nombre tentative : " + nombreT + "\n nombre essaie restant : " + nombreEssai, Toast.LENGTH_SHORT).show();
+                                */
+                                Toast.makeText(Authentification.this, "Pattern incorrect !\nNombre essai restant : " + nombreEssai, Toast.LENGTH_SHORT).show();
 
                             } else {
                                 nombreEssai--;
+                                editor.putInt("nbTentative", nombreEssai);
+                                editor.commit();
+                                /*
                                 methodeManager.addTentativeEchouee(methode);
+
                                 float nombreTE = 0;
                                 nombreTE = methodeManager.getMethode(methode).getNb_tentative_echouee();
                                 float nombreT = 0;
                                 nombreT = methodeManager.getMethode(methode).getNb_tentative_reussie() + methodeManager.getMethode(methode).getNb_tentative_echouee() ;
                                 methodeManager.close();
-                                Toast.makeText(Authentification.this, "ECHEC ! \n vous n'avez plus d'essaie restant ! \n nombre tentative echoué : " + nombreTE + "\n nombre tentative : " + nombreT + "\n nombre essaie restant : " + nombreEssai, Toast.LENGTH_SHORT).show();
+                                */
+                                Toast.makeText(Authentification.this, "ECHEC !\nVous n'avez plus d'essai restant !\nLa technique est bloquée ", Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(Authentification.this, Accueil.class);
                                 startActivity(intent);
                                 finish();
                             }
                         } else {
+                            /*
                             float nombreTE = 0;
                             nombreTE = methodeManager.getMethode(methode).getNb_tentative_echouee();
                             float nombreT = 0;
                             nombreT = methodeManager.getMethode(methode).getNb_tentative_reussie() + methodeManager.getMethode(methode).getNb_tentative_echouee() ;
                             methodeManager.close();
-                            Toast.makeText(Authentification.this, "Selectionnez au moins 4 points ! \n nombre tentative echoué : " + nombreTE + "\n nombre tentative : " + nombreT + "\n nombre essaie restant : " + nombreEssai, Toast.LENGTH_SHORT).show();
+                            */
+                            Toast.makeText(Authentification.this, "Selectionnez au moins 4 points !", Toast.LENGTH_SHORT).show();
 
                         }
 

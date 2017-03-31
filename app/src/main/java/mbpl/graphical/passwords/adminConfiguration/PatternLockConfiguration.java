@@ -1,6 +1,7 @@
 package mbpl.graphical.passwords.adminConfiguration;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -23,13 +24,17 @@ public class PatternLockConfiguration extends AppCompatActivity {
 
 
     private Spinner spinnerNbPoints, spinnerPointsMin;
-    private Button btnSubmit, btnInit;
+    private Button btnSubmit, btnInit, btnInitEssai;
     private int nbPointsActuel, pointsMinimum;
 
 
     //BD
     protected Methode methode =  new PatternLock();
     private MethodeManager methodeManager;
+
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
+    private static String MY_PREFS_NAME = "PatternLock";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,9 @@ public class PatternLockConfiguration extends AppCompatActivity {
         // action bar
         setTitle("Pattern Lock Configuration");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
         //mise en place de la bd
         methodeManager = new MethodeManager(getApplicationContext());
@@ -107,6 +115,7 @@ public class PatternLockConfiguration extends AppCompatActivity {
 
         btnSubmit = (Button) findViewById(R.id.buttonConfigPattrnLock);
         btnInit = (Button) findViewById(R.id.buttonInitPatternLock);
+        btnInitEssai = (Button) findViewById(R.id.buttonDebloPatternLock);
 
         btnSubmit.setOnClickListener(new OnClickListener() {
             @Override
@@ -136,6 +145,15 @@ public class PatternLockConfiguration extends AppCompatActivity {
                 initMotDePasse();
             }
         });
+
+        btnInitEssai.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initTentative();
+                Toast.makeText(PatternLockConfiguration.this, "Le nombre de tentative a été Réinitialisé", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void initMotDePasse() {
@@ -144,7 +162,15 @@ public class PatternLockConfiguration extends AppCompatActivity {
         methode = methodeManager.getMethode(methode);
         methodeManager.setPassword(methode, "");
         methodeManager.close();
-        Toast.makeText(PatternLockConfiguration.this, "Votre mot de passe a été initialisé", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PatternLockConfiguration.this, "Votre mot de passe a été Réinitialisé", Toast.LENGTH_SHORT).show();
+
+        initTentative();
+    }
+
+    private void initTentative() {
+        //Initialisation des tentatives
+        editor.putInt("nbTentative", 3);
+        editor.commit();
     }
 
 
