@@ -1,6 +1,5 @@
 package mbpl.graphical.passwords.androidPatternLock;
 
-
 import mbpl.graphical.passwords.R;
 import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.sqlite.Methode;
