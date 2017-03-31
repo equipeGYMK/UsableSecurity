@@ -1,7 +1,13 @@
 package mbpl.graphical.passwords.utils;
 
 import android.content.res.Resources;
+import android.os.Environment;
+import android.util.Log;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +69,42 @@ public abstract class Tools {
             result = resources.getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+
+    public static void writeToFile(String data)
+    {
+
+        String path =
+            Environment.getExternalStorageDirectory() + File.separator  + "Usable Security";
+        // Create the folder.
+        File folder = new File(path);
+        folder.mkdirs();
+
+
+        // Create the file.
+        File file = new File(folder, "tentative.txt");
+
+        // Save your stream, don't forget to flush() it before closing it.
+
+        try
+        {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileOutputStream fOut = new FileOutputStream(file, true);
+            OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
+            myOutWriter.append(data);
+
+            myOutWriter.close();
+
+            fOut.flush();
+            fOut.close();
+        }
+        catch (IOException e)
+        {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 
 }

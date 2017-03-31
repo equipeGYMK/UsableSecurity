@@ -14,6 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import static android.R.attr.data;
+import static mbpl.graphical.passwords.utils.Tools.writeToFile;
+
 public class Authentification extends AppCompatActivity {
 
     private Lock9View lock9View;
@@ -65,62 +71,39 @@ public class Authentification extends AppCompatActivity {
 
                     nombreEssai = prefs.getInt("nbTentative", 0);
 
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+                    String formattedDate = df.format(c.getTime());
+
                     if(password.equals(PATTERN_KEY)){
-                        //Ecriture dans la BDD
-                        methodeManager.addTentativeReussie(methode);
-                        float nombreTE = 0;
-                        nombreTE = methodeManager.getMethode(methode).getNb_tentative_echouee();
-                        float nombreT = 0;
-                        nombreT = methodeManager.getMethode(methode).getNb_tentative_reussie() + methodeManager.getMethode(methode).getNb_tentative_echouee() ;
-                        methodeManager.close();
+
+                        writeToFile("Succes\tEssai restant :\t"+nombreEssai+"\t"+formattedDate+"\n");
+                        editor.putInt("nbTentative", 3);
+                        editor.commit();
 
                         Intent intent = new Intent(Authentification.this, Bienvenue.class);
                         startActivity(intent);
                         finish();
                     }else{
                         if ( nombre > 3) {
-                            if (nombreEssai > 1 ) {
-                                nombreEssai-- ;
-                                editor.putInt("nbTentative", nombreEssai);
-                                editor.commit();
-                                //Ecriture dans la BDD
-                                /*
-                                methodeManager.addTentativeEchouee(methode);
-                                float nombreTE = 0;
-                                nombreTE = methodeManager.getMethode(methode).getNb_tentative_echouee();
-                                float nombreT = 0;
-                                nombreT = methodeManager.getMethode(methode).getNb_tentative_reussie() + methodeManager.getMethode(methode).getNb_tentative_echouee() ;
-                                methodeManager.close();
-                                */
-                                Toast.makeText(Authentification.this, "Pattern incorrect !\nNombre essai restant : " + nombreEssai, Toast.LENGTH_SHORT).show();
 
+                            nombreEssai-- ;
+                            editor.putInt("nbTentative", nombreEssai);
+                            editor.commit();
+
+                            writeToFile("Echec\t\tEssai restant :\t"+nombreEssai+"\t"+formattedDate+"\n");
+
+                            if (nombreEssai > 0 ) {
+                                Toast.makeText(Authentification.this, "Pattern incorrect !\nNombre essai restant : " + nombreEssai, Toast.LENGTH_LONG).show();
                             } else {
-                                nombreEssai--;
-                                editor.putInt("nbTentative", nombreEssai);
-                                editor.commit();
-                                /*
-                                methodeManager.addTentativeEchouee(methode);
-
-                                float nombreTE = 0;
-                                nombreTE = methodeManager.getMethode(methode).getNb_tentative_echouee();
-                                float nombreT = 0;
-                                nombreT = methodeManager.getMethode(methode).getNb_tentative_reussie() + methodeManager.getMethode(methode).getNb_tentative_echouee() ;
-                                methodeManager.close();
-                                */
-                                Toast.makeText(Authentification.this, "ECHEC !\nVous n'avez plus d'essai restant !\nLa technique est bloquée ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Authentification.this, "ECHEC !\nVous n'avez plus d'essai restant !\nLa technique est bloquée ", Toast.LENGTH_LONG).show();
 
                                 Intent intent = new Intent(Authentification.this, Accueil.class);
                                 startActivity(intent);
                                 finish();
                             }
                         } else {
-                            /*
-                            float nombreTE = 0;
-                            nombreTE = methodeManager.getMethode(methode).getNb_tentative_echouee();
-                            float nombreT = 0;
-                            nombreT = methodeManager.getMethode(methode).getNb_tentative_reussie() + methodeManager.getMethode(methode).getNb_tentative_echouee() ;
-                            methodeManager.close();
-                            */
+
                             Toast.makeText(Authentification.this, "Selectionnez au moins 4 points !", Toast.LENGTH_SHORT).show();
 
                         }
