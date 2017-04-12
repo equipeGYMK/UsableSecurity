@@ -25,7 +25,7 @@ public class Information extends AppCompatActivity {
         btnOk = (Button) findViewById(R.id.ok);
 
         // action bar
-        setTitle("Pattern Lock");
+        setTitle("Pattern Lock Création");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnOk.setOnClickListener(new View.OnClickListener() {

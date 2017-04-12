@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +24,7 @@ public class PassFacesConfiguration extends AppCompatActivity {
 
     private Button btnSubmit, btnInit, btnInitEssai;
     private EditText textNbimage;
-    private int nbImageActuel;
+    private int nbImageActuel, nbImageTemp;
 
     protected Methode methode =  new Passfaces();
     private MethodeManager methodeManager;
@@ -46,6 +48,7 @@ public class PassFacesConfiguration extends AppCompatActivity {
         editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
         nbImageActuel = prefs.getInt("param1", 4);
+        nbImageTemp = nbImageActuel;
 
         initEditText();
         addListenerOnButton();
@@ -55,6 +58,35 @@ public class PassFacesConfiguration extends AppCompatActivity {
         textNbimage = (EditText) findViewById(R.id.textfield_nbimage);
 
         textNbimage.setText(nbImageActuel+"", TextView.BufferType.EDITABLE);
+
+        textNbimage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String text = textNbimage.getText().toString();
+                if(!text.isEmpty()) {
+                    if (!text.matches("^-?\\d+$")) {
+                        textNbimage.setText(nbImageTemp + "", TextView.BufferType.EDITABLE);
+                    } else {
+                        if (Integer.parseInt(textNbimage.getText().toString()) > Passfaces.nbImageBD) {
+                            textNbimage.setText(20 + "", TextView.BufferType.EDITABLE);
+                        } else if(Integer.parseInt(textNbimage.getText().toString()) < 1) {
+                            textNbimage.setText(1 + "", TextView.BufferType.EDITABLE);
+                        }
+                        nbImageTemp = Integer.parseInt(textNbimage.getText().toString());
+                    }
+                }
+            }
+        });
     }
 
     // get the selected dropdown list value
@@ -67,6 +99,9 @@ public class PassFacesConfiguration extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(textNbimage.getText().toString().isEmpty()){
+                    textNbimage.setText(nbImageTemp + "", TextView.BufferType.EDITABLE);
+                }
 
                 if (nbImageActuel != Integer.parseInt(textNbimage.getText().toString())) {
                     editor.putInt("param1", Integer.parseInt(textNbimage.getText().toString()));

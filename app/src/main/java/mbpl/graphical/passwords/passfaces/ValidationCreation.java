@@ -41,7 +41,7 @@ public class ValidationCreation extends AppCompatActivity {
         setContentView(R.layout.activity_validation_creation);
 
         // action bar
-        setTitle("Pass Face");
+        setTitle("Pass Face Création");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //récupérer les éléments

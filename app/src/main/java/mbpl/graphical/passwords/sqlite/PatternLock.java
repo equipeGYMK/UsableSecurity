@@ -22,6 +22,7 @@ public class PatternLock extends Methode {
                 " de lignes reliant les points. Lors du choix du mot de passe, l’utilisateur choisit sa séquence et pour s’authentifier il doit le redessiner sur l’écran." +
                 " Au moins 4 points doivent être choisis";
         this.nom = "Pattern Lock";
+        this.nameSavePref = "PatternLock";
         this.categorie = "toucher";
         this.bruteForce = 0;
         this.dictionaryAttack = 2;

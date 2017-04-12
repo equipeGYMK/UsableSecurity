@@ -42,7 +42,7 @@ public class Creation extends ActionBarActivity {
         evenementButton();
 
         // action bar
-        setTitle("Pattern Lock");
+        setTitle("Pattern Lock Création");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //récupérer le contexte de la bdd

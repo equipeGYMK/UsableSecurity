@@ -41,7 +41,7 @@ public class Authentification extends AppCompatActivity {
         setContentView(R.layout.activity_authentification_pattern_lock);
 
         // action bar
-        setTitle("Pattern Lock");
+        setTitle("Pattern Lock Authentification");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
@@ -66,38 +66,28 @@ public class Authentification extends AppCompatActivity {
 
                     //Sinon il a déjà enregistré
                 }else{
-                    methodeManager.open();
-                    methode = methodeManager.getMethode(methode);
-
                     nombreEssai = prefs.getInt("nbTentative", 0);
-
                     Calendar c = Calendar.getInstance();
                     SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
                     String formattedDate = df.format(c.getTime());
 
                     if(password.equals(PATTERN_KEY)){
-
-                        writeToFile("Succes\tEssai restant :\t"+nombreEssai+"\t"+formattedDate+"\n");
+                        writeToFile("Pattern Lock - Succes - Essai restant : "+nombreEssai+" "+formattedDate+"\n");
                         editor.putInt("nbTentative", 3);
                         editor.commit();
-
                         Intent intent = new Intent(Authentification.this, Bienvenue.class);
                         startActivity(intent);
                         finish();
                     }else{
                         if ( nombre > 3) {
-
                             nombreEssai-- ;
                             editor.putInt("nbTentative", nombreEssai);
                             editor.commit();
-
-                            writeToFile("Echec\t\tEssai restant :\t"+nombreEssai+"\t"+formattedDate+"\n");
-
+                            writeToFile("Pattern Lock - Echec - Essai restant : "+nombreEssai+" "+formattedDate+"\n");
                             if (nombreEssai > 0 ) {
                                 Toast.makeText(Authentification.this, "Pattern incorrect !\nNombre essai restant : " + nombreEssai, Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(Authentification.this, "ECHEC !\nVous n'avez plus d'essai restant !\nLa technique est bloquée ", Toast.LENGTH_LONG).show();
-
                                 Intent intent = new Intent(Authentification.this, Accueil.class);
                                 startActivity(intent);
                                 finish();

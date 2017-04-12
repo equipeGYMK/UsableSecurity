@@ -28,7 +28,7 @@ public class Bienvenue extends AppCompatActivity {
         setContentView(R.layout.activity_bienvenue_authentification);
 
         // action bar
-        setTitle("PassFaces");
+        setTitle("PassFaces Authentification");
 
         //récupérer le contexte
         //récupérer le contexte de la bdd

@@ -22,7 +22,7 @@ public class Authentification extends GenericAuthentification {
         super.onCreate(savedInstanceState);
 
         // action bar
-        setTitle("PassFaces");
+        setTitle("PassFaces Authentification");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }

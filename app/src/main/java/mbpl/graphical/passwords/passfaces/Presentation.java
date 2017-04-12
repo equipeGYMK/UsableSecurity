@@ -30,6 +30,7 @@ public class Presentation extends AppCompatActivity {
     private ArrayList pass = new ArrayList();
     private Button boutonContinuer;
     private GridLayout gridPresentation;
+    private int nbImage_mdp;
 
     private SharedPreferences prefs;
     private static String MY_PREFS_NAME = "PassFaces";
@@ -41,7 +42,7 @@ public class Presentation extends AppCompatActivity {
         setContentView(R.layout.activity_presentation);
 
         // action bar
-        setTitle("Pass Face");
+        setTitle("Pass Face Création");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
@@ -68,8 +69,7 @@ public class Presentation extends AppCompatActivity {
         methodeManager = new MethodeManager(getApplicationContext());
         methodeManager.open();
 
-        //Générer le mot de passe aléatoirement parmis les 20 images
-        int nbImage_mdp = prefs.getInt("param1", 4);
+        nbImage_mdp = prefs.getInt("param1", 4);
         Random r = new Random();
         ArrayList numDispo =  new ArrayList();
         for (int i = 1; i <= Passfaces.nbImageBD; i++){
@@ -93,6 +93,13 @@ public class Presentation extends AppCompatActivity {
     private void afficherMotdePasse(){
         gridPresentation = (GridLayout) findViewById(R.id.grid_presentation);
 
+        int tailleTemp;
+        if(nbImage_mdp > 4){
+            tailleTemp = 5;
+        } else {
+            tailleTemp = nbImage_mdp;
+        }
+
         for (int i = 0; i < pass.size(); i++) {
             ImageView iv;
             iv = new ImageView(this);
@@ -105,17 +112,17 @@ public class Presentation extends AppCompatActivity {
 
             Bitmap bmp;
             bmp = BitmapFactory.decodeResource(getResources(), getDrawableN((int) pass.get(i)));
-            bmp = Bitmap.createScaledBitmap(bmp, (width*10)/45, (width*10)/45, true);
+            int tImage = (width*10)/(tailleTemp*10 + 5);
+            bmp = Bitmap.createScaledBitmap(bmp, tImage, tImage, true);
 
             iv.setImageBitmap(bmp);
-
             android.widget.GridLayout.LayoutParams param = new android.widget.GridLayout.LayoutParams();
 
             param.setMargins(0, 10, 0, 0);
             param.setGravity(Gravity.LEFT);
 
-            param.columnSpec = android.widget.GridLayout.spec(1 + (i % 4));
-            param.rowSpec = android.widget.GridLayout.spec(i / 4);
+            param.columnSpec = android.widget.GridLayout.spec(1 + (i % 5));
+            param.rowSpec = android.widget.GridLayout.spec(i / 5);
             iv.setLayoutParams(param);
             gridPresentation.addView(iv);
         }

@@ -35,7 +35,7 @@ public class AdminUser extends AppCompatActivity {
         Intent intent = getIntent();
         final int position = intent.getIntExtra("methode",-1);
 
-        prefs = getSharedPreferences("PatternLock", MODE_PRIVATE);
+        prefs = getSharedPreferences(implementedMethods.get(position).getNameSavePref(), MODE_PRIVATE);
         nombreEssai = prefs.getInt("nbTentative", 0);
 
         // action bar
@@ -64,10 +64,8 @@ public class AdminUser extends AppCompatActivity {
                     mm.open();
                     m = mm.getMethode(implementedMethods.get(position));
                     if (!mm.defaultPassword(m)) {
-                        //si il y a un mdp defini
                         authentification = new Intent(AdminUser.this, implementedMethods.get(position).getAuthentification());
                     } else {
-                        //si il n'y a pas de mdp defini on fait :
                         authentification = new Intent(AdminUser.this, implementedMethods.get(position).getInformation());
                     }
 

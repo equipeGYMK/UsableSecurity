@@ -3,6 +3,7 @@ package mbpl.graphical.passwords.utils;
 import android.content.res.Resources;
 import android.os.Environment;
 import android.util.Log;
+import android.util.TypedValue;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -71,22 +72,25 @@ public abstract class Tools {
         return result;
     }
 
+    public static int getActionBarHeight(Resources.Theme theme, Resources resources) {
+        TypedValue tv = new TypedValue();
+        if (theme.resolveAttribute(android.R.attr.actionBarSize, tv, true))
+        {
+            return TypedValue.complexToDimensionPixelSize(tv.data,resources.getDisplayMetrics());
+        } else {
+            return 0;
+        }
+    }
+
 
     public static void writeToFile(String data)
     {
 
         String path =
             Environment.getExternalStorageDirectory() + File.separator  + "Usable Security";
-        // Create the folder.
         File folder = new File(path);
         folder.mkdirs();
-
-
-        // Create the file.
         File file = new File(folder, "tentative.txt");
-
-        // Save your stream, don't forget to flush() it before closing it.
-
         try
         {
             if (!file.exists()) {

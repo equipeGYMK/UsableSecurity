@@ -23,7 +23,7 @@ public class Creation extends GenericCreation {
         super.onCreate(savedInstanceState);
 
         // action bar
-        setTitle("PassFaces");
+        setTitle("PassFaces Création");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

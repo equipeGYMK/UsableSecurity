@@ -84,7 +84,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         android:text="Name"
         app:layout_constraintBottom_toBottomOf="@+id/textView12"
         app:layout_constraintHorizontal_bias="0.555"

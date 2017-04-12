@@ -1,24 +1,33 @@
 package mbpl.graphical.passwords.genericDejaVu;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import mbpl.graphical.passwords.accueil.Accueil;
+import mbpl.graphical.passwords.androidPatternLock.Authentification;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
 import mbpl.graphical.passwords.utils.Tools;
+
+import static mbpl.graphical.passwords.utils.Tools.writeToFile;
 
 /**
  * Created by benja135 on 05/03/16.
@@ -31,7 +40,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
     protected Class nextClass = Accueil.class;
     protected int nbImage;
     protected Methode methode;
-    protected int tailleImage = 256; // optionnel
+    protected int tailleImage; // optionnel
 
     private int nbLigne = 6;
     private int nbColonne = 4;
@@ -39,13 +48,24 @@ public abstract class GenericAuthentification extends AppCompatActivity {
 
     private List<Integer> trueMotDePasse;
     private List<Integer> inputMotDePasse = new ArrayList<>();
-    private long time;
 
-    private Toast mToast;
+    private SharedPreferences prefs;
+    private static String MY_PREFS_NAME = "PassFaces";
+    SharedPreferences.Editor editor;
+
+    int nombreEssai;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mToast = Toast.makeText(this.here, "", Toast.LENGTH_SHORT);
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
 
         methodeManager = new MethodeManager(getApplicationContext());
         methodeManager.open();
@@ -71,6 +91,8 @@ public abstract class GenericAuthentification extends AppCompatActivity {
                 nbColonne = 4;
                 break;
         }
+
+        tailleImage = (width*10)/(nbColonne*10);
         methodeManager.close();
     }
 
@@ -78,8 +100,6 @@ public abstract class GenericAuthentification extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         drawAndSetListeners(trueMotDePasse.get(0));
-        Toast.makeText(GenericAuthentification.this, "Phase d'authentification", Toast.LENGTH_LONG).show();
-        time = System.currentTimeMillis();
     }
 
     /**
@@ -102,7 +122,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
         int screenWidth = size.x;
-        int screenHeight = size.y - Tools.getStatusBarHeight(getResources());
+        int screenHeight = size.y - Tools.getStatusBarHeight(getResources()) - Tools.getActionBarHeight(getTheme(),getResources());
 
         gridLayout.setColumnCount(nbColonne);
         gridLayout.setRowCount(nbLigne);
@@ -169,24 +189,34 @@ public abstract class GenericAuthentification extends AppCompatActivity {
         inputMotDePasse.add(selectedImage);
 
         if (inputMotDePasse.size() == trueMotDePasse.size()) {
-            methodeManager.open();
-            methode = methodeManager.getMethode(methode);
+
+            nombreEssai = prefs.getInt("nbTentative", 0);
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+            String formattedDate = df.format(c.getTime());
+
             if (inputMotDePasse.equals(trueMotDePasse)) {
-                time = System.currentTimeMillis() - time; // temps de l'authentification
+                writeToFile("PassFaces - Succes - Essai restant : "+nombreEssai+" "+formattedDate+"\n");
+                editor.putInt("nbTentative", 3);
+                editor.commit();
                 inputMotDePasse.clear();
-                mToast.setText("Authentification OK !");
-                mToast.show();
                 Intent accueil = new Intent(here, nextClass);
-                methodeManager.addTentativeReussie(methode);
-                methodeManager.close();
                 startActivity(accueil);
             } else {
-                methodeManager.addTentativeEchouee(methode);
-                methodeManager.close();
-                mToast.setText("Authentification échouée");
-                mToast.show();
-                inputMotDePasse.clear();
-                drawAndSetListeners(trueMotDePasse.get(inputMotDePasse.size()));
+                nombreEssai-- ;
+                editor.putInt("nbTentative", nombreEssai);
+                editor.commit();
+                writeToFile("PassFaces - Echec - Essai restant : "+nombreEssai+" "+formattedDate+"\n");
+                if (nombreEssai > 0 ) {
+                    Toast.makeText(GenericAuthentification.this, "Authentification Echouée !\nNombre essai restant : " + nombreEssai, Toast.LENGTH_LONG).show();
+                    inputMotDePasse.clear();
+                    drawAndSetListeners(trueMotDePasse.get(inputMotDePasse.size()));
+                } else {
+                    Toast.makeText(GenericAuthentification.this, "ECHEC !\nVous n'avez plus d'essai restant !\nLa technique est bloquée ", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(here, Accueil.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         } else {
             drawAndSetListeners(trueMotDePasse.get(inputMotDePasse.size()));

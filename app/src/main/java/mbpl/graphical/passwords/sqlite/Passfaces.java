@@ -26,6 +26,7 @@ public class Passfaces extends Methode {
                 "les sélectionne parmi des image_passfaces aléatoires pour l’authentification. " +
                 "A chaque phase de l'authentification, il faut sélectionner un visage parmi une grille de 9 visages.";
         this.nom = "Passfaces";
+        this.nameSavePref = "PassFaces";
         this.categorie = "reconnaissance";
         this.bruteForce = 0;
         this.dictionaryAttack = 2;

@@ -7,7 +7,7 @@ public abstract class Methode {
 
     protected int id, bruteForce, dictionaryAttack, shoulderSurfing, smudgeAttack, eyeTracking, spyWare, espaceMdp;
     protected int apprentissage, memorisation, temps, satisfaction, nb_tentative_reussie, nb_tentative_echouee;
-    protected String nom, categorie, mdp, description;
+    protected String nom, categorie, mdp, description, nameSavePref;
     protected Float indiceSecurite, indiceUtilisabilite, temps_auth_moyen;
     protected int param1, param2;
     protected Class creation, authentification, configuration, information;
@@ -87,6 +87,14 @@ public abstract class Methode {
 
     public int getShoulderSurfing() {
         return shoulderSurfing;
+    }
+
+    public String getNameSavePref() {
+        return nameSavePref;
+    }
+
+    public void setNameSavePref(String nameSavePref) {
+        this.nameSavePref = nameSavePref;
     }
 
     public String getMdp() {
