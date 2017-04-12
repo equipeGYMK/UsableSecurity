@@ -5,12 +5,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import mbpl.graphical.passwords.R;
 import mbpl.graphical.passwords.accueil.Accueil;
@@ -19,7 +23,7 @@ import mbpl.graphical.passwords.sqlite.MethodeManager;
 import mbpl.graphical.passwords.sqlite.Passfaces;
 import mbpl.graphical.passwords.utils.Tools;
 
-public class ValidationCreation extends Activity {
+public class ValidationCreation extends AppCompatActivity {
 
     private MethodeManager methodeManager;
     private List<Integer> trueMotDePasse;
@@ -35,6 +39,10 @@ public class ValidationCreation extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validation_creation);
+
+        // action bar
+        setTitle("Pass Face");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //récupérer les éléments
         buttonSubmit = (Button) findViewById(R.id.buttonTerminerValidationCreationPassFace);
@@ -186,6 +194,17 @@ public class ValidationCreation extends Activity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

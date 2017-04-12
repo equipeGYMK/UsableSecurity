@@ -65,19 +65,22 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".androidPatternLock.Information"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <!-- Welcome's activities -->
         <activity
             android:name=".androidPatternLock.Bienvenue"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".passfaces.Bienvenue"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".passfaces.ValidationCreation"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_validation_creation" />
+            android:label="@string/title_activity_validation_creation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".passfaces.Presentation"
+            android:label="@string/title_activity_presentation"></activity>
     </application>
 
 </manifest>

@@ -3,6 +3,8 @@ package mbpl.graphical.passwords.sqlite;
 import mbpl.graphical.passwords.adminConfiguration.PassFacesConfiguration;
 import mbpl.graphical.passwords.passfaces.Authentification;
 import mbpl.graphical.passwords.passfaces.Creation;
+import mbpl.graphical.passwords.passfaces.Information;
+import mbpl.graphical.passwords.passfaces.ValidationCreation;
 
 /**
  * Created by Matteo on 26/04/2016.
@@ -10,12 +12,15 @@ import mbpl.graphical.passwords.passfaces.Creation;
  */
 public class Passfaces extends Methode {
 
+    public final static int nbImageBD = 20;
+
     public Passfaces() {
+
         this.id = 0;
-        this.creation = Creation.class;
+        this.creation = ValidationCreation.class;
         this.authentification = Authentification.class;
         this.configuration = PassFacesConfiguration.class;
-        this.information = Creation.class;
+        this.information = Information.class;
 
         this.description = "L’utilisateur choisit un ensemble d’image_passfaces de visages humains et " +
                 "les sélectionne parmi des image_passfaces aléatoires pour l’authentification. " +

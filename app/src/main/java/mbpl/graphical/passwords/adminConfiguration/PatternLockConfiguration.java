@@ -55,9 +55,6 @@ public class PatternLockConfiguration extends AppCompatActivity {
         methode = methodeManager.getMethode(methode);
         nbPointsActuel = methode.getParam1();
         pointsMinimum = methode.getParam2();
-
-        System.out.println("param1: "+ nbPointsActuel + " et param2: " + pointsMinimum);
-        System.out.println("param1: "+ nbPointsActuel + " et param2: " + pointsMinimum);
         methodeManager.close();
 
         //Création des spinners

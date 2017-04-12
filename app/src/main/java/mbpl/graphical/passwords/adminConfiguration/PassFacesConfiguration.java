@@ -1,11 +1,14 @@
 package mbpl.graphical.passwords.adminConfiguration;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import mbpl.graphical.passwords.R;
@@ -17,10 +20,16 @@ import mbpl.graphical.passwords.sqlite.Passfaces;
 public class PassFacesConfiguration extends AppCompatActivity {
 
 
-    private Button btnSubmit, btnInit;
-    //BD
+    private Button btnSubmit, btnInit, btnInitEssai;
+    private EditText textNbimage;
+    private int nbImageActuel;
+
     protected Methode methode =  new Passfaces();
     private MethodeManager methodeManager;
+
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
+    private static String MY_PREFS_NAME = "PassFaces";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +40,41 @@ public class PassFacesConfiguration extends AppCompatActivity {
         setTitle("PassFaces Configuration");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //mise en place de la bd
         methodeManager = new MethodeManager(getApplicationContext());
-        //Evenement des boutons
+
+        prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
+        nbImageActuel = prefs.getInt("param1", 4);
+
+        initEditText();
         addListenerOnButton();
     }
 
+    private void initEditText(){
+        textNbimage = (EditText) findViewById(R.id.textfield_nbimage);
 
+        textNbimage.setText(nbImageActuel+"", TextView.BufferType.EDITABLE);
+    }
 
     // get the selected dropdown list value
     public void addListenerOnButton() {
 
         btnSubmit = (Button) findViewById(R.id.buttonSubmitPassFace);
         btnInit = (Button) findViewById(R.id.buttonInitPassFacePassword);
+        btnInitEssai = (Button) findViewById(R.id.btnInitEssaipf);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Changement d'activité
+
+                if (nbImageActuel != Integer.parseInt(textNbimage.getText().toString())) {
+                    editor.putInt("param1", Integer.parseInt(textNbimage.getText().toString()));
+                    editor.commit();
+
+                    initMotDePasse();
+                }
+
                 Intent authentification = new Intent(PassFacesConfiguration.this, Accueil.class);
                 startActivity(authentification);
                 finish();
@@ -58,21 +84,37 @@ public class PassFacesConfiguration extends AppCompatActivity {
         btnInit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Initialisation du mot de passe
                 initMotDePasse();
             }
         });
 
+        btnInitEssai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initTentative();
+                Toast.makeText(PassFacesConfiguration.this, "Le nombre de tentative a été Réinitialisé", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
+
+
 
     private void initMotDePasse() {
         methodeManager.open();
         methode = methodeManager.getMethode(methode);
         methodeManager.setPassword(methode, "");
         methodeManager.close();
+        Toast.makeText(PassFacesConfiguration.this, "Votre mot de passe a été Réinitialisé", Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(PassFacesConfiguration.this, "Votre mot de passe a été initialisé", Toast.LENGTH_SHORT).show();
+        initTentative();
     }
+
+    private void initTentative() {
+        editor.putInt("nbTentative", 3);
+        editor.commit();
+    }
+
 
     @Override
     protected void onStart(){
