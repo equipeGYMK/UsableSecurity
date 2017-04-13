@@ -4,14 +4,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.view.View.OnClickListener;
 import java.util.ArrayList;
 import java.util.List;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import mbpl.graphical.passwords.R;
@@ -23,10 +27,12 @@ import mbpl.graphical.passwords.sqlite.PatternLock;
 public class PatternLockConfiguration extends AppCompatActivity {
 
 
-    private Spinner spinnerNbPoints, spinnerPointsMin;
+    private Spinner spinnerNbPoints;
     private Button btnSubmit, btnInit, btnInitEssai;
-    private int nbPointsActuel, pointsMinimum;
+    private int nbPointsActuel, pointsMinimum, pointsMinimumTemp;
+    private EditText textPointsMinimum;
 
+    private ArrayList listIntSpinner;
 
     //BD
     protected Methode methode =  new PatternLock();
@@ -59,7 +65,7 @@ public class PatternLockConfiguration extends AppCompatActivity {
 
         //Création des spinners
         addItemsOnSpinnerNbPoints();
-        addItemsOnSpinnerPointsMin();
+        initEditText();
         addListenerOnButton();
 
     }
@@ -69,41 +75,69 @@ public class PatternLockConfiguration extends AppCompatActivity {
 
         spinnerNbPoints = (Spinner) findViewById(R.id.spinnerConfigPatternLockNbPoints);
         List<String> list = new ArrayList<String>();
-        list.add("9");
-        list.add("16");
-        list.add("25");
+        listIntSpinner = new ArrayList();
+        list.add("3x3");
+        listIntSpinner.add(9);
+        list.add("4x4");
+        listIntSpinner.add(16);
+        list.add("5x5");
+        listIntSpinner.add(25);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerNbPoints.setAdapter(dataAdapter);
 
-        //Initialiser la bonne valeur du spinner avec le nombre actuel de points
-        int spinnerPositionNbPoints = dataAdapter.getPosition(String.valueOf(nbPointsActuel));
-        //set the default according to value
-        spinnerNbPoints.setSelection(spinnerPositionNbPoints, false);
+
+
+        switch (nbPointsActuel) {
+            case 9 : {
+                spinnerNbPoints.setSelection(0, false);
+                break;
+            }
+            case 16 : {
+                spinnerNbPoints.setSelection(1, false);
+                break;
+            }
+            case 25 : {
+                spinnerNbPoints.setSelection(2, false);
+                break;
+            }
+        }
     }
 
+    private void initEditText(){
+        textPointsMinimum = (EditText) findViewById(R.id.editTextpointsMinimum);
 
-    // add items into spinner dynamically
-    public void addItemsOnSpinnerPointsMin() {
+        textPointsMinimum.setText(pointsMinimum+"", TextView.BufferType.EDITABLE);
 
-        spinnerPointsMin = (Spinner) findViewById(R.id.spinnerConfigAndroidPatternLockPointsMin);
-        List<String> list = new ArrayList<String>();
-        list.add("4");
-        list.add("5");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerPointsMin.setAdapter(dataAdapter);
+        textPointsMinimum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
 
-        //Initialiser la bonne valeur du spinner avec le nombre actuel de points
-        int spinnerPositionPointsMinimum = dataAdapter.getPosition(String.valueOf(pointsMinimum));
-
-        System.out.println("position: "+ spinnerPositionPointsMinimum);
-        System.out.println("position: "+ spinnerPositionPointsMinimum);
-        //set the default according to value
-        spinnerPointsMin.setSelection(spinnerPositionPointsMinimum, false);
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String text = textPointsMinimum.getText().toString();
+                if(!text.isEmpty()) {
+                    if (!text.matches("^-?\\d+$")) {
+                        textPointsMinimum.setText(pointsMinimumTemp + "", TextView.BufferType.EDITABLE);
+                    } else {
+                        if (Integer.parseInt(textPointsMinimum.getText().toString()) > (int) listIntSpinner.get(spinnerNbPoints.getSelectedItemPosition())) {
+                            textPointsMinimum.setText((int) listIntSpinner.get(spinnerNbPoints.getSelectedItemPosition()) + "", TextView.BufferType.EDITABLE);
+                        } else if(Integer.parseInt(textPointsMinimum.getText().toString()) < 1) {
+                            textPointsMinimum.setText(1 + "", TextView.BufferType.EDITABLE);
+                        }
+                        pointsMinimumTemp = Integer.parseInt(textPointsMinimum.getText().toString());
+                    }
+                }
+            }
+        });
     }
 
 
@@ -118,12 +152,20 @@ public class PatternLockConfiguration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (nbPointsActuel != Integer.parseInt(String.valueOf(spinnerNbPoints.getSelectedItem()))
-                        || pointsMinimum != Integer.parseInt(String.valueOf(spinnerPointsMin.getSelectedItem()))) {
+                if(textPointsMinimum.getText().toString().isEmpty()){
+                    textPointsMinimum.setText(pointsMinimumTemp + "", TextView.BufferType.EDITABLE);
+                }
+
+                if (Integer.parseInt(textPointsMinimum.getText().toString()) > (int) listIntSpinner.get(spinnerNbPoints.getSelectedItemPosition())) {
+                    textPointsMinimum.setText((int) listIntSpinner.get(spinnerNbPoints.getSelectedItemPosition()) + "", TextView.BufferType.EDITABLE);
+                }
+
+                if (nbPointsActuel != (int) listIntSpinner.get(spinnerNbPoints.getSelectedItemPosition())
+                        || pointsMinimum != Integer.parseInt(textPointsMinimum.getText().toString())) {
                     //Modification des paramètres
                     methodeManager.open();
                     methode = methodeManager.getMethode(methode);
-                    methodeManager.setParam(methode, Integer.parseInt(String.valueOf(spinnerNbPoints.getSelectedItem())), Integer.parseInt(String.valueOf(spinnerPointsMin.getSelectedItem())));
+                    methodeManager.setParam(methode, (int) listIntSpinner.get(spinnerNbPoints.getSelectedItemPosition()), Integer.parseInt(textPointsMinimum.getText().toString()));
                     methodeManager.close();
 
                     initMotDePasse();

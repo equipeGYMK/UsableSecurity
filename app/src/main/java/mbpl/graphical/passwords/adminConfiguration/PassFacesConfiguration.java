@@ -78,7 +78,7 @@ public class PassFacesConfiguration extends AppCompatActivity {
                         textNbimage.setText(nbImageTemp + "", TextView.BufferType.EDITABLE);
                     } else {
                         if (Integer.parseInt(textNbimage.getText().toString()) > Passfaces.nbImageBD) {
-                            textNbimage.setText(20 + "", TextView.BufferType.EDITABLE);
+                            textNbimage.setText(Passfaces.nbImageBD + "", TextView.BufferType.EDITABLE);
                         } else if(Integer.parseInt(textNbimage.getText().toString()) < 1) {
                             textNbimage.setText(1 + "", TextView.BufferType.EDITABLE);
                         }
