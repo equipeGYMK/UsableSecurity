@@ -2,7 +2,6 @@ package mbpl.graphical.passwords.sqlite;
 
 import mbpl.graphical.passwords.adminConfiguration.PassFacesConfiguration;
 import mbpl.graphical.passwords.passfaces.Authentification;
-import mbpl.graphical.passwords.passfaces.Creation;
 import mbpl.graphical.passwords.passfaces.Information;
 import mbpl.graphical.passwords.passfaces.ValidationCreation;
 
