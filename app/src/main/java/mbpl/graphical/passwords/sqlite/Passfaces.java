@@ -3,7 +3,7 @@ package mbpl.graphical.passwords.sqlite;
 import mbpl.graphical.passwords.adminConfiguration.PassFacesConfiguration;
 import mbpl.graphical.passwords.passfaces.Authentification;
 import mbpl.graphical.passwords.passfaces.Information;
-import mbpl.graphical.passwords.passfaces.ValidationCreation;
+import mbpl.graphical.passwords.passfaces.MemorisationCreation;
 
 /**
  * Created by Matteo on 26/04/2016.
@@ -16,7 +16,7 @@ public class Passfaces extends Methode {
     public Passfaces() {
 
         this.id = 0;
-        this.creation = ValidationCreation.class;
+        this.creation = MemorisationCreation.class;
         this.authentification = Authentification.class;
         this.configuration = PassFacesConfiguration.class;
         this.information = Information.class;

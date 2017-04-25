@@ -3,7 +3,7 @@ package mbpl.graphical.passwords.passfaces;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import mbpl.graphical.passwords.genericDejaVu.GenericAuthentification;
+import mbpl.graphical.passwords.utils.GenericAuthentification;
 import mbpl.graphical.passwords.sqlite.Passfaces;
 
 

@@ -58,7 +58,7 @@ public class Presentation extends AppCompatActivity {
         boutonContinuer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent authentification = new Intent(Presentation.this, ValidationCreation.class);
+                Intent authentification = new Intent(Presentation.this, MemorisationCreation.class);
                 startActivity(authentification);
             }
         });

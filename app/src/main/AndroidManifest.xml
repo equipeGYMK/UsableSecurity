@@ -75,12 +75,15 @@
             android:name=".passfaces.Bienvenue"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".passfaces.ValidationCreation"
+            android:name=".passfaces.MemorisationCreation"
             android:label="@string/title_activity_validation_creation"
             android:screenOrientation="portrait" />
         <activity
             android:name=".passfaces.Presentation"
-            android:label="@string/title_activity_presentation"></activity>
+            android:label="@string/title_activity_presentation" />
+        <activity
+            android:name=".passfaces.VerificationCreation"
+            android:label="@string/title_activity_verification_creation"></activity>
     </application>
 
 </manifest>

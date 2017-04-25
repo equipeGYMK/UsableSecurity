@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,9 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import mbpl.graphical.passwords.R;
 import mbpl.graphical.passwords.accueil.Accueil;
@@ -23,7 +20,7 @@ import mbpl.graphical.passwords.sqlite.MethodeManager;
 import mbpl.graphical.passwords.sqlite.Passfaces;
 import mbpl.graphical.passwords.utils.Tools;
 
-public class ValidationCreation extends AppCompatActivity {
+public class MemorisationCreation extends AppCompatActivity {
 
     private MethodeManager methodeManager;
     private List<Integer> trueMotDePasse;
@@ -82,6 +79,11 @@ public class ValidationCreation extends AppCompatActivity {
         bmp = BitmapFactory.decodeResource(getResources(), getDrawableN(trueMotDePasse.get(compteur - 1)));
         bmp = Bitmap.createScaledBitmap(bmp, 256, 256, true);
         imageView.setImageBitmap(bmp);
+
+
+        //si l'image est agrandi et qu'on change d'image, il faut s'assurer que le texte soit le bon
+        if (isFullScreen)
+            textViewZoom.setText("Cliquez sur l'image pour l'agrandir");
 
         //Gérer les boutons selon le compteur
         EnableBouton();
@@ -157,7 +159,7 @@ public class ValidationCreation extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ValidationCreation.this, Accueil.class);
+                Intent intent = new Intent(MemorisationCreation.this, Accueil.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finish();
                 startActivity(intent);

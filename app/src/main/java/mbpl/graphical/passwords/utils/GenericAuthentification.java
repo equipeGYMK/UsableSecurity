@@ -1,14 +1,12 @@
-package mbpl.graphical.passwords.genericDejaVu;
+package mbpl.graphical.passwords.utils;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -22,10 +20,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import mbpl.graphical.passwords.accueil.Accueil;
-import mbpl.graphical.passwords.androidPatternLock.Authentification;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
-import mbpl.graphical.passwords.utils.Tools;
 
 import static mbpl.graphical.passwords.utils.Tools.writeToFile;
 
