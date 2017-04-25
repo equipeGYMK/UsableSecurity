@@ -33,6 +33,8 @@ public class Accueil extends Activity {
     public static String [] prgmNameList={"PassFaces","Pattern Lock"};
     public static String [] descriptionList = new String[implementedMethods.size()];
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
