@@ -25,7 +25,7 @@ public class Authentification extends AppCompatActivity {
     private Lock9View lock9View;
     private MethodeManager methodeManager;
     protected Methode methode = new PatternLock();
-    protected int nombreEssai ;
+    protected int nombreEssai,nbPointsMin;
 
 
     //Créer le fichier de préférence dans lequel on stockera les données
@@ -51,6 +51,9 @@ public class Authentification extends AppCompatActivity {
 
         //récupérer le contexte de la bdd
         methodeManager = new MethodeManager(getApplicationContext());
+        methodeManager.open();
+        methode = methodeManager.getMethode(methode);
+        nbPointsMin = methode.getParam1();
 
         lock9View.setCallBack(new Lock9View.CallBack() {
 
@@ -79,7 +82,7 @@ public class Authentification extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }else{
-                        if ( nombre > 3) {
+                        if ( nombre >= nbPointsMin) {
                             nombreEssai-- ;
                             editor.putInt("nbTentative", nombreEssai);
                             editor.commit();
@@ -94,7 +97,7 @@ public class Authentification extends AppCompatActivity {
                             }
                         } else {
 
-                            Toast.makeText(Authentification.this, "Selectionnez au moins 4 points !", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Authentification.this, "Selectionnez au moins "+ nbPointsMin +" points !", Toast.LENGTH_SHORT).show();
 
                         }
 

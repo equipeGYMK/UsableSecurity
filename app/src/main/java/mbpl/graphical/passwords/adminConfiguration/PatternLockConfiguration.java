@@ -27,9 +27,9 @@ import mbpl.graphical.passwords.sqlite.PatternLock;
 public class PatternLockConfiguration extends AppCompatActivity {
 
 
-    private Spinner spinnerNbPoints;
+    private Spinner spinnerNbPoints, spinnerTentative;
     private Button btnSubmit, btnInit, btnInitEssai;
-    private int nbPointsActuel, pointsMinimum, pointsMinimumTemp;
+    private int nbPointsActuel, pointsMinimum, pointsMinimumTemp, tentativeActuelle;
     private EditText textPointsMinimum;
 
     private ArrayList listIntSpinner;
@@ -61,10 +61,12 @@ public class PatternLockConfiguration extends AppCompatActivity {
         methode = methodeManager.getMethode(methode);
         nbPointsActuel = methode.getParam1();
         pointsMinimum = methode.getParam2();
+        tentativeActuelle = prefs.getInt("param3", 3);
         methodeManager.close();
 
         //Création des spinners
         addItemsOnSpinnerNbPoints();
+        addItemsOnSpinnerTentative();
         initEditText();
         addListenerOnButton();
 
@@ -103,6 +105,24 @@ public class PatternLockConfiguration extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    // add items into spinner dynamically
+    public void addItemsOnSpinnerTentative() {
+
+        spinnerTentative = (Spinner) findViewById(R.id.aPLSpinnerTentative);
+        List<String> list = new ArrayList<String>();
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+        list.add("6");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTentative.setAdapter(dataAdapter);
+        spinnerTentative.setSelection(tentativeActuelle-2, false);
+
     }
 
     private void initEditText(){
@@ -170,6 +190,9 @@ public class PatternLockConfiguration extends AppCompatActivity {
 
                     initMotDePasse();
                 }
+                if(tentativeActuelle != (spinnerTentative.getSelectedItemPosition()+2)) {
+                    initTentative();
+                }
 
                 //Changement d'activité
                 Intent authentification = new Intent(PatternLockConfiguration.this, Accueil.class);
@@ -208,7 +231,8 @@ public class PatternLockConfiguration extends AppCompatActivity {
 
     private void initTentative() {
         //Initialisation des tentatives
-        editor.putInt("nbTentative", 3);
+        editor.putInt("param3", spinnerTentative.getSelectedItemPosition()+2);
+        editor.putInt("nbTentative", spinnerTentative.getSelectedItemPosition()+2);
         editor.commit();
     }
 
