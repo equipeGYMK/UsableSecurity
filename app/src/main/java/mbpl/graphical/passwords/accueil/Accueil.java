@@ -40,7 +40,7 @@ public class Accueil extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_tab_technics);
 
-        //récupérer la vue et générer le titre
+        //récupérer la vue et générer le  titre
         context = this;
 
         //créer la bd
