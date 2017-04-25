@@ -9,7 +9,7 @@ import mbpl.graphical.passwords.sqlite.Passfaces;
 
 /**
  * Created by benja135 on 26/04/16.
- * Activité d'authentification de la méthode "passfaces".
+ * Activité d'authentification de la méthode "passfaces". OK
  */
 public class Authentification extends GenericAuthentification {
 
