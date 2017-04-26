@@ -66,26 +66,25 @@ public class Presentation extends AppCompatActivity {
 
     private void genererMotDePasse(){
 
-        methodeManager = new MethodeManager(getApplicationContext());
-        methodeManager.open();
-
-        nbImage_mdp = prefs.getInt("param1", 4);
+        //attributs
+        int random_image;
         Random r = new Random();
         ArrayList numDispo =  new ArrayList();
+
+        methodeManager = new MethodeManager(getApplicationContext());
+        methodeManager.open();
+        nbImage_mdp = prefs.getInt("param1", 4);
+
         for (int i = 1; i <= Passfaces.nbImageBD; i++){
             numDispo.add(i);
         }
 
         for(int i = 0; i < nbImage_mdp ; i++){
-            int random_image;
-            if(i < nbImage_mdp - 1 ) {
-                random_image = r.nextInt(20 - i);
-            } else {
-                random_image = 0;
-            }
+            random_image = r.nextInt(20 - i);
             pass.add(numDispo.get(random_image));
             numDispo.remove(numDispo.get(random_image));
         }
+        
         methodeManager.setPassword(methode, pass.toString());
         methodeManager.close();
     }
