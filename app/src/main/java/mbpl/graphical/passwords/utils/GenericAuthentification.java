@@ -200,7 +200,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
                                     bmpReference = BitmapFactory.decodeResource(getResources(), getDrawableN(trueMotDePasse.get(inputMotDePasse.size())));
                                     bmpReference = Bitmap.createScaledBitmap(bmpReference, tailleImage, tailleImage, true);
                                     bmpReference = bmpReference.copy(bmpReference.getConfig(), true);     //autoriser la modification
-                                    animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.roatate);
+                                    animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.animation);
                                     currentImage.startAnimation(animRotate);
 
                                     //mettre le booléen à true afin d'éviter de relancer l'animation plusieurs fois
@@ -293,7 +293,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
         }
     }
 
-
+    
     /**
      * Retourne l'image n de res/drawable.
      *
@@ -302,22 +302,6 @@ public abstract class GenericAuthentification extends AppCompatActivity {
      */
     protected abstract int getDrawableN(int n);
 
-
-    /**
-     *
-     */
-    protected  void validiteImageClique(Bitmap bitMap){
-
-
-        bitMap = bitMap.copy(bitMap.getConfig(), true);     //lets bmp to be mutable
-        Canvas canvas = new Canvas(bitMap);                 //draw a canvas in defined bmp
-        Paint paint = new Paint();                          //define paint and paint color
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        //paint.setStrokeWidth(0.5f);
-        paint.setAntiAlias(true);                           //smooth edges
-        canvas.drawCircle(50, 50, 3, paint);
-    }
 
 
     public ImageView getImageView(int Id){
