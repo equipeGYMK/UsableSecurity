@@ -1,14 +1,13 @@
 package mbpl.graphical.passwords.passfaces;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import mbpl.graphical.passwords.R;
-import mbpl.graphical.passwords.sqlite.Passfaces;
 
 public class Information extends AppCompatActivity {
 
@@ -23,7 +22,7 @@ public class Information extends AppCompatActivity {
         btnOk = (Button) findViewById(R.id.button_info_pf);
 
         // action bar
-        setTitle("Pass Face Création");
+        setTitle("Pass Face Information");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnOk.setOnClickListener(new View.OnClickListener() {

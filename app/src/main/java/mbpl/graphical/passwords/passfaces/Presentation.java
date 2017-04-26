@@ -84,7 +84,7 @@ public class Presentation extends AppCompatActivity {
             pass.add(numDispo.get(random_image));
             numDispo.remove(numDispo.get(random_image));
         }
-        
+
         methodeManager.setPassword(methode, pass.toString());
         methodeManager.close();
     }
