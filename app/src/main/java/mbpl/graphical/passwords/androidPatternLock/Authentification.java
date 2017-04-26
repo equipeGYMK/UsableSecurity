@@ -1,15 +1,8 @@
 package mbpl.graphical.passwords.androidPatternLock;
 
-import mbpl.graphical.passwords.R;
-import mbpl.graphical.passwords.accueil.Accueil;
-import mbpl.graphical.passwords.sqlite.Methode;
-import mbpl.graphical.passwords.sqlite.MethodeManager;
-import mbpl.graphical.passwords.sqlite.PatternLock;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -17,7 +10,12 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import static android.R.attr.data;
+import mbpl.graphical.passwords.R;
+import mbpl.graphical.passwords.accueil.Accueil;
+import mbpl.graphical.passwords.sqlite.Methode;
+import mbpl.graphical.passwords.sqlite.MethodeManager;
+import mbpl.graphical.passwords.sqlite.PatternLock;
+
 import static mbpl.graphical.passwords.utils.Tools.writeToFile;
 
 public class Authentification extends AppCompatActivity {
@@ -53,7 +51,7 @@ public class Authentification extends AppCompatActivity {
         methodeManager = new MethodeManager(getApplicationContext());
         methodeManager.open();
         methode = methodeManager.getMethode(methode);
-        nbPointsMin = methode.getParam1();
+        nbPointsMin = methode.getParam2();
 
         lock9View.setCallBack(new Lock9View.CallBack() {
 
