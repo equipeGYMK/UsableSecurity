@@ -24,7 +24,11 @@
     <string name="title_activity_pass_faces_configuration">PassFacesConfiguration</string>
     <string name="title_activity_validation_creation">ValidationCreation</string>
     <string name="title_activity_presentation">presentation</string>
-    <string name="title_activity_verification_creation">VerificationCreation</string>
+    <string name="title_activity_apprentissage_avec_aide">ApprentissageAvecAide</string>
+    <string name="title_activity_apprentissage_sans_aide">ApprentissageSansAide</string>
+    <string name="title_activity_choix_apres_echec_apprentissage_creation">
+        ChoixApresEchecApprentissageCreation
+    </string>
 
 
 </resources>

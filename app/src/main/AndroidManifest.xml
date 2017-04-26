@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- Menu -->
+        <!-- Accueil et menu -->
         <activity
             android:name=".accueil.Accueil"
             android:launchMode="singleTask"
@@ -35,10 +35,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".passfaces.Creation"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".adminConfiguration.PassFacesConfiguration"
             android:label="@string/title_activity_pass_faces_configuration"
             android:screenOrientation="portrait"
@@ -46,6 +42,22 @@
         <activity
             android:name=".passfaces.Information"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".passfaces.Bienvenue"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".passfaces.MemorisationCreation"
+            android:label="@string/title_activity_validation_creation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".passfaces.Presentation"
+            android:label="@string/title_activity_presentation" />
+        <activity
+            android:name=".passfaces.ApprentissageAvecAideCreation"
+            android:label="@string/title_activity_apprentissage_avec_aide" />
+        <activity
+            android:name=".passfaces.ApprentissageSansAideCreation"
+            android:label="@string/title_activity_apprentissage_sans_aide" />
 
         <!-- PatternLock -->
         <activity
@@ -66,24 +78,12 @@
         <activity
             android:name=".androidPatternLock.Information"
             android:screenOrientation="portrait" />
-
-        <!-- Welcome's activities -->
         <activity
             android:name=".androidPatternLock.Bienvenue"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".passfaces.Bienvenue"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".passfaces.MemorisationCreation"
-            android:label="@string/title_activity_validation_creation"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".passfaces.Presentation"
-            android:label="@string/title_activity_presentation" />
-        <activity
-            android:name=".passfaces.VerificationCreation"
-            android:label="@string/title_activity_verification_creation"></activity>
+            android:name=".passfaces.ChoixApresEchecApprentissageCreation"
+            android:label="@string/title_activity_choix_apres_echec_apprentissage_creation"></activity>
     </application>
 
 </manifest>

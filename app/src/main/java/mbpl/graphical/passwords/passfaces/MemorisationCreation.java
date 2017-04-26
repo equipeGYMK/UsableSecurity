@@ -14,7 +14,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import mbpl.graphical.passwords.R;
-import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
 import mbpl.graphical.passwords.sqlite.Passfaces;
@@ -38,7 +37,7 @@ public class MemorisationCreation extends AppCompatActivity {
         setContentView(R.layout.activity_validation_creation);
 
         // action bar
-        setTitle("Pass Face Création");
+        setTitle("Phase de mémorisation");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //récupérer les éléments
@@ -159,7 +158,7 @@ public class MemorisationCreation extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MemorisationCreation.this, Accueil.class);
+                Intent intent = new Intent(MemorisationCreation.this, ApprentissageAvecAideCreation.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finish();
                 startActivity(intent);

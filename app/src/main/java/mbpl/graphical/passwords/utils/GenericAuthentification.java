@@ -2,14 +2,20 @@ package mbpl.graphical.passwords.utils;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -19,7 +25,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import mbpl.graphical.passwords.R;
 import mbpl.graphical.passwords.accueil.Accueil;
+import mbpl.graphical.passwords.passfaces.ApprentissageAvecAideCreation;
+import mbpl.graphical.passwords.passfaces.ApprentissageSansAideCreation;
+import mbpl.graphical.passwords.passfaces.ChoixApresEchecApprentissageCreation;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
 
@@ -31,8 +41,21 @@ import static mbpl.graphical.passwords.utils.Tools.writeToFile;
  */
 public abstract class GenericAuthentification extends AppCompatActivity {
 
+
+    //mettre l'image bmp en global afin de pouvoir l'étendre et l'appliquer dans les listeners
+    protected Bitmap bmp, bmpReference;
+    protected ImageView imageView;
+    protected GridLayout gridLayout;
+    protected int idCompteur = 0;
+    //animtion
+    protected Animation animRotate;
+    //Vue de la bonne image actuelle
+    protected ImageView currentImage;
+    //booléen de vérification animation
+    protected boolean falseImagePicked = false;
+
     // Variables protected à redéfinir dans chaque classe fille /!\
-    protected GenericAuthentification here = GenericAuthentification.this;
+    protected GenericAuthentification here;
     protected Class nextClass = Accueil.class;
     protected int nbImage;
     protected Methode methode;
@@ -53,6 +76,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -113,8 +137,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
 
         int positionImageToBeDisplayed = Tools.randomInto(0, nbLigne * nbColonne - 1);
 
-        GridLayout gridLayout = new GridLayout(this);
-
+        gridLayout = new GridLayout(this);
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
         int screenWidth = size.x;
@@ -126,9 +149,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
         for (int l = 0; l < nbLigne; l++) {
             for (int c = 0; c < nbColonne; c++) {
 
-                ImageView imageView;
                 imageView = new ImageView(this);
-
                 // Crée un bitmap d'une image piochée aléatoirement (ou pas)
                 int numImage;
                 if ((l * nbColonne + c) == positionImageToBeDisplayed) {
@@ -140,23 +161,62 @@ public abstract class GenericAuthentification extends AppCompatActivity {
                 }
                 imageAlreadyDisplayed[numImage - 1] = true;
 
-                Bitmap bmp;
+
                 bmp = BitmapFactory.decodeResource(getResources(), getDrawableN(numImage));
                 bmp = Bitmap.createScaledBitmap(bmp, tailleImage, tailleImage, true);
-
                 // On ajoute l'image à l'ImageView
                 imageView.setImageBitmap(bmp);
+
+                //récupérer l'image actuelle
+                if (numImage == trueMotDePasse.get(inputMotDePasse.size()))
+                    currentImage = imageView;
 
                 // Ajoute un listener sur l'image
                 final int finalNumImage = numImage;
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        changePhase(finalNumImage);
+
+                        if (here instanceof ApprentissageAvecAideCreation)
+                        {
+                            if (finalNumImage != trueMotDePasse.get(inputMotDePasse.size()))
+                            {
+                                ImageView l = getImageView(v.getId());
+                                bmp = BitmapFactory.decodeResource(getResources(), getDrawableN(finalNumImage));
+                                bmp = Bitmap.createScaledBitmap(bmp, tailleImage, tailleImage, true);
+                                bmp = bmp.copy(bmp.getConfig(), true);     //lets bmp to be mutable
+                                Paint paint = new Paint();
+                                paint.setColor(Color.RED);
+                                paint.setStrokeWidth(12);
+                                Canvas canvas = new Canvas(bmp);
+                                canvas.drawLine(0, 0, bmp.getHeight(), bmp.getWidth(), paint);
+                                canvas.drawLine(bmp.getHeight(), 0, 0, bmp.getWidth(), paint);
+                                l.setImageBitmap(bmp);
+
+
+                                //Permet de s'assurer que l'animation de se reproduit pas plusieurs fois
+                                if(!falseImagePicked) {
+                                    //animation de la bonne image et création de labitmap
+                                    bmpReference = BitmapFactory.decodeResource(getResources(), getDrawableN(trueMotDePasse.get(inputMotDePasse.size())));
+                                    bmpReference = Bitmap.createScaledBitmap(bmpReference, tailleImage, tailleImage, true);
+                                    bmpReference = bmpReference.copy(bmpReference.getConfig(), true);     //autoriser la modification
+                                    animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.roatate);
+                                    currentImage.startAnimation(animRotate);
+
+                                    //mettre le booléen à true afin d'éviter de relancer l'animation plusieurs fois
+                                    falseImagePicked = true;
+                                }
+                            }
+                            else
+                                changePhase(finalNumImage);
+
+                        }
+                        else
+                            changePhase(finalNumImage);
                     }
                 });
 
-                // On ajoute l'ImageView au GridLayout en mettant les bon paramétres
+                // On ajoute l'ImageView au GridLayout en mettant les bons paramétres
                 GridLayout.LayoutParams param = new GridLayout.LayoutParams();
                 param.height = screenHeight / nbLigne;
                 param.width = screenWidth / nbColonne;
@@ -165,11 +225,15 @@ public abstract class GenericAuthentification extends AppCompatActivity {
                 param.columnSpec = GridLayout.spec(c);
                 param.rowSpec = GridLayout.spec(l);
                 imageView.setLayoutParams(param);
+                imageView.setId(idCompteur);
                 gridLayout.addView(imageView);
+
+                //incrémenter le compteur et ajouter le couple (id, numImage) au tableau)
+                idCompteur++;
             }
         }
-
         setContentView(gridLayout);
+        idCompteur = 0;
     }
 
 
@@ -192,30 +256,40 @@ public abstract class GenericAuthentification extends AppCompatActivity {
             String formattedDate = df.format(c.getTime());
 
             if (inputMotDePasse.equals(trueMotDePasse)) {
-                writeToFile("PassFaces - Succes - Essai restant : "+nombreEssai+" "+formattedDate+"\n");
+                writeToFile("PassFaces - Succes - Essais restants : "+nombreEssai+" "+formattedDate+"\n");
                 editor.putInt("nbTentative", 3);
                 editor.commit();
                 inputMotDePasse.clear();
-                Intent accueil = new Intent(here, nextClass);
-                startActivity(accueil);
+                Intent intent = new Intent(here, nextClass);
+                startActivity(intent);
             } else {
                 nombreEssai-- ;
                 editor.putInt("nbTentative", nombreEssai);
                 editor.commit();
-                writeToFile("PassFaces - Echec - Essai restant : "+nombreEssai+" "+formattedDate+"\n");
+                writeToFile("PassFaces - Echec - Essais restants : "+nombreEssai+" "+formattedDate+"\n");
                 if (nombreEssai > 0 ) {
-                    Toast.makeText(GenericAuthentification.this, "Authentification Echouée !\nNombre essai restant : " + nombreEssai, Toast.LENGTH_LONG).show();
+                    Toast.makeText(GenericAuthentification.this, "Authentification échouée !\nNombre d'essais restants : " + nombreEssai, Toast.LENGTH_LONG).show();
                     inputMotDePasse.clear();
                     drawAndSetListeners(trueMotDePasse.get(inputMotDePasse.size()));
                 } else {
-                    Toast.makeText(GenericAuthentification.this, "ECHEC !\nVous n'avez plus d'essai restant !\nLa technique est bloquée ", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(here, Accueil.class);
-                    startActivity(intent);
-                    finish();
+                    if (here instanceof ApprentissageSansAideCreation){
+                        Toast.makeText(GenericAuthentification.this, "Vous avez échoué la phase d'apprentissage", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(here, ChoixApresEchecApprentissageCreation.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                    else{
+                        Toast.makeText(GenericAuthentification.this, "ECHEC !\nVous n'avez plus d'essais restants !\nLa technique est bloquée ", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(here, Accueil.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         } else {
             drawAndSetListeners(trueMotDePasse.get(inputMotDePasse.size()));
+            falseImagePicked = false;
         }
     }
 
@@ -229,4 +303,33 @@ public abstract class GenericAuthentification extends AppCompatActivity {
     protected abstract int getDrawableN(int n);
 
 
+    /**
+     *
+     */
+    protected  void validiteImageClique(Bitmap bitMap){
+
+
+        bitMap = bitMap.copy(bitMap.getConfig(), true);     //lets bmp to be mutable
+        Canvas canvas = new Canvas(bitMap);                 //draw a canvas in defined bmp
+        Paint paint = new Paint();                          //define paint and paint color
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        //paint.setStrokeWidth(0.5f);
+        paint.setAntiAlias(true);                           //smooth edges
+        canvas.drawCircle(50, 50, 3, paint);
+    }
+
+
+    public ImageView getImageView(int Id){
+
+        ImageView resultImage = null;
+        int childSize = gridLayout.getChildCount();
+        for(int k = 0; k < childSize; k++) {
+            if( gridLayout.getChildAt(k) instanceof ImageView) {
+                if (gridLayout.getChildAt(k).getId() == Id)
+                    resultImage = (ImageView) gridLayout.getChildAt(k);
+            }
+        }
+        return resultImage;
+    }
 }
