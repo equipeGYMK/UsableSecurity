@@ -8,7 +8,7 @@
     android:background="@drawable/images_accueil_background">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/titrePresentationPassfaces"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textViewZoom"
@@ -32,7 +32,8 @@
 
     <Button
         android:id="@+id/button_pf_presentation"
-        android:layout_width="0dp"
+        android:background="@drawable/border_button_global"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="Continuer"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,7 +47,7 @@
         app:layout_constraintVertical_bias="0.95" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textePresentationPassfaces"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/imageViewValidation"
@@ -60,7 +61,7 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/titrePresentationPassfaces" />
 
     <GridLayout
         android:id="@+id/grid_presentation"
@@ -73,7 +74,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button_pf_presentation"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textePresentationPassfaces"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintVertical_bias="0.0">
 

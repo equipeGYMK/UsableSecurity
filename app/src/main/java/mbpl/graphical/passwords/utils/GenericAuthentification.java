@@ -293,7 +293,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
         }
     }
 
-    
+
     /**
      * Retourne l'image n de res/drawable.
      *

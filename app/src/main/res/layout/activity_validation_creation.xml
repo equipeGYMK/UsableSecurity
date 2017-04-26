@@ -21,7 +21,7 @@
         android:layout_marginEnd="18dp"
         android:layout_above="@+id/buttonTerminerValidationCreationPassFace"
         android:layout_alignParentRight="true"
-        android:background="@drawable/border_button_accueil"
+        android:background="@drawable/border_button_global"
         android:layout_alignParentEnd="true"
         android:layout_width="140dp" />
 
@@ -32,7 +32,7 @@
         android:id="@+id/buttonTerminerValidationCreationPassFace"
         android:layout_marginBottom="14dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/border_button_accueil"
+        android:background="@drawable/border_button_global"
         android:layout_centerHorizontal="true"
         android:layout_width="100dp" />
 
@@ -93,7 +93,7 @@
         android:text="Image précédente"
         android:layout_height="40dp"
         android:id="@+id/buttonPreviousValidationCreation"
-        android:background="@drawable/border_button_accueil"
+        android:background="@drawable/border_button_global"
         android:layout_below="@+id/textViewExplicationValidationCreation"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
