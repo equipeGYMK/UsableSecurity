@@ -22,7 +22,7 @@ public class Information extends AppCompatActivity {
         btnOk = (Button) findViewById(R.id.button_info_pf);
 
         // action bar
-        setTitle("Pass Face Information");
+        setTitle("Passfaces Information");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnOk.setOnClickListener(new View.OnClickListener() {

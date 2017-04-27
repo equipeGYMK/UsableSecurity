@@ -161,7 +161,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/border_button_global"
-        android:text="Reinitialiser le nombre de tentative"
+        android:text="Reinitialiser le nombre d'essais"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonInitPatternLock"

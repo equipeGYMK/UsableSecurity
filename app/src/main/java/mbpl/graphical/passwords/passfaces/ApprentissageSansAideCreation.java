@@ -24,7 +24,7 @@ public class ApprentissageSansAideCreation extends GenericAuthentification {
         super.onCreate(savedInstanceState);
 
         // action bar
-        setTitle(Html.fromHtml("<small>Phase d'apprentissage sans aide</small>"));
+        setTitle(Html.fromHtml("<small>Passfaces Apprentissage sans aide</small>"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }

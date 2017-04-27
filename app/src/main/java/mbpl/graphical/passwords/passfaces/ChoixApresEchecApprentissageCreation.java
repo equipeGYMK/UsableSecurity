@@ -23,7 +23,7 @@ public class ChoixApresEchecApprentissageCreation extends AppCompatActivity {
         btnApprentissage = (Button) findViewById(R.id.accederMemorisation);
 
         // action bar
-        setTitle("Choix PassFace");
+        setTitle("Passfaces Choix de recours");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnNouveau.setOnClickListener(new View.OnClickListener() {

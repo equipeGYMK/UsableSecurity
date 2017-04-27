@@ -37,7 +37,7 @@ public class MemorisationCreation extends AppCompatActivity {
         setContentView(R.layout.activity_validation_creation);
 
         // action bar
-        setTitle("Phase de mémorisation");
+        setTitle("Passfaces Mémorisation");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //récupérer les éléments
@@ -51,7 +51,7 @@ public class MemorisationCreation extends AppCompatActivity {
 
         //mettre en place le texte
         textViewExplication.setText("Regardez attentivement cette personne.\n" +
-                "À quoi pensez-vous qu'elle ressemble?\n" +
+                "À qui pensez-vous qu'elle ressemble?\n" +
                 "Elle vous rappelle quelqu'un?");
 
         //récupération mot de passe
@@ -59,12 +59,6 @@ public class MemorisationCreation extends AppCompatActivity {
         methodeManager.open();
         methode = methodeManager.getMethode(methode);
         trueMotDePasse = Tools.stringArrayToIntArray(methode.getMdp());
-
-
-        for (int i = 0; i< trueMotDePasse.size();i++){
-            System.out.println("mot de passe value: " + trueMotDePasse.get(i));
-        }
-
 
         //Ajout des listeners. Achaque fois que l'on cliquera sur un bouton, on appellera la fonction traitementVerification avec le compteur modifié
         addListenerOnButton();

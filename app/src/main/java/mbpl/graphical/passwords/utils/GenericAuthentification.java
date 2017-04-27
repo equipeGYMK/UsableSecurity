@@ -202,7 +202,6 @@ public abstract class GenericAuthentification extends AppCompatActivity {
                                     bmpReference = bmpReference.copy(bmpReference.getConfig(), true);     //autoriser la modification
                                     animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.animation);
                                     currentImage.startAnimation(animRotate);
-
                                     //mettre le booléen à true afin d'éviter de relancer l'animation plusieurs fois
                                     falseImagePicked = true;
                                 }
@@ -255,18 +254,22 @@ public abstract class GenericAuthentification extends AppCompatActivity {
             SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
             String formattedDate = df.format(c.getTime());
 
+            System.out.println("nombre essai: " + nombreEssai);
+
             if (inputMotDePasse.equals(trueMotDePasse)) {
-                writeToFile("PassFaces - Succes - Essais restants : "+nombreEssai+" "+formattedDate+"\n");
+                writeToFile("Passfaces - Succes - Essais restants : "+nombreEssai+" "+formattedDate+"\n");
                 editor.putInt("nbTentative", 3);
                 editor.commit();
                 inputMotDePasse.clear();
                 Intent intent = new Intent(here, nextClass);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             } else {
                 nombreEssai-- ;
                 editor.putInt("nbTentative", nombreEssai);
                 editor.commit();
-                writeToFile("PassFaces - Echec - Essais restants : "+nombreEssai+" "+formattedDate+"\n");
+                writeToFile("Passfaces - Echec - Essais restants : "+nombreEssai+" "+formattedDate+"\n");
                 if (nombreEssai > 0 ) {
                     Toast.makeText(GenericAuthentification.this, "Authentification échouée !\nNombre d'essais restants : " + nombreEssai, Toast.LENGTH_LONG).show();
                     inputMotDePasse.clear();
@@ -275,6 +278,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
                     if (here instanceof ApprentissageSansAideCreation){
                         Toast.makeText(GenericAuthentification.this, "Vous avez échoué la phase d'apprentissage", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(here, ChoixApresEchecApprentissageCreation.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
 
@@ -282,6 +286,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
                     else{
                         Toast.makeText(GenericAuthentification.this, "ECHEC !\nVous n'avez plus d'essais restants !\nLa technique est bloquée ", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(here, Accueil.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
                     }

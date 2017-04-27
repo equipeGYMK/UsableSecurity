@@ -26,6 +26,8 @@ public class PassFacesConfiguration extends AppCompatActivity {
     private EditText textNbimage;
     private int nbImageActuel, nbImageTemp;
 
+    private int nbImageActuelleTest;
+
     protected Methode methode =  new Passfaces();
     private MethodeManager methodeManager;
 
@@ -39,7 +41,7 @@ public class PassFacesConfiguration extends AppCompatActivity {
         setContentView(R.layout.activity_pass_faces_configuration);
 
         // action bar
-        setTitle("PassFaces Configuration");
+        setTitle("Passfaces Configuration");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         methodeManager = new MethodeManager(getApplicationContext());
@@ -55,8 +57,8 @@ public class PassFacesConfiguration extends AppCompatActivity {
     }
 
     private void initEditText(){
-        textNbimage = (EditText) findViewById(R.id.textfield_nbimage);
 
+        textNbimage = (EditText) findViewById(R.id.textfield_nbimage);
         textNbimage.setText(nbImageActuel+"", TextView.BufferType.EDITABLE);
 
         textNbimage.addTextChangedListener(new TextWatcher() {
@@ -127,7 +129,7 @@ public class PassFacesConfiguration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 initTentative();
-                Toast.makeText(PassFacesConfiguration.this, "Le nombre de tentative a été Réinitialisé", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PassFacesConfiguration.this, "Le nombre de tentative a été réinitialisé", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -140,7 +142,7 @@ public class PassFacesConfiguration extends AppCompatActivity {
         methode = methodeManager.getMethode(methode);
         methodeManager.setPassword(methode, "");
         methodeManager.close();
-        Toast.makeText(PassFacesConfiguration.this, "Votre mot de passe a été Réinitialisé", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PassFacesConfiguration.this, "Votre mot de passe a été réinitialisé", Toast.LENGTH_SHORT).show();
 
         initTentative();
     }

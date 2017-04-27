@@ -22,7 +22,7 @@ public class ApprentissageAvecAideCreation extends GenericAuthentification {
         this.methode = new Passfaces();
         super.onCreate(savedInstanceState);
 
-        setTitle(Html.fromHtml("<small>Phase d'apprentissage avec aide</small>"));
+        setTitle(Html.fromHtml("<small>Passfaces Apprentissage avec aide</small>"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

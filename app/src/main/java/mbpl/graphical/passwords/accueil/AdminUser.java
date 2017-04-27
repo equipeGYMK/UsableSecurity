@@ -38,6 +38,8 @@ public class AdminUser extends AppCompatActivity {
         prefs = getSharedPreferences(implementedMethods.get(position).getNameSavePref(), MODE_PRIVATE);
         nombreEssai = prefs.getInt("nbTentative", 0);
 
+
+        System.out.println("test looool: " + nombreEssai );
         // action bar
         setTitle(implementedMethods.get(position).getNom());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -55,8 +57,6 @@ public class AdminUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (nombreEssai > 0 ) {
-
                     Intent authentification;
 
                     Methode m;
@@ -64,17 +64,19 @@ public class AdminUser extends AppCompatActivity {
                     mm.open();
                     m = mm.getMethode(implementedMethods.get(position));
                     if (!mm.defaultPassword(m)) {
-                        authentification = new Intent(AdminUser.this, implementedMethods.get(position).getAuthentification());
+                        if (nombreEssai > 0 ) {
+                            authentification = new Intent(AdminUser.this, implementedMethods.get(position).getAuthentification());
+                            mm.close();
+                            startActivity(authentification);
+                        }else {
+                            Toast.makeText(AdminUser.this, "Vous n'avez plus d'essai restants !\nLa technique est bloquée", Toast.LENGTH_SHORT).show();
+                        }
+
                     } else {
                         authentification = new Intent(AdminUser.this, implementedMethods.get(position).getInformation());
+                        mm.close();
+                        startActivity(authentification);
                     }
-
-                    mm.close();
-                    startActivity(authentification);
-
-                } else {
-                    Toast.makeText(AdminUser.this, "Vous n'avez plus d'essai restant !\nLa technique est bloquée", Toast.LENGTH_SHORT).show();
-                }
             }
         });
 

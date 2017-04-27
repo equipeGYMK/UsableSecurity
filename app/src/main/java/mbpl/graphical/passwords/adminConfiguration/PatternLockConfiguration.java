@@ -8,15 +8,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.view.View.OnClickListener;
-import java.util.ArrayList;
-import java.util.List;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import mbpl.graphical.passwords.R;
 import mbpl.graphical.passwords.accueil.Accueil;
@@ -126,8 +127,8 @@ public class PatternLockConfiguration extends AppCompatActivity {
     }
 
     private void initEditText(){
-        textPointsMinimum = (EditText) findViewById(R.id.editTextpointsMinimum);
 
+        textPointsMinimum = (EditText) findViewById(R.id.editTextpointsMinimum);
         textPointsMinimum.setText(pointsMinimum+"", TextView.BufferType.EDITABLE);
 
         textPointsMinimum.addTextChangedListener(new TextWatcher() {
@@ -212,27 +213,29 @@ public class PatternLockConfiguration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 initTentative();
-                Toast.makeText(PatternLockConfiguration.this, "Le nombre de tentative a été Réinitialisé", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PatternLockConfiguration.this, "Le nombre de tentative a été réinitialisé", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
     private void initMotDePasse() {
+
+        initTentative();
         //Initialisation du mot de passe
         methodeManager.open();
         methode = methodeManager.getMethode(methode);
         methodeManager.setPassword(methode, "");
         methodeManager.close();
-        Toast.makeText(PatternLockConfiguration.this, "Votre mot de passe a été Réinitialisé", Toast.LENGTH_SHORT).show();
-
-        initTentative();
+        Toast.makeText(PatternLockConfiguration.this, "Votre mot de passe a été réinitialisé", Toast.LENGTH_SHORT).show();
     }
 
     private void initTentative() {
         //Initialisation des tentatives
-        editor.putInt("param3", spinnerTentative.getSelectedItemPosition()+2);
-        editor.putInt("nbTentative", spinnerTentative.getSelectedItemPosition()+2);
+        String tentativeTemp = (String) spinnerTentative.getSelectedItem();
+
+        editor.putInt("param3", Integer.parseInt(tentativeTemp));
+        editor.putInt("nbTentative", Integer.parseInt(tentativeTemp));
         editor.commit();
     }
 
@@ -243,15 +246,6 @@ public class PatternLockConfiguration extends AppCompatActivity {
         super.onStart();
     }
 
-    /*
-    @Override
-    public void onBackPressed() {
-        //Retour à la page d'accueil lorsque l'on clique sur retour
-        Intent authentification = new Intent(PatternLockConfiguration.this, AccueilAdmin.class);
-        startActivity(authentification);
-        finish();
-    }
-    */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

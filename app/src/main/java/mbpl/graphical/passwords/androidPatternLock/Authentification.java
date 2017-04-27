@@ -23,7 +23,7 @@ public class Authentification extends AppCompatActivity {
     private Lock9View lock9View;
     private MethodeManager methodeManager;
     protected Methode methode = new PatternLock();
-    protected int nombreEssai,nbPointsMin;
+    protected int nombreEssai, nbPointsMin;
 
 
     //Créer le fichier de préférence dans lequel on stockera les données
@@ -46,6 +46,9 @@ public class Authentification extends AppCompatActivity {
         editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
         lock9View = (Lock9View) findViewById(R.id.lock_9_view);
+        nombreEssai = prefs.getInt("param3", 0);
+
+        System.out.println("param3 " + nombreEssai + " et " +  prefs.getInt("nbTentative", 0));
 
         //récupérer le contexte de la bdd
         methodeManager = new MethodeManager(getApplicationContext());
@@ -74,7 +77,7 @@ public class Authentification extends AppCompatActivity {
 
                     if(password.equals(PATTERN_KEY)){
                         writeToFile("Pattern Lock - Succes - Essai restant : "+nombreEssai+" "+formattedDate+"\n");
-                        editor.putInt("nbTentative", 3);
+                        editor.putInt("nbTentative", prefs.getInt("param3", 0));
                         editor.commit();
                         Intent intent = new Intent(Authentification.this, Bienvenue.class);
                         startActivity(intent);

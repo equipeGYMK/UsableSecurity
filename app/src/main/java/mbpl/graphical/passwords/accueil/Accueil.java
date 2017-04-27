@@ -1,19 +1,14 @@
 package mbpl.graphical.passwords.accueil;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.Menu;
-
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import mbpl.graphical.passwords.R;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
@@ -25,12 +20,10 @@ public class Accueil extends Activity {
 
     ListView lv;
     Context context;
-    Button btnRetour;
-    TextView titre;
 
     //Paramètre des différents éléments à afficher
     public static int [] prgmImages={R.drawable.image_passfaces,R.drawable.image_patternlock};
-    public static String [] prgmNameList={"PassFaces","Pattern Lock"};
+    public static String [] prgmNameList={"Passfaces","Pattern Lock"};
     public static String [] descriptionList = new String[implementedMethods.size()];
 
 
@@ -80,11 +73,9 @@ public class Accueil extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String description = "Application développée dans le cadre de l'UE TER/PROJET : " +
+        String description = "Application développée dans le cadre de l'UE PROJET : " +
                 "\"Usable Security - Secure Usability\", pour le M1 informatique de l'Université " +
-                "Paul Sabatier de Toulouse.\n\nAuteurs : \n - LACHERAY Benjamin\n " +
-                "- JEANMOUGIN Pierre\n - LE QUERE Lilian\n - MOUGEOT Matteo\n" +
-                "Remerciements à M. PALANQUE Philippe pour son encadrement.";
+                "Paul Sabatier de Toulouse.";
 
         AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
         myAlert.setMessage(description)

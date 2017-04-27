@@ -42,7 +42,7 @@ public class Presentation extends AppCompatActivity {
         setContentView(R.layout.activity_presentation);
 
         // action bar
-        setTitle("Pass Face Création");
+        setTitle("Passfaces Présentation");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
