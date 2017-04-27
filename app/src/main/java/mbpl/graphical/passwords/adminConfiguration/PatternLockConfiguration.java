@@ -190,6 +190,7 @@ public class PatternLockConfiguration extends AppCompatActivity {
                     methodeManager.close();
 
                     initMotDePasse();
+                    initTentative();
                 }
                 if(tentativeActuelle != (spinnerTentative.getSelectedItemPosition()+2)) {
                     initTentative();
@@ -206,6 +207,7 @@ public class PatternLockConfiguration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 initMotDePasse();
+                initTentative();
             }
         });
 
