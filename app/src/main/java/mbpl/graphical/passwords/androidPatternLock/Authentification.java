@@ -25,8 +25,6 @@ public class Authentification extends AppCompatActivity {
     protected Methode methode = new PatternLock();
     protected int nombreEssai, nbPointsMin;
 
-
-    //Créer le fichier de préférence dans lequel on stockera les données
     private static String MY_PREFS_NAME = "PatternLock";
     private static String PATTERN_KEY;
 
@@ -38,7 +36,6 @@ public class Authentification extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentification_pattern_lock);
 
-        // action bar
         setTitle("Pattern Lock Authentification");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -50,7 +47,6 @@ public class Authentification extends AppCompatActivity {
 
         System.out.println("param3 " + nombreEssai + " et " +  prefs.getInt("nbTentative", 0));
 
-        //récupérer le contexte de la bdd
         methodeManager = new MethodeManager(getApplicationContext());
         methodeManager.open();
         methode = methodeManager.getMethode(methode);
@@ -61,14 +57,10 @@ public class Authentification extends AppCompatActivity {
             @Override
             public void onFinish(String password, int nombre,  StringBuilder ok) {
 
-                //retourne la valeur pour la clé donnée qui est "Pattern". Le second paramètre donne une valeur par défaut dans le cas où la référence n'est pas trouvée
                 PATTERN_KEY = prefs.getString("Pattern", "invalid");
 
-                //Dans le cas où l'utilisateur n'a pas encore créé de pattern alors la valeur de PATTERN_KEY est invalid et on lui propose de se créer un nouveau pattern
                 if(PATTERN_KEY.equals("invalid")){
                     Toast.makeText(Authentification.this, "Options --> Create new Pattern", Toast.LENGTH_LONG).show();
-
-                    //Sinon il a déjà enregistré
                 }else{
                     nombreEssai = prefs.getInt("nbTentative", 0);
                     Calendar c = Calendar.getInstance();
