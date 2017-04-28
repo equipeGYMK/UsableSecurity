@@ -18,11 +18,9 @@ public class ChoixApresEchecApprentissageCreation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choix_apres_echec_apprentissage_creation);
 
-        //Récupérer les vues
         btnNouveau = (Button) findViewById(R.id.genererNouveau);
         btnApprentissage = (Button) findViewById(R.id.accederMemorisation);
 
-        // action bar
         setTitle("Passfaces Choix de recours");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
