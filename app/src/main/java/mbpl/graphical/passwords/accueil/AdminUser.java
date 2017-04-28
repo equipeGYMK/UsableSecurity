@@ -34,19 +34,16 @@ public class AdminUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil_admin_user);
 
-        //Récupérer les vues
         btnAdmin = (Button) findViewById(R.id.adminButton);
         btnUser = (Button) findViewById(R.id.userButton);
 
         Intent intent = getIntent();
         final int position = intent.getIntExtra("methode",-1);
 
-        //prefs
         editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
         prefs = getSharedPreferences(implementedMethods.get(position).getNameSavePref(), MODE_PRIVATE);
         nombreEssai = prefs.getInt("nbTentative", 3);
 
-        // action bar
         setTitle(implementedMethods.get(position).getNom());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
