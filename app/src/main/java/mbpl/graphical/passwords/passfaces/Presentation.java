@@ -33,7 +33,8 @@ public class Presentation extends AppCompatActivity {
     private int nbImage_mdp;
 
     private SharedPreferences prefs;
-    private static String MY_PREFS_NAME = "PassFaces";
+    private SharedPreferences.Editor editor;
+    private static String MY_PREFS_NAME = "Passfaces";
 
 
     @Override
@@ -46,6 +47,11 @@ public class Presentation extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
+        //mettre le nombre de tentatives à 3
+        editor.putInt("nbTentative", 3);
+        editor.commit();
 
         initButton();
 

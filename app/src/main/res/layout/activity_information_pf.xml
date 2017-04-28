@@ -16,16 +16,16 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginTop="8dp"
-        android:text="Pour cette méthode d'authentification vous allez devoir retenir dans le bon ordre une suite d'image représentant des visages humains.\n\nLe mot de passe est généré aléatoirement.\n\nDeux phases vont ce succéder, la présentation globale du mot de passe, attention à bien retenir l'ordre, puis la phase de mémorisation durant laquelle chaques images vous seront présentées individuellement. "
+        android:layout_marginTop="16dp"
+        android:text="Pour cette méthode d'authentification vous allez devoir retenir dans le bon ordre une suite d'image représentant des visages humains. Le mot de passe est généré aléatoirement.\n\nTrois phases vont ce succéder:\n -La présentation globale du mot de passe généré aléatoirement.\n-Une phase de mémorisation dans laquelle l'utiliseur pourra regarder attentivement chaque image du mot de passe\n-Enfin une phase d'apprentissage comportant deux parties. La première partie de l'apprentissage aura une aide automatique et guidera l'utilisateur lors de la manipulation. La seconde partie mettra l'utilisateur dans les conditions réelles."
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button_info_pf"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.713" />
+        app:layout_constraintVertical_bias="0.74" />
 
     <TextView
         android:id="@+id/titrePassfaces"
@@ -46,7 +46,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.119" />
+        app:layout_constraintVertical_bias="0.050000012" />
 
     <Button
         android:id="@+id/button_info_pf"

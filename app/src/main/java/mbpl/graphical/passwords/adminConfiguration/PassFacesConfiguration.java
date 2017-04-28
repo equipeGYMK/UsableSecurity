@@ -33,7 +33,7 @@ public class PassFacesConfiguration extends AppCompatActivity {
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
-    private static String MY_PREFS_NAME = "PassFaces";
+    private static String MY_PREFS_NAME = "Passfaces";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +79,10 @@ public class PassFacesConfiguration extends AppCompatActivity {
                     if (!text.matches("^-?\\d+$")) {
                         textNbimage.setText(nbImageTemp + "", TextView.BufferType.EDITABLE);
                     } else {
-                        if (Integer.parseInt(textNbimage.getText().toString()) > Passfaces.nbImageBD) {
-                            textNbimage.setText(Passfaces.nbImageBD + "", TextView.BufferType.EDITABLE);
-                        } else if(Integer.parseInt(textNbimage.getText().toString()) < 1) {
-                            textNbimage.setText(1 + "", TextView.BufferType.EDITABLE);
+                        if (Integer.parseInt(textNbimage.getText().toString()) > 7) {
+                            textNbimage.setText(7 + "", TextView.BufferType.EDITABLE);
+                        } else if(Integer.parseInt(textNbimage.getText().toString()) < 3) {
+                            textNbimage.setText(3 + "", TextView.BufferType.EDITABLE);
                         }
                         nbImageTemp = Integer.parseInt(textNbimage.getText().toString());
                     }

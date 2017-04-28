@@ -1,11 +1,5 @@
 package mbpl.graphical.passwords.androidPatternLock;
 
-import mbpl.graphical.passwords.accueil.Accueil;
-import mbpl.graphical.passwords.R;
-import mbpl.graphical.passwords.sqlite.Methode;
-import mbpl.graphical.passwords.sqlite.MethodeManager;
-import mbpl.graphical.passwords.sqlite.PatternLock;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -17,6 +11,12 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import mbpl.graphical.passwords.R;
+import mbpl.graphical.passwords.accueil.Accueil;
+import mbpl.graphical.passwords.sqlite.Methode;
+import mbpl.graphical.passwords.sqlite.MethodeManager;
+import mbpl.graphical.passwords.sqlite.PatternLock;
 
 public class Creation extends ActionBarActivity {
 
@@ -78,9 +78,6 @@ public class Creation extends ActionBarActivity {
 
             @Override
             public void onFinish(String password, int nombre, StringBuilder ok) {
-
-                System.out.println("chemin" + password);
-
                 if (nombre >= pointsMinimum) {
                     PATTERN_KEY = password;
                     enterPatternContainer.setVisibility(View.GONE);

@@ -34,9 +34,12 @@ public class AdminUser extends AppCompatActivity {
 
         Intent intent = getIntent();
         final int position = intent.getIntExtra("methode",-1);
+        System.out.println("test name:"+ implementedMethods.get(position).getNameSavePref());
 
         prefs = getSharedPreferences(implementedMethods.get(position).getNameSavePref(), MODE_PRIVATE);
-        nombreEssai = prefs.getInt("nbTentative", 0);
+        nombreEssai = prefs.getInt("nbTentative", 3);
+
+        System.out.println("nbEssai:" + nombreEssai);
 
 
         System.out.println("test looool: " + nombreEssai );

@@ -69,7 +69,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
     private List<Integer> inputMotDePasse = new ArrayList<>();
 
     private SharedPreferences prefs;
-    private static String MY_PREFS_NAME = "PassFaces";
+    private static String MY_PREFS_NAME = "Passfaces";
     SharedPreferences.Editor editor;
 
     int nombreEssai;
