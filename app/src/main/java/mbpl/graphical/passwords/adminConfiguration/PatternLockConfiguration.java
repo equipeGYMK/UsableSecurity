@@ -48,16 +48,13 @@ public class PatternLockConfiguration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pattern_lock_configuration);
 
-        // action bar
         setTitle("Pattern Lock Configuration");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
-        //mise en place de la bd
         methodeManager = new MethodeManager(getApplicationContext());
-        //Récupération du nombre de points et du nombre de points minimum définis par l'admin
         methodeManager.open();
         methode = methodeManager.getMethode(methode);
         nbPointsActuel = methode.getParam1();
@@ -65,7 +62,6 @@ public class PatternLockConfiguration extends AppCompatActivity {
         tentativeActuelle = prefs.getInt("param3", 3);
         methodeManager.close();
 
-        //Création des spinners
         addItemsOnSpinnerNbPoints();
         addItemsOnSpinnerTentative();
         initEditText();
@@ -73,7 +69,9 @@ public class PatternLockConfiguration extends AppCompatActivity {
 
     }
 
-    // add items into spinner dynamically
+    /**
+     *Initialise les items du spinner spinnerNbPoints
+     */
     public void addItemsOnSpinnerNbPoints() {
 
         spinnerNbPoints = (Spinner) findViewById(R.id.spinnerConfigPatternLockNbPoints);
@@ -108,7 +106,9 @@ public class PatternLockConfiguration extends AppCompatActivity {
         }
     }
 
-    // add items into spinner dynamically
+    /**
+     * Initialise les items du spinner spinnerTentative
+     */
     public void addItemsOnSpinnerTentative() {
 
         spinnerTentative = (Spinner) findViewById(R.id.aPLSpinnerTentative);
@@ -126,6 +126,9 @@ public class PatternLockConfiguration extends AppCompatActivity {
 
     }
 
+    /**
+     *Initialise les listeners du EditText textPointsMinimum
+     */
     private void initEditText(){
 
         textPointsMinimum = (EditText) findViewById(R.id.editTextpointsMinimum);
@@ -162,7 +165,9 @@ public class PatternLockConfiguration extends AppCompatActivity {
     }
 
 
-    // get the selected dropdown list value
+    /**
+     * Initialise les listeners des boutons de l'interface
+     */
     public void addListenerOnButton() {
 
         btnSubmit = (Button) findViewById(R.id.buttonConfigPattrnLock);
@@ -183,7 +188,6 @@ public class PatternLockConfiguration extends AppCompatActivity {
 
                 if (nbPointsActuel != (int) listIntSpinner.get(spinnerNbPoints.getSelectedItemPosition())
                         || pointsMinimum != Integer.parseInt(textPointsMinimum.getText().toString())) {
-                    //Modification des paramètres
                     methodeManager.open();
                     methode = methodeManager.getMethode(methode);
                     methodeManager.setParam(methode, (int) listIntSpinner.get(spinnerNbPoints.getSelectedItemPosition()), Integer.parseInt(textPointsMinimum.getText().toString()));
@@ -196,7 +200,6 @@ public class PatternLockConfiguration extends AppCompatActivity {
                     initTentative();
                 }
 
-                //Changement d'activité
                 Intent authentification = new Intent(PatternLockConfiguration.this, Accueil.class);
                 startActivity(authentification);
                 finish();
@@ -221,10 +224,12 @@ public class PatternLockConfiguration extends AppCompatActivity {
 
     }
 
+    /**
+     * Initialise le mot de passe et effectue un affichage avec un Toast.
+     */
     private void initMotDePasse() {
 
         initTentative();
-        //Initialisation du mot de passe
         methodeManager.open();
         methode = methodeManager.getMethode(methode);
         methodeManager.setPassword(methode, "");
@@ -232,8 +237,10 @@ public class PatternLockConfiguration extends AppCompatActivity {
         Toast.makeText(PatternLockConfiguration.this, "Votre mot de passe a été réinitialisé", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Initialise le nombre de tentatives et effectue un affichage avec un Toast.
+     */
     private void initTentative() {
-        //Initialisation des tentatives
         String tentativeTemp = (String) spinnerTentative.getSelectedItem();
 
         editor.putInt("param3", Integer.parseInt(tentativeTemp));
