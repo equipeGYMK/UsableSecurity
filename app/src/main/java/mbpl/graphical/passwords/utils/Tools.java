@@ -42,6 +42,14 @@ public abstract class Tools {
     }
 
 
+     /**
+     * Convertie une chaine de caractères en liste de caractère.
+     * La chaine doit être de la forme ArrayList.toString().
+     * 
+     *
+     * @param pass chaine de forme ArrayList.toString().
+     * @return liste de caractère
+     */
     public static String[] stringToStringTable(String pass) {
         return pass.replaceAll("\\[", "").replaceAll(" ", "").replaceAll("\\]", "").split(",");
     }
@@ -72,6 +80,13 @@ public abstract class Tools {
         return result;
     }
 
+     /**
+     * Retourne la hauteur de la barre d'action
+     *
+     * @param resources getResources()
+     * @param theme theme de la ressource
+     * @return taille de la barre de notification
+     */
     public static int getActionBarHeight(Resources.Theme theme, Resources resources) {
         TypedValue tv = new TypedValue();
         if (theme.resolveAttribute(android.R.attr.actionBarSize, tv, true))
@@ -83,6 +98,10 @@ public abstract class Tools {
     }
 
 
+     /**
+     * Enregistre dans le fichier tentative.txt les données en paramètre
+     * @param data données à enregistrer 
+     */
     public static void writeToFile(String data)
     {
 
