@@ -18,7 +18,7 @@
         android:layout_marginRight="24dp"
         android:layout_marginTop="109dp"
         android:gravity="center"
-        android:text="Cliquez sur Nouveau pour générer un nouveau mot de passe et refaire toutes les étapaes.\n\nCliquez sur Mémorisation pour accéder à la phase de mémorisation."
+        android:text="Cliquez sur Nouveau pour générer un nouveau mot de passe et refaire toutes les étapes.\n\nCliquez sur Mémorisation pour accéder à la phase de mémorisation."
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18sp"
         android:textStyle="bold"
