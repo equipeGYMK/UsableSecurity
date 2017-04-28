@@ -18,10 +18,8 @@ public class Information extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_apl);
 
-        //Récupérer les vues
         btnOk = (Button) findViewById(R.id.button_info_AndroidPatternLock);
 
-        // action bar
         setTitle("Pattern Lock Information");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
