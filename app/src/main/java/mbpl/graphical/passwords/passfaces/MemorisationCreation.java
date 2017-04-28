@@ -182,9 +182,10 @@ public class MemorisationCreation extends AppCompatActivity {
     }
 
     /**
-     * Retourne l'image contenu dans la base de données à l'indice donnée
-     * @param n
-     * return l'image à l'indice n
+     * Retourne l'image n de res/drawable.
+     *
+     * @param n numéro de l'image à récupérer
+     * @return id identifiant de l'image
      */
     protected int getDrawableN(int n) {
         return getResources().getIdentifier("visage_" + n, "drawable", getPackageName());
