@@ -273,6 +273,14 @@ public class MethodeManager {
 
 
 
+      /**
+     * enregistre le nombre de caractère dans le mot de passe courant et le nombre de points minimum 
+     * passés en paramètre dans la colonne correspondant à la méthode passé en paramètre
+     *
+     * @param methode
+     * @param param1
+     * @param param2
+     */
     public int setParam(Methode methode, int param1, int param2){
 
         int id = methode.getId();
