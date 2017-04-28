@@ -86,20 +86,16 @@ public class Creation extends ActionBarActivity {
             public void onFinish(String password, int nombre,  StringBuilder ok) {
                 if(password.equals(PATTERN_KEY)){
 
-                    //Ecriture dans la BDD
                     methodeManager.open();
                     methode = methodeManager.getMethode(methode);
                     methodeManager.setPassword(methode, "PATTERN_KEY");
                     methodeManager.close();
 
-                    //Suite traitement
                     Toast.makeText(getApplicationContext(), "Le mot de passe a été créé avec succès.", Toast.LENGTH_SHORT).show();
                     editor.putString("Pattern", password);
-                    // initialisation du nombre de tentative
                     editor.putInt("nbTentative", prefs.getInt("param3", 3));
                     editor.commit();
 
-                    //On se redirige vers la page d'accueil de l'utilisateur
                     Intent intent = new Intent(Creation.this, Accueil.class);
                     startActivity(intent);
                     finish();
