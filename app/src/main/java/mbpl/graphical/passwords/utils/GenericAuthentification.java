@@ -37,24 +37,25 @@ import static mbpl.graphical.passwords.utils.Tools.writeToFile;
 
 /**
  * Created by benja135 on 05/03/16.
- * Activité d'authentification des méthodes de type "Déjà Vu".
+ * Activité d'authentification des méthodes.
  */
 public abstract class GenericAuthentification extends AppCompatActivity {
 
 
-    //mettre l'image bmp en global afin de pouvoir l'étendre et l'appliquer dans les listeners
+   
     protected Bitmap bmp, bmpReference;
     protected ImageView imageView;
     protected GridLayout gridLayout;
     protected int idCompteur = 0;
-    //animtion
+    
+    //animation
     protected Animation animRotate;
     //Vue de la bonne image actuelle
     protected ImageView currentImage;
     //booléen de vérification animation
     protected boolean falseImagePicked = false;
 
-    // Variables protected à redéfinir dans chaque classe fille /!\
+  
     protected GenericAuthentification here;
     protected Class nextClass = Accueil.class;
     protected int nbImage;
@@ -150,7 +151,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
             for (int c = 0; c < nbColonne; c++) {
 
                 imageView = new ImageView(this);
-                // Crée un bitmap d'une image piochée aléatoirement (ou pas)
+               
                 int numImage;
                 if ((l * nbColonne + c) == positionImageToBeDisplayed) {
                     numImage = trueMotDePasse.get(inputMotDePasse.size());
@@ -164,14 +165,14 @@ public abstract class GenericAuthentification extends AppCompatActivity {
 
                 bmp = BitmapFactory.decodeResource(getResources(), getDrawableN(numImage));
                 bmp = Bitmap.createScaledBitmap(bmp, tailleImage, tailleImage, true);
-                // On ajoute l'image à l'ImageView
+               
                 imageView.setImageBitmap(bmp);
 
-                //récupérer l'image actuelle
+                
                 if (numImage == trueMotDePasse.get(inputMotDePasse.size()))
                     currentImage = imageView;
 
-                // Ajoute un listener sur l'image
+                
                 final int finalNumImage = numImage;
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -194,15 +195,15 @@ public abstract class GenericAuthentification extends AppCompatActivity {
                                 l.setImageBitmap(bmp);
 
 
-                                //Permet de s'assurer que l'animation de se reproduit pas plusieurs fois
+                                
                                 if(!falseImagePicked) {
-                                    //animation de la bonne image et création de labitmap
+                                   
                                     bmpReference = BitmapFactory.decodeResource(getResources(), getDrawableN(trueMotDePasse.get(inputMotDePasse.size())));
                                     bmpReference = Bitmap.createScaledBitmap(bmpReference, tailleImage, tailleImage, true);
-                                    bmpReference = bmpReference.copy(bmpReference.getConfig(), true);     //autoriser la modification
+                                    bmpReference = bmpReference.copy(bmpReference.getConfig(), true);     
                                     animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.animation);
                                     currentImage.startAnimation(animRotate);
-                                    //mettre le booléen à true afin d'éviter de relancer l'animation plusieurs fois
+                                    
                                     falseImagePicked = true;
                                 }
                             }
@@ -215,7 +216,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
                     }
                 });
 
-                // On ajoute l'ImageView au GridLayout en mettant les bons paramétres
+                
                 GridLayout.LayoutParams param = new GridLayout.LayoutParams();
                 param.height = screenHeight / nbLigne;
                 param.width = screenWidth / nbColonne;
@@ -227,7 +228,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
                 imageView.setId(idCompteur);
                 gridLayout.addView(imageView);
 
-                //incrémenter le compteur et ajouter le couple (id, numImage) au tableau)
+               
                 idCompteur++;
             }
         }
@@ -258,7 +259,7 @@ public abstract class GenericAuthentification extends AppCompatActivity {
 
             if (inputMotDePasse.equals(trueMotDePasse)) {
 
-                //rajouter la condition prefs pour s'assurer que le mot de passe st créé seulement lorsque l'utilisateur effectue toutes les taches
+                
                 if (here instanceof ApprentissageSansAideCreation)
                 {
                     methodeManager.open();
