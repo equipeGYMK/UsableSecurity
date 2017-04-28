@@ -30,7 +30,6 @@ public class Creation extends ActionBarActivity {
     Button btnRecommencer;
     int pointsMinimum;
 
-    //BDD
     private MethodeManager methodeManager;
     protected Methode methode = new PatternLock();
 
@@ -38,42 +37,29 @@ public class Creation extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creation_pattern_lock);
-        //evenement Bouton
         evenementButton();
 
-        // action bar
         setTitle("Pattern Lock Création");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //récupérer le contexte de la bdd
         methodeManager = new MethodeManager(getApplicationContext());
-        //Récupération du nombre de points minimum dans la bd
-        //Récupération du nombre de points et du nombre de points minimum définis par l'admin
         methodeManager.open();
         methode = methodeManager.getMethode(methode);
         pointsMinimum = methode.getParam2();
         methodeManager.close();
 
-
-        //Création des préférences afin de stocker le mdp
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
-        //Message situé en haut
         tvMsg = (TextView)findViewById(R.id.tvMsg);
         tvMsg.setText(getResources().getString(R.string.draw_pattern_msg));
 
-        //Récupérer les deux frameLayout. VOir le fichier xml activity_creation_pattern_lock
         enterPatternContainer = (FrameLayout) findViewById(R.id.enterPattern);
         confirmPatternContainer = (FrameLayout) findViewById(R.id.confirmPattern);
 
-        //Récupérer les deux lock9View. Voir le fichier xml activity_creation_pattern_lock
         lockViewFirstTry = (Lock9View) findViewById(R.id.lock_viewFirstTry);
         lockViewConfirm =  (Lock9View) findViewById(R.id.lock_viewConfirm);
-        //Cacher la vue confirm
         confirmPatternContainer.setVisibility(View.GONE);
-
-//		we can get a call back string when ever user interacts with the pattern lock view
         lockViewFirstTry.setCallBack(new Lock9View.CallBack() {
 
             @Override
@@ -124,13 +110,13 @@ public class Creation extends ActionBarActivity {
         });
     }
 
-
+    /**
+     * Initialise le listener du bouton Recommencer
+     */
     public void evenementButton(){
-        //Evenement bouton
         btnRecommencer = (Button) findViewById(R.id.buttonPatternLockCreationRecommencer);
         btnRecommencer.setVisibility(View.GONE);
 
-        //Lors d'un clique, on revient à l'acitivité pour recommencer la saisie
         btnRecommencer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,14 +131,11 @@ public class Creation extends ActionBarActivity {
     public void onBackPressed() {
 
         Intent authentification;
-        //On peut seulement se rediriger vers la page de création d'un nouveau mdp si l'utilisateur a au moins entré une fois son pattern. Cela n'a aucune utilité sinon
-        //Si le bouton recommencer est visible alors on sait qu'on se trouve dans la seconde partie de création lorsque l'utilisateur doit valider son pattern en le remettant.
         if (btnRecommencer.isShown()) {
             authentification = new Intent(Creation.this, Creation.class);
             startActivity(authentification);
             finish();
         }
-        //Sinon on revient à l'écran de description
         else
         {
             finish();
@@ -170,30 +153,4 @@ public class Creation extends ActionBarActivity {
         }
     }
 
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Étend le menu ; ceci ajoute des items à la barre d'actions si elle est présente.
-        getMenuInflater().inflate(R.menu.menu_change, menu);
-        return true;
-    }
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.contact:
-                new AlertDialog.Builder(this)
-                        .setTitle("Android Pattern Lock")
-                        .setMessage("Prototype version 1")
-                        .setPositiveButton("OK", null).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    */
 }
