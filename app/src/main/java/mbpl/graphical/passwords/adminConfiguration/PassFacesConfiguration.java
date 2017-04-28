@@ -55,7 +55,10 @@ public class PassFacesConfiguration extends AppCompatActivity {
         initEditText();
         addListenerOnButton();
     }
-
+    
+    /**
+     * Initialise les listeners du EditText textNbimage.
+     */
     private void initEditText(){
 
         textNbimage = (EditText) findViewById(R.id.textfield_nbimage);
@@ -91,7 +94,9 @@ public class PassFacesConfiguration extends AppCompatActivity {
         });
     }
 
-    // get the selected dropdown list value
+    /**
+     * Initialise les listeners des buttons de l'interface
+     */
     public void addListenerOnButton() {
 
         btnSubmit = (Button) findViewById(R.id.buttonSubmitPassFace);
@@ -136,7 +141,9 @@ public class PassFacesConfiguration extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Initialise le mot de passe et effectue un affichage avec un Toast.
+     */
     private void initMotDePasse() {
         methodeManager.open();
         methode = methodeManager.getMethode(methode);
@@ -146,7 +153,10 @@ public class PassFacesConfiguration extends AppCompatActivity {
 
         initTentative();
     }
-
+    
+    /**
+     * Initialise le nombre de tentatives et effectue un affichage avec un Toast.
+     */
     private void initTentative() {
         editor.putInt("nbTentative", 3);
         editor.commit();
