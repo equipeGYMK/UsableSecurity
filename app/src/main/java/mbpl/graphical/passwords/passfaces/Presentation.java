@@ -42,14 +42,12 @@ public class Presentation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_presentation);
 
-        // action bar
         setTitle("Passfaces Présentation");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
-        //mettre le nombre de tentatives à 3
         editor.putInt("nbTentative", 3);
         editor.commit();
 
@@ -59,6 +57,9 @@ public class Presentation extends AppCompatActivity {
         afficherMotdePasse();
     }
 
+    /**
+     * Initialise le listeners du bouton de l'interface
+     */
     private void initButton(){
         boutonContinuer = (Button) findViewById(R.id.button_pf_presentation);
         boutonContinuer.setOnClickListener(new View.OnClickListener() {
@@ -70,9 +71,11 @@ public class Presentation extends AppCompatActivity {
         });
     }
 
+    /**
+     * Génère un mot de passe aléatoire
+     */
     private void genererMotDePasse(){
 
-        //attributs
         int random_image;
         Random r = new Random();
         ArrayList numDispo =  new ArrayList();
@@ -95,6 +98,9 @@ public class Presentation extends AppCompatActivity {
         methodeManager.close();
     }
 
+    /**
+     * Affiche le mot de passe à l'écran dans un gridLayout
+     */
     private void afficherMotdePasse(){
         gridPresentation = (GridLayout) findViewById(R.id.grid_presentation);
 
