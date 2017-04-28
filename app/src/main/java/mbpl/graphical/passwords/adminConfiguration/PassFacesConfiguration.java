@@ -145,9 +145,13 @@ public class PassFacesConfiguration extends AppCompatActivity {
      * Initialise le mot de passe et effectue un affichage avec un Toast.
      */
     private void initMotDePasse() {
+
+
+        //mettre à jour la bd
         methodeManager.open();
         methode = methodeManager.getMethode(methode);
         methodeManager.setPassword(methode, "");
+        methodeManager.setParam(methode, methode.getParam1(), 0);
         methodeManager.close();
         Toast.makeText(PassFacesConfiguration.this, "Votre mot de passe a été réinitialisé", Toast.LENGTH_SHORT).show();
 

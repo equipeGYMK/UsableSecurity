@@ -28,6 +28,7 @@ public class Accueil extends Activity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class Accueil extends Activity {
             }
         }
         methodeManager.close();
+
 
         //Remplir mon tableau de description
         for (int i = 0; i < implementedMethods.size(); i++)
@@ -79,7 +81,7 @@ public class Accueil extends Activity {
 
         AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
         myAlert.setMessage(description)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Continuer", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

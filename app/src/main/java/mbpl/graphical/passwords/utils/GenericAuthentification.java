@@ -257,6 +257,16 @@ public abstract class GenericAuthentification extends AppCompatActivity {
             System.out.println("nombre essai: " + nombreEssai);
 
             if (inputMotDePasse.equals(trueMotDePasse)) {
+
+                //rajouter la condition prefs pour s'assurer que le mot de passe st créé seulement lorsque l'utilisateur effectue toutes les taches
+                if (here instanceof ApprentissageSansAideCreation)
+                {
+                    methodeManager.open();
+                    methode = methodeManager.getMethode(methode);
+                    methodeManager.setParam(methode, methode.getParam1(), 1);
+                    methodeManager.close();
+                }
+
                 writeToFile("Passfaces - Succes - Essais restants : "+nombreEssai+" "+formattedDate+"\n");
                 editor.putInt("nbTentative", 3);
                 editor.commit();

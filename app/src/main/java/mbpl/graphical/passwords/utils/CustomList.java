@@ -13,13 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import mbpl.graphical.passwords.accueil.AdminUser;
-import mbpl.graphical.passwords.accueil.Accueil;
 import mbpl.graphical.passwords.R;
+import mbpl.graphical.passwords.accueil.Accueil;
+import mbpl.graphical.passwords.accueil.AdminUser;
 import mbpl.graphical.passwords.sqlite.Methode;
 import mbpl.graphical.passwords.sqlite.MethodeManager;
+import mbpl.graphical.passwords.sqlite.Passfaces;
+import mbpl.graphical.passwords.sqlite.PatternLock;
 
-import static android.app.PendingIntent.getActivity;
 import static mbpl.graphical.passwords.sqlite.ImplementedMethods.implementedMethods;
 
 /**
@@ -36,7 +37,10 @@ public class CustomList extends BaseAdapter{
     String [] description;
     Context context;
     int [] imageId;
+    int valide;
     private static LayoutInflater inflater=null;
+    boolean isValide;
+
 
 
     //Constructeur user
@@ -74,7 +78,6 @@ public class CustomList extends BaseAdapter{
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
-
         View rowView;
         final Holder holder;
 
@@ -96,17 +99,27 @@ public class CustomList extends BaseAdapter{
         // indicateur mot de passe cree
         if (interfaceNom.equals("User")) {
 
+            isValide = false;
             Methode m;
             MethodeManager mm = new MethodeManager(context);
             mm.open();
             m = mm.getMethode(implementedMethods.get(position));
-            if (!mm.defaultPassword(m)) {
+            valide = m.getParam2();
+            mm.close();
+
+
+            if ((valide == 1) && (implementedMethods.get(position) instanceof Passfaces))
+                isValide = true;
+
+            if (((!mm.defaultPassword(m)) && (isValide)) || ((!mm.defaultPassword(m)) && (implementedMethods.get(position) instanceof PatternLock))){
                 holder.mdpCreated.setTextColor(Color.RED);
                 holder.mdpCreated.setText("MDP Créé");
+
             } else {
                 //holder.mdpCreated.setTextColor(Color.RED);
                 holder.mdpCreated.setText("");
             }
+
 
         }
 
@@ -118,7 +131,6 @@ public class CustomList extends BaseAdapter{
             appel = new Intent(context, AdminUser.class);
             appel.putExtra("methode", position);
             context.startActivity(appel);
-
             }
         });
 

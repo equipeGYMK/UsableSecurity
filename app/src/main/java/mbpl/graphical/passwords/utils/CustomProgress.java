@@ -39,7 +39,7 @@ import java.util.Arrays;
 
 import mbpl.graphical.passwords.R;
 
-public class CustomProgress extends TextView {
+public class CustomProgress extends android.support.v7.widget.AppCompatTextView {
 
     private final static int SHAPE_RECTANGLE = 0;
     private final static int SHAPE_ROUNDED_RECTANGLE = 1;
