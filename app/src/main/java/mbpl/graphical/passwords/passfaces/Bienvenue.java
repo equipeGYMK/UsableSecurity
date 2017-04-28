@@ -18,12 +18,10 @@ public class Bienvenue extends AppCompatActivity {
 
 
     Button btnRetour, btnReinit;
-    //prefs
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
     private static String MY_PREFS_NAME = "Passfaces";
 
-    //BDD
     private MethodeManager methodeManager;
     protected Methode methode = new Passfaces();
 
@@ -33,31 +31,23 @@ public class Bienvenue extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bienvenue_authentification);
 
-        // action bar
         setTitle("Passfaces Bienvenue");
-
-        //récupérer le contexte
-        //récupérer le contexte de la bdd
         methodeManager = new MethodeManager(getApplicationContext());
 
-        //création des boutons
         btnRetour = (Button) findViewById(R.id.buttonRetourPatternLock);
         btnReinit = (Button) findViewById(R.id.buttonReinit);
 
-        //Evévenement des boutons
         btnReinit.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                //On réinitialise le mot de passe à " "
                 methodeManager.open();
                 methodeManager.setPassword(methode, "");
                 methodeManager.setParam(methode, methode.getParam1(), 0);
                 methodeManager.close();
                 Toast.makeText(Bienvenue.this, "Votre mot de passe a été réinitialisé", Toast.LENGTH_SHORT).show();
 
-                //On retourne à l'activité accueil
                 Intent authentification = new Intent(Bienvenue.this, Presentation.class);
                 startActivity(authentification);
                 finish();
@@ -69,8 +59,6 @@ public class Bienvenue extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
-                //On retourne à l'activité accueil sans rien faire
                 Intent authentification = new Intent(Bienvenue.this, Accueil.class);
                 startActivity(authentification);
                 finish();
