@@ -57,7 +57,7 @@ public class PassFacesConfiguration extends AppCompatActivity {
     }
     
     /**
-     * Initialise les listeners du EditText textNbimage.
+     * Initialise les listeners du EditText textNbimage
      */
     private void initEditText(){
 
