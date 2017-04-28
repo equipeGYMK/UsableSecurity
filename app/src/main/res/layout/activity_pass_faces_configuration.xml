@@ -18,7 +18,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/style_textview"
         android:gravity="center"
-        android:text="Taille du mot de passe\n(1 à 20 images)"
+        android:text="Taille du mot de passe\n(3 à 7 images)"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
