@@ -25,7 +25,6 @@ public class Bienvenue extends AppCompatActivity {
 
     //BDD
     private MethodeManager methodeManager;
-    private Class creationClass;
     protected Methode methode = new Passfaces();
 
 
@@ -44,10 +43,6 @@ public class Bienvenue extends AppCompatActivity {
         //création des boutons
         btnRetour = (Button) findViewById(R.id.buttonRetourPatternLock);
         btnReinit = (Button) findViewById(R.id.buttonReinit);
-
-        //prefs
-        prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-        editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
         //Evévenement des boutons
         btnReinit.setOnClickListener(new View.OnClickListener() {
