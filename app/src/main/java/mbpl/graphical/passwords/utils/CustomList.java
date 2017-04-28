@@ -22,6 +22,12 @@ import mbpl.graphical.passwords.sqlite.MethodeManager;
 import static android.app.PendingIntent.getActivity;
 import static mbpl.graphical.passwords.sqlite.ImplementedMethods.implementedMethods;
 
+/**
+ * Outil permettant de mettre en place des liste de méthode d'authentification avec les
+ * images associées
+ *
+ *
+ */
 public class CustomList extends BaseAdapter{
 
     String interfaceNom;
