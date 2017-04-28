@@ -18,10 +18,8 @@ public class Information extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_pf);
 
-        //Récupérer les vues
         btnOk = (Button) findViewById(R.id.button_info_pf);
 
-        // action bar
         setTitle("Passfaces Information");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
