@@ -26,7 +26,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textViewNbPointsPatternLock"
         android:layout_marginBottom="8dp"
         app:layout_constraintTop_toTopOf="@+id/textViewNbPointsPatternLock"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="12dp" />
 
     <Spinner
         android:id="@+id/aPLSpinnerTentative"
@@ -51,35 +51,37 @@
 
     <EditText
         android:id="@+id/editTextpointsMinimum"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="phone"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewPointsMinimum"
+        android:text="Nombre"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/guideline2"
-        app:layout_constraintRight_toLeftOf="@+id/guideline" />
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        android:layout_marginTop="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerConfigPatternLockNbPoints" />
 
     <TextView
-        android:text="Points minimum"
-        android:layout_width="0dp"
         android:id="@+id/textViewPointsMinimum"
-        android:gravity="center"
-        android:layout_height="40dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:background="@drawable/style_textview"
-        android:textSize="18sp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintRight_toLeftOf="@+id/guideline4"
-        android:layout_marginRight="0dp"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="19dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNbPointsPatternLock"
-        app:layout_constraintHorizontal_bias="0.0" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/style_textview"
+        android:gravity="center"
+        android:text="Nombre de noeuds\nminimal pour le\n mot de passe"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline3"
+        app:layout_constraintRight_toLeftOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNbPointsPatternLock" />
 
     <TextView
         android:id="@+id/textViewNbPointsPatternLock"
@@ -93,8 +95,8 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/style_textview"
         android:gravity="center"
-        android:text="Nombre de points"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:text="Taille de la grille"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/guideline3"
@@ -108,24 +110,24 @@
         android:id="@+id/aPLtextViewTentative"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/style_textview"
         android:gravity="center"
-        android:text="Nombre de tentatives"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:text="Nombre d'essais maximal"
         android:textSize="18sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toTopOf="@+id/textViewNbPointsPatternLock"
         app:layout_constraintLeft_toLeftOf="@+id/guideline3"
         app:layout_constraintRight_toLeftOf="@+id/guideline4"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewNbPointsPatternLock"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintVertical_bias="0.857" />
+        app:layout_constraintVertical_bias="0.857"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
 
     <Button
         android:id="@+id/buttonConfigPattrnLock"
@@ -150,7 +152,7 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintTop_toBottomOf="@+id/textViewPointsMinimum"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent" />

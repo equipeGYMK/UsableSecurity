@@ -87,9 +87,9 @@ public class Authentification extends AppCompatActivity {
                             nombreEssai-- ;
                             editor.putInt("nbTentative", nombreEssai);
                             editor.commit();
-                            writeToFile("Pattern Lock - Echec - Essai restant : "+nombreEssai+" "+formattedDate+"\n");
+                            writeToFile("Pattern Lock - Echec - Essai restants : "+nombreEssai+" "+formattedDate+"\n");
                             if (nombreEssai > 0 ) {
-                                Toast.makeText(Authentification.this, "Pattern incorrect !\nNombre essai restant : " + nombreEssai, Toast.LENGTH_LONG).show();
+                                Toast.makeText(Authentification.this, "Pattern incorrect !\nNombre d'essais restants : " + nombreEssai, Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(Authentification.this, "ECHEC !\nVous n'avez plus d'essai restant !\nLa technique est bloquée ", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(Authentification.this, Accueil.class);

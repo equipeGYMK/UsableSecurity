@@ -215,7 +215,7 @@ public class PatternLockConfiguration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 initTentative();
-                Toast.makeText(PatternLockConfiguration.this, "Le nombre de tentative a été réinitialisé", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PatternLockConfiguration.this, "Le nombre d'essais a été réinitialisé", Toast.LENGTH_SHORT).show();
             }
         });
 
